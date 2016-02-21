@@ -27,7 +27,7 @@ public class Player extends MapObject {
     // animations
     private ArrayList<BufferedImage[]> sprites;
     private final int[] numFrames = {
-            2, 8, 1, 2, 4, 2, 5
+            2, 4, 1, 1, 4
     };
 
     // animation actions
@@ -35,7 +35,7 @@ public class Player extends MapObject {
     private static final int WALKING = 1;
     private static final int JUMPING = 2;
     private static final int FALLING = 3;
-    private static final int ATTACKING = 6;
+    private static final int ATTACKING = 4;
 
     public Player(TileMap tm) {
 
@@ -66,12 +66,12 @@ public class Player extends MapObject {
 
             BufferedImage spritesheet = ImageIO.read(
                     getClass().getResourceAsStream(
-                            "/Sprites/Player/playersprites.gif"
+                            "/Sprites/Player/knightsprites.gif"
                     )
             );
 
             sprites = new ArrayList<>();
-            for(int i = 0; i < 7; i++) {
+            for(int i = 0; i < numFrames.length; i++) {
 
                 BufferedImage[] bi =
                         new BufferedImage[numFrames[i]];
@@ -194,14 +194,14 @@ public class Player extends MapObject {
             if(currentAction != ATTACKING) {
                 currentAction = ATTACKING;
                 animation.setFrames(sprites.get(ATTACKING));
-                animation.setDelay(50);
+                animation.setDelay(40);
                 width = 60;
             }
         } else if(dy > 0) {
             if(currentAction != FALLING) {
                 currentAction = FALLING;
                 animation.setFrames(sprites.get(FALLING));
-                animation.setDelay(100);
+                animation.setDelay(40);
                 width = 30;
             }
         }
@@ -225,7 +225,7 @@ public class Player extends MapObject {
             if(currentAction != IDLE) {
                 currentAction = IDLE;
                 animation.setFrames(sprites.get(IDLE));
-                animation.setDelay(400);
+                animation.setDelay(100);
                 width = 30;
             }
         }
