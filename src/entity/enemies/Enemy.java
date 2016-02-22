@@ -1,6 +1,7 @@
 package entity.enemies;
 
 import entity.MapObject;
+import entity.Player;
 import tileMap.TileMap;
 
 import java.awt.*;
@@ -10,15 +11,18 @@ import java.awt.*;
  */
 public abstract class Enemy extends MapObject {
 
+    private final Player player;
     protected int health;
     protected int maxHealth;
     protected boolean dead;
     protected int damage;
     protected boolean flinching;
     protected long flinchTimer;
+    protected int xpWorth;
 
-    public Enemy(TileMap tm){
+    public Enemy(TileMap tm, Player player){
         super(tm);
+        this.player = player;
     }
 
     public boolean isDead() {
@@ -35,6 +39,7 @@ public abstract class Enemy extends MapObject {
         if (health <= 0){
             health = 0;
             dead = true;
+            player.gainXP(xpWorth);
         }
         flinching = true;
         flinchTimer = System.nanoTime();

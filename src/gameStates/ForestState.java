@@ -65,7 +65,7 @@ public class ForestState extends GameState{
         };
 
         for (int i = 0; i < points.length; i++) {
-            RoboSpider spider = new RoboSpider(tileMap);
+            RoboSpider spider = new RoboSpider(tileMap, player);
             spider.setPosition(points[i].x, points[i].y);
             enemies.add(spider);
         }

@@ -321,4 +321,8 @@ public class Player extends MapObject {
             );
         }
     }
+
+    public void gainXP(int XP){
+        this.XP += XP;
+    }
 }

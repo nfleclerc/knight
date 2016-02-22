@@ -1,6 +1,7 @@
 package entity.enemies;
 
 import entity.Animation;
+import entity.Player;
 import tileMap.TileMap;
 
 import javax.imageio.ImageIO;
@@ -11,10 +12,10 @@ import java.awt.image.BufferedImage;
  */
 public class RoboSpider extends Enemy{
 
-    public BufferedImage[] sprites;
+    private BufferedImage[] sprites;
 
-    public RoboSpider(TileMap tm){
-        super(tm);
+    public RoboSpider(TileMap tm, Player player){
+        super(tm, player);
         moveSpeed = 0.3;
         maxSpeed = 0.3;
         fallSpeed = 0.2;
@@ -27,6 +28,7 @@ public class RoboSpider extends Enemy{
 
         health = maxHealth = 2;
         damage = 1;
+        xpWorth = 10;
 
         //loadSprites
         try{
