@@ -6,10 +6,13 @@ import entity.enemies.Enemy;
 import entity.Player;
 import entity.enemies.RoboSpider;
 import main.GamePanel;
+import tileMap.Background;
 import tileMap.TileMap;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.util.ArrayList;
 
 /**
@@ -23,6 +26,7 @@ public class Level1State extends GameState{
     private ArrayList<Enemy> enemies;
     public ArrayList<Explosion> explosions;
     private HUD hud;
+    private Background bg;
 
     public Level1State(GameStateManager gameStateManager){
         this.gameStateManager = gameStateManager;
@@ -33,11 +37,13 @@ public class Level1State extends GameState{
     public void init() {
         tileMap = new TileMap(30);
         tileMap.loadTiles("/Tilesets/grasstileset.gif");
-        tileMap.loadMap("/Maps/level1-1.map");
+        tileMap.loadMap("/Maps/forestcave_map.tme");
         tileMap.setPosition(0, 0);
 
+        bg = new Background("/Backgrounds/forestbg.gif", 0.05);
+
         player = new Player(tileMap);
-        player.setPosition(100, 100);
+        player.setPosition(100, 300);
 
         hud = new HUD(player);
 
@@ -53,11 +59,11 @@ public class Level1State extends GameState{
 
         enemies = new ArrayList<>();
         java.awt.Point[] points = new Point[] {
-                new Point(280, 200),
-                new Point(860, 200),
-                new Point(1525, 200),
-                new Point(1680, 200),
-                new Point(1800, 200)
+                new Point(510, 350),
+                new Point(800, 50),
+                new Point(2000, 250),
+                new Point(3000, 150),
+                new Point(4000, 150)
         };
 
         for (int i = 0; i < points.length; i++) {
@@ -75,6 +81,8 @@ public class Level1State extends GameState{
                 GamePanel.WIDTH / 2 - player.getX(),
                 GamePanel.HEIGHT / 2 - player.getY()
         );
+
+        bg.setPosition(tileMap.getX(), tileMap.getY());
 
         player.checkAttack(enemies);
 
@@ -101,9 +109,7 @@ public class Level1State extends GameState{
     @Override
     public void draw(Graphics2D g) {
 
-        //clear the screen
-        g.setColor(new Color(10, 10, 80));
-        g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
+       bg.draw(g);
 
         tileMap.draw(g);
         player.draw(g);
