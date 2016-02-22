@@ -27,8 +27,8 @@ public class MenuState extends GameState {
     public MenuState(GameStateManager gameStateManager){
         this.gameStateManager = gameStateManager;
         try {
-            bg = new Background("/Backgrounds/housebg.gif", 1);
-            bg.setVector(0, 0);
+            bg = new Background("/Backgrounds/mountainbg.gif", 1);
+            bg.setVector(-0.1, 0);
             titleColor = Color.RED;
             titleFont = new Font("Arial", Font.PLAIN, 28);
             font = new Font("Arial", Font.PLAIN, 12);
