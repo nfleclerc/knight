@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by nathaniel on 2/19/16.
  */
-public class Level1State extends GameState{
+public class ForestState extends GameState{
 
     private TileMap tileMap;
 
@@ -26,7 +26,7 @@ public class Level1State extends GameState{
     private HUD hud;
     private Background bg;
 
-    public Level1State(GameStateManager gameStateManager){
+    public ForestState(GameStateManager gameStateManager){
         this.gameStateManager = gameStateManager;
         init();
     }

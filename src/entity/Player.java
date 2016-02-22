@@ -293,4 +293,32 @@ public class Player extends MapObject {
         flinching = true;
         flinchTimer = System.nanoTime();
     }
+
+    @Override
+    public Rectangle getRectangle(){
+        if (attacking){
+            if (facingRight) {
+                return new Rectangle(
+                        (int) x - cWidth + attackRange,
+                        (int) y - cHeight,
+                        cWidth,
+                        cHeight
+                );
+            } else {
+                return new Rectangle(
+                        (int) x - cWidth - attackRange,
+                        (int) y - cHeight,
+                        cWidth,
+                        cHeight
+                );
+            }
+        } else {
+            return new Rectangle(
+                    (int) x - cWidth,
+                    (int) y - cHeight,
+                    cWidth,
+                    cHeight
+            );
+        }
+    }
 }

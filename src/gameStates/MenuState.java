@@ -95,7 +95,7 @@ public class MenuState extends GameState {
         switch (currentChoice){
             case 0:
                 //start
-                gameStateManager.setState(GameStateManager.LEVEL1STATE);
+                gameStateManager.setState(GameStateManager.FORESTSTATE);
                 break;
             case 1:
                 //help

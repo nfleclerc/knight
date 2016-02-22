@@ -12,13 +12,13 @@ public class GameStateManager {
     private int currentState;
 
     public static final int MENUSTATE = 0;
-    public static final int LEVEL1STATE = 1;
+    public static final int FORESTSTATE = 1;
 
     public GameStateManager() {
         gameStates = new ArrayList<GameState>();
         currentState = MENUSTATE;
         gameStates.add(new MenuState(this));
-        gameStates.add(new Level1State(this));
+        gameStates.add(new ForestState(this));
 
     }
 
