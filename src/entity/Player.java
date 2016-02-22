@@ -2,6 +2,7 @@ package entity;
 
 
 import entity.MapObject;
+import entity.enemies.Enemy;
 import tileMap.TileMap;
 
 import java.util.ArrayList;
@@ -190,6 +191,14 @@ public class Player extends MapObject {
             }
         }
 
+        //check done flinching
+        if (flinching){
+            long elapsed = (System.nanoTime() - flinchTimer) / 1_000_000;
+            if (elapsed > 500){
+                flinching = false;
+            }
+        }
+
         // set animation
         if(attacking) {
             if(currentAction != ATTACKING) {
@@ -259,5 +268,30 @@ public class Player extends MapObject {
 
     public int getXP() {
         return XP;
+    }
+
+    public void checkAttack(ArrayList<Enemy> enemies) {
+
+        for (Enemy enemy : enemies){
+            if (this.intersects(enemy)){
+                if (attacking){
+                    enemy.hit(attackDamage);
+                } else {
+                    hit(enemy.getDamage());
+                }
+            }
+        }
+
+    }
+
+    private void hit(int damage) {
+        if (flinching) return;
+        health -= damage;
+        if (health <= 0){
+            health = 0;
+            dead = true;
+        }
+        flinching = true;
+        flinchTimer = System.nanoTime();
     }
 }

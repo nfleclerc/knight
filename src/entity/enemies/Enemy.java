@@ -89,7 +89,7 @@ public abstract class Enemy extends MapObject {
 
     public void draw(Graphics2D g){
 
-        if (notOnScreen()) return;
+        //if (notOnScreen()) return;
 
         setMapPosition();
 
