@@ -183,6 +183,8 @@ public class Player extends MapObject {
         checkTileMapCollision();
         setPosition(xtemp, ytemp);
 
+        System.out.println(getX() + ", " + getY());
+
         //check attack has stopped
         if (currentAction == ATTACKING){
             if (animation.hasPlayedOnce()){
