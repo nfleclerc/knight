@@ -273,15 +273,13 @@ public class Player extends MapObject {
 
     public void checkAttack(ArrayList<Enemy> enemies) {
 
-        for (Enemy enemy : enemies){
-            if (this.intersects(enemy)){
-                if (attacking){
-                    enemy.hit(attackDamage);
-                } else {
-                    hit(enemy.getDamage());
-                }
+        enemies.stream().filter(this::intersects).forEach(enemy -> {
+            if (attacking) {
+                enemy.hit(attackDamage);
+            } else {
+                hit(enemy.getDamage());
             }
-        }
+        });
 
     }
 
