@@ -234,7 +234,7 @@ public class Player extends MapObject {
             if(currentAction != IDLE) {
                 currentAction = IDLE;
                 animation.setFrames(sprites.get(IDLE));
-                animation.setDelay(4000);
+                animation.setDelay(400);
                 width = 30;
             }
         }

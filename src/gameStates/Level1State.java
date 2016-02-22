@@ -129,22 +129,20 @@ public class Level1State extends GameState{
     @Override
     public void keyPressed(int k) {
         switch (k){
-            case KeyEvent.VK_D:
+            case KeyEvent.VK_RIGHT:
                 player.setRight(true);
                 break;
-            case KeyEvent.VK_A:
+            case KeyEvent.VK_LEFT:
                 player.setLeft(true);
                 break;
-            case KeyEvent.VK_W:
+            case KeyEvent.VK_UP:
                 player.setUp(true);
+                player.setJumping(true);
                 break;
-            case KeyEvent.VK_S:
+            case KeyEvent.VK_DOWN:
                 player.setDown(true);
                 break;
             case KeyEvent.VK_SPACE:
-                player.setJumping(true);
-                break;
-            case KeyEvent.VK_F:
                 player.setAttacking();
         }
     }
@@ -152,20 +150,18 @@ public class Level1State extends GameState{
     @Override
     public void keyReleased(int k) {
         switch (k) {
-            case KeyEvent.VK_D:
+            case KeyEvent.VK_RIGHT:
                 player.setRight(false);
                 break;
-            case KeyEvent.VK_A:
+            case KeyEvent.VK_LEFT:
                 player.setLeft(false);
                 break;
-            case KeyEvent.VK_W:
+            case KeyEvent.VK_UP:
                 player.setUp(false);
-                break;
-            case KeyEvent.VK_S:
-                player.setDown(false);
-                break;
-            case KeyEvent.VK_SPACE:
                 player.setJumping(false);
+                break;
+            case KeyEvent.VK_DOWN:
+                player.setDown(false);
                 break;
         }
 
