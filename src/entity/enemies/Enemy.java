@@ -72,13 +72,15 @@ public abstract class Enemy extends MapObject {
         checkTileMapCollision();
         setPosition(xtemp, ytemp);
 
-        if(flinching){
-            long elapsed = (System.nanoTime() - flinchTimer) / 1_000_000;
-            if (elapsed > 400){
-                flinching = false;
-            }
-        }
+        checkDoneFlinching(400);
 
+        checkForDirectionChange();
+
+        animation.update();
+
+    }
+
+    protected void checkForDirectionChange(){
         if (right && dx == 0){
             right = false;
             left = true;
@@ -88,17 +90,10 @@ public abstract class Enemy extends MapObject {
             left = false;
             facingRight = true;
         }
-        animation.update();
-
     }
 
     public void draw(Graphics2D g){
-
-        //if (notOnScreen()) return;
-
         setMapPosition();
-
         super.draw(g);
-
     }
 }

@@ -15,8 +15,6 @@ public class Player extends MapObject {
     private int health;
     private int maxHealth;
     private boolean dead;
-    private boolean flinching;
-    private long flinchTimer;
     private int XP;
 
     // attack
@@ -134,27 +132,24 @@ public class Player extends MapObject {
             if(dx < -maxSpeed) {
                 dx = -maxSpeed;
             }
-        }
-        else if(right) {
+        } else if(right) {
             dx += moveSpeed;
             if(dx > maxSpeed) {
                 dx = maxSpeed;
             }
-        }
-        else {
+        } else
             if(dx > 0) {
                 dx -= stopSpeed;
                 if(dx < 0) {
                     dx = 0;
                 }
-            }
-            else if(dx < 0) {
+            } else if(dx < 0) {
                 dx += stopSpeed;
                 if(dx > 0) {
                     dx = 0;
                 }
             }
-        }
+
 
         // cannot move while attacking, except in air
         if((currentAction == ATTACKING) && !(jumping || falling)) {
@@ -185,60 +180,24 @@ public class Player extends MapObject {
 
         System.out.println(getX() + ", " + getY());
 
-        //check attack has stopped
-        if (currentAction == ATTACKING){
-            if (animation.hasPlayedOnce()){
-                attacking = false;
-            }
-        }
+        checkAttackHasStopped();
 
-        //check done flinching
-        if (flinching){
-            long elapsed = (System.nanoTime() - flinchTimer) / 1_000_000;
-            if (elapsed > 500){
-                flinching = false;
-            }
-        }
+        checkDoneFlinching(1000);
 
         // set animation
         if(attacking) {
-            if(currentAction != ATTACKING) {
-                currentAction = ATTACKING;
-                animation.setFrames(sprites.get(ATTACKING));
-                animation.setDelay(80);
-                width = 60;
-            }
+            setAnimation(ATTACKING, 80, 60);
         } else if(dy > 0) {
-            if(currentAction != FALLING) {
-                currentAction = FALLING;
-                animation.setFrames(sprites.get(FALLING));
-                animation.setDelay(40);
-                width = 30;
-            }
+            setAnimation(FALLING, 40, 30);
         }
         else if(dy < 0) {
-            if(currentAction != JUMPING) {
-                currentAction = JUMPING;
-                animation.setFrames(sprites.get(JUMPING));
-                animation.setDelay(-1);
-                width = 30;
-            }
+            setAnimation(JUMPING, -1, 30);
         }
         else if(left || right) {
-            if(currentAction != WALKING) {
-                currentAction = WALKING;
-                animation.setFrames(sprites.get(WALKING));
-                animation.setDelay(150);
-                width = 30;
-            }
+            setAnimation(WALKING, 150, 30);
         }
         else {
-            if(currentAction != IDLE) {
-                currentAction = IDLE;
-                animation.setFrames(sprites.get(IDLE));
-                animation.setDelay(400);
-                width = 30;
-            }
+            setAnimation(IDLE, 400, 30);
         }
 
         animation.update();
@@ -249,6 +208,15 @@ public class Player extends MapObject {
             if(left) facingRight = false;
         }
 
+    }
+
+    private void setAnimation(int currentAction, int delay, int width){
+        if(this.currentAction != currentAction){
+            this.currentAction = currentAction;
+            animation.setFrames(sprites.get(currentAction));
+            animation.setDelay(delay);
+            this.width = width;
+        }
     }
 
     public void draw(Graphics2D g) {
@@ -283,6 +251,15 @@ public class Player extends MapObject {
 
     }
 
+    public void checkAttackHasStopped(){
+        //check attack has stopped
+        if (currentAction == ATTACKING){
+            if (animation.hasPlayedOnce()){
+                attacking = false;
+            }
+        }
+    }
+
     private void hit(int damage) {
         if (flinching) return;
         health -= damage;
@@ -299,23 +276,19 @@ public class Player extends MapObject {
         if (attacking){
             if (facingRight) {
                 return new Rectangle(
-                        (int) x - cWidth + attackRange,
-                        (int) y - cHeight,
-                        cWidth,
+                        (int) x - cWidth, (int) y - cHeight,
+                        cWidth + attackRange,
                         cHeight
                 );
             } else {
                 return new Rectangle(
-                        (int) x - cWidth - attackRange,
-                        (int) y - cHeight,
-                        cWidth,
+                        (int) x - cWidth - attackRange, (int) y - cHeight,
+                        cWidth + attackRange,
                         cHeight
                 );
             }
         } else {
-            return new Rectangle(
-                    (int) x - cWidth,
-                    (int) y - cHeight,
+            return new Rectangle((int) x - cWidth, (int) y - cHeight,
                     cWidth,
                     cHeight
             );

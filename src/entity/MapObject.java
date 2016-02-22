@@ -65,6 +65,9 @@ public abstract class MapObject {
     protected double jumpStart;
     protected double stopJumpSpeed;
 
+    protected boolean flinching;
+    protected long flinchTimer;
+
     //constructor
     public MapObject(TileMap tm) {
         tileMap = tm;
@@ -89,6 +92,7 @@ public abstract class MapObject {
     public void checkTileMapCollision() {
         currCol = (int) x / tileSize;
         currRow = (int) y / tileSize;
+
         xdest = x + dx;
         ydest = y + dy;
 
@@ -106,8 +110,19 @@ public abstract class MapObject {
         }
     }
 
-    public void calculateCollisionInYDirection() {
+    private void calculateCollisionInYDirection() {
         calculateCorners(x, ydest);
+        checkTopTiles();
+        checkBottomTiles();
+    }
+
+    private void calculateCollisionInXDirection() {
+        calculateCorners(xdest, y);
+        checkLeftTiles();
+        checkRightTiles();
+    }
+
+    private void checkTopTiles(){
         if (dy < 0) {
             if (topLeft || topRight) {
                 dy = 0;
@@ -116,6 +131,9 @@ public abstract class MapObject {
                 ytemp += dy;
             }
         }
+    }
+
+    private void checkBottomTiles(){
         if (dy > 0) {
             if (bottomLeft || bottomRight) {
                 dy = 0;
@@ -127,8 +145,7 @@ public abstract class MapObject {
         }
     }
 
-    public void calculateCollisionInXDirection() {
-        calculateCorners(xdest, y);
+    private void checkLeftTiles(){
         if (dx < 0) {
             if (topLeft || bottomLeft) {
                 dx = 0;
@@ -137,6 +154,9 @@ public abstract class MapObject {
                 xtemp += dx;
             }
         }
+    }
+
+    private void checkRightTiles(){
         if (dx > 0) {
             if (topRight || bottomRight) {
                 dx = 0;
@@ -145,11 +165,9 @@ public abstract class MapObject {
                 xtemp += dx;
             }
         }
-
     }
 
-
-        public void calculateCorners(double x, double y) {
+    public void calculateCorners(double x, double y) {
         int leftTile = (int)(x - cWidth / 2) / tileSize;
         int rightTile = (int)(x + cWidth / 2 - 1) / tileSize;
         int topTile = (int)(y - cHeight / 2) / tileSize;
@@ -226,6 +244,16 @@ public abstract class MapObject {
 
     public void setJumping(boolean jumping) {
         this.jumping = jumping;
+    }
+
+    public void checkDoneFlinching(int flinchTime){
+        //check done flinching
+        if (flinching){
+            long elapsed = (System.nanoTime() - flinchTimer) / 1_000_000;
+            if (elapsed > flinchTime){
+                flinching = false;
+            }
+        }
     }
 
     public boolean isOnScreen(){
