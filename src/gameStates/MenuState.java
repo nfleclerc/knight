@@ -17,6 +17,7 @@ public class MenuState extends GameState {
             "Start",
             "Help",
             "Load",
+            "Credits",
             "Quit"
     };
 
