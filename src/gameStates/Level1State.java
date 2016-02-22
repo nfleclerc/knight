@@ -11,8 +11,6 @@ import tileMap.TileMap;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.util.ArrayList;
 
 /**
@@ -36,11 +34,11 @@ public class Level1State extends GameState{
     @Override
     public void init() {
         tileMap = new TileMap(30);
-        tileMap.loadTiles("/Tilesets/grasstileset.gif");
-        tileMap.loadMap("/Maps/forestcave_map.tme");
+        tileMap.loadTiles("/tilesets/grasstileset.gif");
+        tileMap.loadMap("/maps/forestcave_map.tme");
         tileMap.setPosition(0, 0);
 
-        bg = new Background("/Backgrounds/forestbg.gif", 0.05);
+        bg = new Background("/backgrounds/forestbg.gif", 0.05);
 
         player = new Player(tileMap);
         player.setPosition(100, 300);

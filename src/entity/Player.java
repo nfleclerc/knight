@@ -1,7 +1,6 @@
 package entity;
 
 
-import entity.MapObject;
 import entity.enemies.Enemy;
 import tileMap.TileMap;
 
@@ -68,7 +67,7 @@ public class Player extends MapObject {
 
             BufferedImage spritesheet = ImageIO.read(
                     getClass().getResourceAsStream(
-                            "/Sprites/Player/knightsprites.gif"
+                            "/sprites/player/knightsprites.gif"
                     )
             );
 

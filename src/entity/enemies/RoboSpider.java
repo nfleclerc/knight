@@ -4,7 +4,6 @@ import entity.Animation;
 import tileMap.TileMap;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -33,7 +32,7 @@ public class RoboSpider extends Enemy{
         try{
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
-                            "/Sprites/Enemies/slugger.gif"
+                            "/sprites/enemies/bugs/spider.gif"
                     )
             );
 
