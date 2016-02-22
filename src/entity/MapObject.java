@@ -95,6 +95,18 @@ public abstract class MapObject {
         xtemp = x;
         ytemp = y;
 
+        calculateCollisionInYDirection();
+        calculateCollisionInXDirection();
+
+        if (!falling) {
+            calculateCorners(x, ydest + 1);
+            if (!bottomRight && !bottomLeft) {
+                falling = true;
+            }
+        }
+    }
+
+    public void calculateCollisionInYDirection() {
         calculateCorners(x, ydest);
         if (dy < 0) {
             if (topLeft || topRight) {
@@ -113,6 +125,9 @@ public abstract class MapObject {
                 ytemp += dy;
             }
         }
+    }
+
+    public void calculateCollisionInXDirection() {
         calculateCorners(xdest, y);
         if (dx < 0) {
             if (topLeft || bottomLeft) {
@@ -131,15 +146,10 @@ public abstract class MapObject {
             }
         }
 
-        if (!falling) {
-            calculateCorners(x, ydest + 1);
-            if (!bottomRight && !bottomLeft) {
-                falling = true;
-            }
-        }
     }
 
-    public void calculateCorners(double x, double y) {
+
+        public void calculateCorners(double x, double y) {
         int leftTile = (int)(x - cWidth / 2) / tileSize;
         int rightTile = (int)(x + cWidth / 2 - 1) / tileSize;
         int topTile = (int)(y - cHeight / 2) / tileSize;
@@ -218,11 +228,11 @@ public abstract class MapObject {
         this.jumping = jumping;
     }
 
-    public boolean notOnScreen(){
-        return x + xmap + width < 0 ||
+    public boolean isOnScreen(){
+        return (x + xmap + width < 0 ||
                 x + xmap - width > GamePanel.WIDTH ||
                 y + ymap + height < 0 ||
-                y + ymap - height > GamePanel.HEIGHT;
+                y + ymap - height > GamePanel.HEIGHT);
     }
 
     public void draw(Graphics2D g){

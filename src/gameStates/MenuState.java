@@ -77,6 +77,9 @@ public class MenuState extends GameState {
             case KeyEvent.VK_ENTER:
                 select();
                 break;
+            case KeyEvent.VK_SPACE:
+                select();
+                break;
             case KeyEvent.VK_UP:
                 currentChoice--;
                 if (currentChoice == -1){

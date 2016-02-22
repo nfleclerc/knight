@@ -113,7 +113,7 @@ public class ForestState extends GameState{
         player.draw(g);
 
         for (Enemy enemy : enemies){
-            enemy.draw(g);
+                enemy.draw(g);
         }
 
         for (Explosion explosion : explosions){
