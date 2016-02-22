@@ -58,11 +58,12 @@ public class ForestState extends GameState{
         enemies = new ArrayList<>();
         java.awt.Point[] points = new Point[] {
                 new Point(510, 350),
-                new Point(800, 50),
-                new Point(2000, 250),
-                new Point(3000, 150),
-                new Point(4000, 150)
-        };
+                new Point(2000, 300),
+                new Point(2076, 300),
+                new Point(2368, 300),
+                new Point(2614, 300),
+                new Point(2900, 300)
+       };
 
         for (int i = 0; i < points.length; i++) {
             RoboSpider spider = new RoboSpider(tileMap, player);
