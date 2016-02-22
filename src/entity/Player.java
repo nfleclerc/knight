@@ -17,6 +17,7 @@ public class Player extends MapObject {
     private boolean dead;
     private boolean flinching;
     private long flinchTimer;
+    private int XP;
 
     // attack
     private boolean attacking;
@@ -109,7 +110,7 @@ public class Player extends MapObject {
         animation = new Animation();
         currentAction = IDLE;
         animation.setFrames(sprites.get(IDLE));
-        animation.setDelay(400);
+        animation.setDelay(4000);
 
     }
 
@@ -194,7 +195,7 @@ public class Player extends MapObject {
             if(currentAction != ATTACKING) {
                 currentAction = ATTACKING;
                 animation.setFrames(sprites.get(ATTACKING));
-                animation.setDelay(40);
+                animation.setDelay(80);
                 width = 60;
             }
         } else if(dy > 0) {
@@ -217,7 +218,7 @@ public class Player extends MapObject {
             if(currentAction != WALKING) {
                 currentAction = WALKING;
                 animation.setFrames(sprites.get(WALKING));
-                animation.setDelay(40);
+                animation.setDelay(150);
                 width = 30;
             }
         }
@@ -225,7 +226,7 @@ public class Player extends MapObject {
             if(currentAction != IDLE) {
                 currentAction = IDLE;
                 animation.setFrames(sprites.get(IDLE));
-                animation.setDelay(100);
+                animation.setDelay(4000);
                 width = 30;
             }
         }
@@ -252,26 +253,11 @@ public class Player extends MapObject {
             }
         }
 
-        if(facingRight) {
-            g.drawImage(
-                    animation.getImage(),
-                    (int)(x + xmap - width / 2),
-                    (int)(y + ymap - height / 2),
-                    null
-            );
-        }
-        else {
-            g.drawImage(
-                    animation.getImage(),
-                    (int)(x + xmap - width / 2 + width),
-                    (int)(y + ymap - height / 2),
-                    -width,
-                    height,
-                    null
-            );
-
-        }
+        super.draw(g);
 
     }
 
+    public int getXP() {
+        return XP;
+    }
 }

@@ -1,12 +1,15 @@
 package gameStates;
 
+import entity.HUD;
+import entity.enemies.Enemy;
 import entity.Player;
-import entity.Player_Test;
+import entity.enemies.RoboSpider;
 import main.GamePanel;
 import tileMap.TileMap;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 /**
  * Created by nathaniel on 2/19/16.
@@ -16,6 +19,8 @@ public class Level1State extends GameState{
     private TileMap tileMap;
 
     private Player player;
+    private ArrayList<Enemy> enemies;
+    private HUD hud;
 
     public Level1State(GameStateManager gameStateManager){
         this.gameStateManager = gameStateManager;
@@ -28,8 +33,17 @@ public class Level1State extends GameState{
         tileMap.loadTiles("/Tilesets/grasstileset.gif");
         tileMap.loadMap("/Maps/level1-1.map");
         tileMap.setPosition(0, 0);
+
         player = new Player(tileMap);
         player.setPosition(100, 100);
+        hud = new HUD(player);
+
+        enemies = new ArrayList<>();
+        RoboSpider spider;
+        spider = new RoboSpider(tileMap);
+        spider.setPosition(100, 100);
+        enemies.add(spider);
+
     }
 
     @Override
@@ -39,6 +53,7 @@ public class Level1State extends GameState{
                 GamePanel.WIDTH / 2 - player.getX(),
                 GamePanel.HEIGHT / 2 - player.getY()
         );
+        enemies.forEach(entity.enemies.Enemy::update);
     }
 
     @Override
@@ -50,6 +65,13 @@ public class Level1State extends GameState{
 
         tileMap.draw(g);
         player.draw(g);
+
+        for (Enemy enemy : enemies){
+            enemy.draw(g);
+        }
+
+        hud.draw(g);
+
 
     }
 
