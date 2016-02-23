@@ -66,7 +66,7 @@ public class Wasp extends Enemy{
             right = false;
             left = true;
             facingRight = false;
-        } else if (!bottomLeft && dx == 0){
+        } else if (!bottomLeft){
             right = true;
             left = false;
             facingRight = true;

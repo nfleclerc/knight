@@ -70,7 +70,7 @@ public class ForestState extends GameState{
                 new Point(1569, 290),
                 new Point(1230, 200),
                 new Point(3270, 200),
-                new Point(856, 230)
+                new Point(856, 140)
         };
 
         for (Point spiderPoint : spiderPoints) {
