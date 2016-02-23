@@ -1,6 +1,8 @@
 /out
 /.idea
-/bin
 .DS_Store
 knight.iml
+/bin
+/jar
+/doc
 /res/.DS_Store
