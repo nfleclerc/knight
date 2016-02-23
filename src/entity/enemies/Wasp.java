@@ -16,8 +16,8 @@ public class Wasp extends Enemy{
 
     public Wasp(TileMap tm, Player player) {
         super(tm, player);
-        moveSpeed = 0.3;
-        maxSpeed = 0.3;
+        moveSpeed = 0.5;
+        maxSpeed = 0.5;
         fallSpeed = 0.0;
         maxFallSpeed = 0.0;
 
@@ -34,7 +34,7 @@ public class Wasp extends Enemy{
         try{
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
-                            "/sprites/enemies/bugs/spider.gif"
+                            "/sprites/enemies/bugs/wasp.gif"
                     )
             );
 

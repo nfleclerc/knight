@@ -5,6 +5,7 @@ import entity.HUD;
 import entity.enemies.Enemy;
 import entity.Player;
 import entity.enemies.RoboSpider;
+import entity.enemies.Wasp;
 import main.GamePanel;
 import tileMap.Background;
 import tileMap.TileMap;
@@ -56,7 +57,7 @@ public class ForestState extends GameState{
     private void populateEnemies() {
 
         enemies = new ArrayList<>();
-        java.awt.Point[] points = new Point[] {
+        java.awt.Point[] spiderPoints = new Point[] {
                 new Point(510, 350),
                 new Point(2000, 300),
                 new Point(2076, 300),
@@ -65,10 +66,23 @@ public class ForestState extends GameState{
                 new Point(2900, 300)
        };
 
-        for (int i = 0; i < points.length; i++) {
+        java.awt.Point[] waspPoints = new Point[] {
+                new Point(1569, 290),
+                new Point(1230, 200),
+                new Point(3270, 200),
+                new Point(856, 230)
+        };
+
+        for (Point spiderPoint : spiderPoints) {
             RoboSpider spider = new RoboSpider(tileMap, player);
-            spider.setPosition(points[i].x, points[i].y);
+            spider.setPosition(spiderPoint.x, spiderPoint.y);
             enemies.add(spider);
+        }
+
+        for (Point waspPoint : waspPoints){
+            Wasp wasp = new Wasp(tileMap, player);
+            wasp.setPosition(waspPoint.x, waspPoint.y);
+            enemies.add(wasp);
         }
 
     }
