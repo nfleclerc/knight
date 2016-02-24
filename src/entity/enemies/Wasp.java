@@ -12,7 +12,6 @@ import java.awt.image.BufferedImage;
  */
 public class Wasp extends Enemy{
 
-    private BufferedImage[] sprites;
 
     public Wasp(TileMap tm, Player player) {
         super(tm, player);

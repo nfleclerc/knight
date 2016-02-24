@@ -5,6 +5,7 @@ import tileMap.Tile;
 import tileMap.TileMap;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by nathaniel on 2/19/16.
@@ -47,6 +48,7 @@ public abstract class MapObject {
     protected int currentAction;
     protected int previousAction;
     protected boolean facingRight;
+
 
     //movement
     protected boolean left;

@@ -5,6 +5,7 @@ import entity.Player;
 import tileMap.TileMap;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by nathaniel on 2/21/16.
@@ -12,6 +13,9 @@ import java.awt.*;
 public abstract class Enemy extends MapObject {
 
     private final Player player;
+
+    protected BufferedImage[] sprites;
+
     protected int health;
     protected int maxHealth;
     protected boolean dead;

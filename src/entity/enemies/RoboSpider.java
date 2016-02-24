@@ -12,7 +12,6 @@ import java.awt.image.BufferedImage;
  */
 public class RoboSpider extends Enemy{
 
-    private BufferedImage[] sprites;
 
     public RoboSpider(TileMap tm, Player player){
         super(tm, player);
