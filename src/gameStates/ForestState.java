@@ -43,7 +43,7 @@ public class ForestState extends GameState{
         bg = new Background("/backgrounds/forestbg.gif", 0.05);
 
         player = new Player(tileMap);
-        player.setPosition(100, 310);
+        player.setPosition(4000, 310);
 
         hud = new HUD(player);
 
