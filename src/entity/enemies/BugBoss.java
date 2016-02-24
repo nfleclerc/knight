@@ -1,7 +1,6 @@
 package entity.enemies;
 
 import entity.Animation;
-import entity.MapObject;
 import entity.Player;
 import tileMap.TileMap;
 
@@ -28,19 +27,19 @@ public class BugBoss extends Enemy {
     public BugBoss(TileMap tm, Player player) {
         super(tm, player);
 
-        width = 120;
-        height = 60;
-        cWidth = 120;
-        cHeight = 60;
+        width = 240;
+        height = 120;
+        cWidth = 240;
+        cHeight = 120;
 
         moveSpeed = 0.3;
         maxSpeed = 1.6;
         stopSpeed = 0.4;
-        fallSpeed = 0.10;
-        maxFallSpeed = 3.0;
+        fallSpeed = 0.01;
+        maxFallSpeed = 1.0;
         xpWorth = 500;
 
-        facingRight = true;
+        facingRight = false;
 
         health = maxHealth = 30;
 
@@ -55,22 +54,21 @@ public class BugBoss extends Enemy {
             );
 
             sprites = new ArrayList<>();
-            for(int i = 0; i < numFrames.length; i++) {
+            for (int i = 0; i < numFrames.length; i++) {
 
                 BufferedImage[] bi =
                         new BufferedImage[numFrames[i]];
 
-                for(int j = 0; j < numFrames[i]; j++) {
+                for (int j = 0; j < numFrames[i]; j++) {
 
-                    if(i != ROLLING) {
+                    if (i != ROLLING) {
                         bi[j] = spritesheet.getSubimage(
                                 j * width,
                                 i * height,
                                 width,
                                 height
                         );
-                    }
-                    else {
+                    } else {
                         bi[j] = spritesheet.getSubimage(
                                 j * (width / 2),
                                 i * height,
@@ -85,21 +83,35 @@ public class BugBoss extends Enemy {
 
             }
 
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         animation = new Animation();
         currentAction = WALKING;
         animation.setFrames(sprites.get(WALKING));
-        animation.setDelay(300);
+        animation.setDelay(150);
 
     }
 
     @Override
-    public void setMapPosition(){
+    public void setMapPosition() {
         xmap = tileMap.getX();
         ymap = tileMap.getY();
+    }
+
+    @Override
+    public void update() {
+
+        getNextPosition();
+        checkTileMapCollision();
+        setPosition(xtemp, ytemp);
+
+        checkDoneFlinching(400);
+
+        checkForDirectionChange();
+
+        animation.update();
+
     }
 }

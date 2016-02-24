@@ -43,7 +43,7 @@ public class ForestState extends GameState{
         bg = new Background("/backgrounds/forestbg.gif", 0.05);
 
         player = new Player(tileMap);
-        player.setPosition(100, 300);
+        player.setPosition(100, 310);
 
         hud = new HUD(player);
 
@@ -87,7 +87,7 @@ public class ForestState extends GameState{
         }
 
         BugBoss bugBoss = new BugBoss(tileMap, player);
-        bugBoss.setPosition(4258, 200);
+        bugBoss.setPosition(4258, 365);
         enemies.add(bugBoss);
 
     }
@@ -127,7 +127,7 @@ public class ForestState extends GameState{
     @Override
     public void draw(Graphics2D g) {
 
-       bg.draw(g);
+        bg.draw(g);
 
         tileMap.draw(g);
         player.draw(g);

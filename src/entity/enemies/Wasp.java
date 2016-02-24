@@ -26,7 +26,6 @@ public class Wasp extends Enemy{
         cHeight = 20;
 
         health = maxHealth = 2;
-        damage = 1;
         xpWorth = 15;
 
         //loadSprites
@@ -53,7 +52,7 @@ public class Wasp extends Enemy{
 
         animation = new Animation();
         animation.setFrames(sprites);
-        animation.setDelay(300);
+        animation.setDelay(45);
 
         right = true;
         facingRight = true;

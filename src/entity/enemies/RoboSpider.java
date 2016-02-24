@@ -26,7 +26,6 @@ public class RoboSpider extends Enemy{
         cHeight = 20;
 
         health = maxHealth = 2;
-        damage = 1;
         xpWorth = 10;
 
         //loadSprites

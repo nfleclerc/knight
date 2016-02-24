@@ -194,7 +194,7 @@ public class Player extends MapObject {
             setAnimation(JUMPING, -1, 30);
         }
         else if(left || right) {
-            setAnimation(WALKING, 150, 30);
+            setAnimation(WALKING, 125, 30);
         }
         else {
             setAnimation(IDLE, 400, 30);
