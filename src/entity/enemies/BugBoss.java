@@ -1,10 +1,12 @@
 package entity.enemies;
 
 import entity.Animation;
+import entity.MapObject;
 import entity.Player;
 import tileMap.TileMap;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -26,10 +28,10 @@ public class BugBoss extends Enemy {
     public BugBoss(TileMap tm, Player player) {
         super(tm, player);
 
-        width = 90;
+        width = 120;
         height = 60;
-        cWidth = 80;
-        cHeight = 50;
+        cWidth = 120;
+        cHeight = 60;
 
         moveSpeed = 0.3;
         maxSpeed = 1.6;
@@ -70,9 +72,9 @@ public class BugBoss extends Enemy {
                     }
                     else {
                         bi[j] = spritesheet.getSubimage(
-                                j * (width - 30),
+                                j * (width / 2),
                                 i * height,
-                                width - 30,
+                                width / 2,
                                 height
                         );
                     }
@@ -91,7 +93,13 @@ public class BugBoss extends Enemy {
         animation = new Animation();
         currentAction = WALKING;
         animation.setFrames(sprites.get(WALKING));
-        animation.setDelay(4000);
+        animation.setDelay(300);
 
+    }
+
+    @Override
+    public void setMapPosition(){
+        xmap = tileMap.getX();
+        ymap = tileMap.getY();
     }
 }

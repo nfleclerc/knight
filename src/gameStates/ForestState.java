@@ -2,6 +2,7 @@ package gameStates;
 
 import entity.Explosion;
 import entity.HUD;
+import entity.enemies.BugBoss;
 import entity.enemies.Enemy;
 import entity.Player;
 import entity.enemies.RoboSpider;
@@ -67,10 +68,10 @@ public class ForestState extends GameState{
        };
 
         java.awt.Point[] waspPoints = new Point[] {
+                new Point(856, 230),
                 new Point(1569, 290),
                 new Point(1230, 200),
-                new Point(3270, 200),
-                new Point(856, 230)
+                new Point(3270, 140)
         };
 
         for (Point spiderPoint : spiderPoints) {
@@ -84,6 +85,10 @@ public class ForestState extends GameState{
             wasp.setPosition(waspPoint.x, waspPoint.y);
             enemies.add(wasp);
         }
+
+        BugBoss bugBoss = new BugBoss(tileMap, player);
+        bugBoss.setPosition(4258, 200);
+        enemies.add(bugBoss);
 
     }
 
