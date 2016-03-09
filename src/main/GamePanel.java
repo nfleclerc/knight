@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 
 /**
  * Created by nathaniel on 2/18/16.
+ *
+ * Represents the panel displaying the game.
  */
 public class GamePanel extends JPanel implements Runnable, KeyListener{
 
@@ -28,7 +30,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 
     private GameStateManager gameStateManager;
 
-    public GamePanel(){
+    /**
+     * Creates a panel. Only to be used once, when the game is first being created.
+     */
+     GamePanel(){
         super();
         setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
         setFocusable(true);
@@ -74,21 +79,34 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         }
     }
 
+    /**
+     * Draws the contents of the panel to the screen.
+     */
     private void drawToScreen() {
         Graphics g2 = getGraphics();
         g2.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
         g2.dispose();
     }
 
+    /**
+     * Draws the current game state.
+     */
     private void draw() {
         gameStateManager.draw(g);
     }
 
+    /**
+     * Updates the current game state.
+     */
     private void update() {
         gameStateManager.update();
     }
 
 
+    /**
+     * Initializes the Graphics of the panel and creates a
+     * game state manager.
+     */
     private void init() {
         image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         g = (Graphics2D) image.getGraphics();
