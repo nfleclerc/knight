@@ -9,6 +9,9 @@ import java.awt.image.BufferedImage;
 
 /**
  * Created by nathaniel on 2/19/16.
+ *
+ * Represents an object to be drawn on the map. All classes that would be drawn on the map (i.e. Player or
+ * an Enemy) extend this class.
  */
 public abstract class MapObject {
 
