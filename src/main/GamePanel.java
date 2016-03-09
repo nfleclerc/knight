@@ -16,8 +16,19 @@ import java.awt.image.BufferedImage;
  */
 public class GamePanel extends JPanel implements Runnable, KeyListener{
 
+    /**
+     * The base width of the game window.
+     */
     public static final int WIDTH = 320;
+
+    /**
+     * The base height of the game window.
+     */
     public static final int HEIGHT = 240;
+
+    /**
+     * The scale at which to multiply the game window's height and width by.
+     */
     public static final int SCALE = 3;
 
     private Thread thread;

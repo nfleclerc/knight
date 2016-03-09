@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 /**
  * Created by nathaniel on 2/19/16.
+ *
+ * Represents the Bugged Forest level.
  */
 public class ForestState extends GameState{
 
@@ -27,6 +29,7 @@ public class ForestState extends GameState{
     public ArrayList<Explosion> explosions;
     private HUD hud;
     private Background bg;
+
 
     public ForestState(GameStateManager gameStateManager){
         this.gameStateManager = gameStateManager;

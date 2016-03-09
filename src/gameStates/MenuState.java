@@ -6,6 +6,8 @@ import java.awt.event.KeyEvent;
 
 /**
  * Created by nathaniel on 2/18/16.
+ *
+ * Represents the opening menu in the game.
  */
 public class MenuState extends GameState {
 
