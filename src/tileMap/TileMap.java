@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 
 /**
  * Created by nathaniel on 2/19/16.
+ *
+ * Represents the Tile Map for a given level.
  */
 public class TileMap {
 
@@ -44,6 +46,10 @@ public class TileMap {
     private int numRowsToDraw;
     private int numColToDraw;
 
+    /**
+     *
+     * @param tileSize The size of each tile in pixels. Height and Width must be the same.
+     */
     public TileMap(int tileSize) {
         this.tileSize = tileSize;
         numRowsToDraw = GamePanel.HEIGHT / tileSize + 2;
@@ -51,6 +57,10 @@ public class TileMap {
         tween = 0.04;
     }
 
+    /**
+     * Loads a given Tile Set for a level.
+     * @param s The location of the image used for the tile set.
+     */
     public void loadTiles(String s){
         try {
             tileSet = ImageIO.read(getClass().getResourceAsStream(s));
@@ -69,6 +79,11 @@ public class TileMap {
         }
     }
 
+    /**
+     * Loads a map using a given map file. Map files are text files containing the
+     * location and layout of each file.
+     * @param s The location of the map file.
+     */
     public void loadMap(String s){
 
         try {
@@ -103,26 +118,52 @@ public class TileMap {
 
     }
 
+    /**
+     *
+     * @return The size of the tile (Height and Width are the same).
+     */
     public int getTileSize() {
         return tileSize;
     }
 
+    /**
+     *
+     * @return The x position of the map.
+     */
     public double getX() {
         return x;
     }
 
+    /**
+     *
+     * @return The y position of the map.
+     */
     public double getY() {
         return y;
     }
 
+    /**
+     *
+     * @return The total width of the map.
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     *
+     * @return The total height of the map.
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * Returns the type of this tile (either NORMAL or BLOCKED).
+     * @param row The row of the tile.
+     * @param col The column of the tile.
+     * @return The type of this tile (either NORMAL or BLOCKED).
+     */
     public int getType(int row, int col){
         int rc = map[row][col];
         int r = rc / numTilesAcross;
@@ -130,6 +171,11 @@ public class TileMap {
         return tiles[r][c].getType();
     }
 
+    /**
+     * Sets the curent position of the map on the screen.
+     * @param x
+     * @param y
+     */
     public void setPosition(double x, double y){
         this.x += (x - this.x) * tween;
         this.y += (y - this.y) * tween;
@@ -140,13 +186,20 @@ public class TileMap {
         rowOffset = (int)-this.y / tileSize;
     }
 
+    /**
+     * Makes sure the map is in the bounds at all times.
+     */
     private void fixBounds() {
-        if (x < xmin){x = xmin;}
-        if (x > xmax){x = xmax;}
-        if (y < ymin){y = ymin;}
-        if (y > ymax){y = ymax;}
+        if (x < xmin) {x = xmin;}
+        if (x > xmax) {x = xmax;}
+        if (y < ymin) {y = ymin;}
+        if (y > ymax) {y = ymax;}
     }
 
+    /**
+     * Draws the map to the screen.
+     * @param g
+     */
     public void draw(Graphics2D g){
         for (int row = rowOffset; row < rowOffset + numRowsToDraw; row++) {
 
@@ -169,10 +222,18 @@ public class TileMap {
         }
     }
 
+    /**
+     *
+     * @return The number of rows in the map.
+     */
     public int getNumRows() {
         return numRows;
     }
 
+    /**
+     *
+     * @return The number of columns in the map.
+     */
     public int getNumCols() {
         return numCols;
     }
