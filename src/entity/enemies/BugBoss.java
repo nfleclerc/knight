@@ -53,7 +53,7 @@ public class BugBoss extends Enemy {
 
                 for (int j = 0; j < numFrames[i]; j++) {
 
-                    if (i != ROLLING) {
+                    if (i != 1) {
                         bi[j] = spriteSheet.getSubimage(
                                 j * width,
                                 i * height,

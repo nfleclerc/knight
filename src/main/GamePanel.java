@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     /**
      * Creates a panel. Only to be used once, when the game is first being created.
      */
-     GamePanel(){
+    public GamePanel(){
         super();
         setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
         setFocusable(true);
@@ -93,7 +93,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     /**
      * Draws the contents of the panel to the screen.
      */
-    private void drawToScreen() {
+    public void drawToScreen() {
         Graphics g2 = getGraphics();
         g2.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
         g2.dispose();
@@ -102,14 +102,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     /**
      * Draws the current game state.
      */
-    private void draw() {
+    public void draw() {
         gameStateManager.draw(g);
     }
 
     /**
      * Updates the current game state.
      */
-    private void update() {
+    public void update() {
         gameStateManager.update();
     }
 
@@ -118,7 +118,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
      * Initializes the Graphics of the panel and creates a
      * game state manager.
      */
-    private void init() {
+    public void init() {
         image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         g = (Graphics2D) image.getGraphics();
         running = true;

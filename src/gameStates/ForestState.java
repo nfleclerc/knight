@@ -7,6 +7,7 @@ import entity.enemies.Enemy;
 import entity.Player;
 import entity.enemies.RoboSpider;
 import entity.enemies.Wasp;
+import evaluator.CodeWindow;
 import main.GamePanel;
 import tileMap.Background;
 import tileMap.TileMap;
@@ -46,7 +47,7 @@ public class ForestState extends GameState{
         bg = new Background("/backgrounds/forestbg.gif", 0.05);
 
         player = new Player(tileMap);
-        player.setPosition(4000, 310);
+        player.setPosition(100, 310);
 
         hud = new HUD(player);
 
@@ -166,6 +167,7 @@ public class ForestState extends GameState{
                 player.setDown(true);
                 break;
             case KeyEvent.VK_SPACE:
+                new CodeWindow();
                 player.setAttacking();
         }
     }
