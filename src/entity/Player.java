@@ -274,25 +274,39 @@ public class Player extends MapObject {
     @Override
     public Rectangle getRectangle(){
         if (attacking){
-            if (facingRight) {
-                return new Rectangle(
-                        (int) x - cWidth, (int) y - cHeight,
-                        cWidth + attackRange,
-                        cHeight
-                );
-            } else {
-                return new Rectangle(
-                        (int) x - cWidth - attackRange, (int) y - cHeight,
-                        cWidth + attackRange,
-                        cHeight
-                );
-            }
+            return getRangedRectangle();
         } else {
             return new Rectangle((int) x - cWidth, (int) y - cHeight,
                     cWidth,
                     cHeight
             );
         }
+    }
+
+    private Rectangle getRangedRectangle(){
+        if (facingRight) {
+            return new Rectangle(
+                    (int) x - cWidth, (int) y - cHeight,
+                    cWidth + attackRange,
+                    cHeight
+            );
+        } else {
+            return new Rectangle(
+                    (int) x - cWidth - attackRange, (int) y - cHeight,
+                    cWidth + attackRange,
+                    cHeight
+            );
+        }
+    }
+
+    public boolean enemyInRange(ArrayList<Enemy> enemies){
+        Rectangle rangedRec = getRangedRectangle();
+        for (Enemy enemy : enemies){
+            if (rangedRec.intersects(enemy.getRectangle())){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void gainXP(int XP){

@@ -11,13 +11,13 @@ import java.util.List;
 /**
  * Created by nathaniel on 3/10/16.
  */
-public class Hilighter extends DefaultStyledDocument {
+public class Highlighter extends DefaultStyledDocument {
 
     private Style style;
     private Style constantWidthStyle;
     
-    public Hilighter(Style style, Style constantWidthStyle) {
-        this.style =  style;
+    public Highlighter(Style style, Style constantWidthStyle) {
+        this.style = style;
         this.constantWidthStyle = constantWidthStyle;
     }
 

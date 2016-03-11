@@ -1,5 +1,7 @@
 package gameStates;
 
+import gameStates.levels.*;
+
 import java.util.ArrayList;
 
 /**

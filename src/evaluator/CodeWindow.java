@@ -36,14 +36,12 @@ public class CodeWindow extends GamePanel {
         StyleConstants.setForeground(constantWidthStyle, new Color(176, 0, 72));
         StyleConstants.setBold(constantWidthStyle, true);
 
-        editor = new JTextPane(new Hilighter(style, constantWidthStyle));
+        editor = new JTextPane(new Highlighter(style, constantWidthStyle));
         editor.setFont(new Font("Courier New", Font.PLAIN, 12));
 
         JScrollPane scrollingEditor = new JScrollPane(editor);
         scrollingEditor.setPreferredSize(new Dimension(WIDTH - 20, HEIGHT - 80));
         add(scrollingEditor, BorderLayout.CENTER);
-        editor.setText("Enter Code Here");
-        editor.setVisible(true);
 
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setFocusable(true);
@@ -93,5 +91,9 @@ public class CodeWindow extends GamePanel {
         Graphics g2 = getGraphics();
         g2.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
         g2.dispose();
+    }
+
+    public String getText(){
+        return editor.getText();
     }
 }

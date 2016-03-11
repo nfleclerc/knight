@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
      */
     public static final int SCALE = 3;
 
-    private Thread thread;
+    public static Thread thread;
     private boolean running;
     private int FPS = 60;
     private long targetTime = 1000 / FPS;
@@ -40,6 +40,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     private Graphics2D g;
 
     private GameStateManager gameStateManager;
+    public static volatile boolean processingAttack;
 
     /**
      * Creates a panel. Only to be used once, when the game is first being created.
@@ -84,6 +85,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 
             try {
                 Thread.sleep(wait);
+                if (processingAttack) {
+                    synchronized (this) {
+                        while (processingAttack) {
+                            wait();
+                        }
+                    }
+                }
             } catch (InterruptedException e){
                 e.printStackTrace();
             }
