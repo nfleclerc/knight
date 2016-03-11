@@ -33,12 +33,15 @@ public class CodeWindow extends GamePanel implements ActionListener{
     private JFrame window;
     private Background bg;
     private Background textbg;
-    private Background buttonbg;
+    private Background unclickedbg;
+    private Background clickedbg;
     private static final int SCALE = GamePanel.SCALE - 1;
     private AttackProcessor attackProcessor;
+    private boolean unclicked;
 
     public CodeWindow(AttackProcessor attackProcessor){
         this.attackProcessor = attackProcessor;
+        this.unclicked = true;
 
         StyleContext styleContext = new StyleContext();
         Style style = styleContext.getStyle(StyleContext.DEFAULT_STYLE);
@@ -62,37 +65,51 @@ public class CodeWindow extends GamePanel implements ActionListener{
         scrollingEditor.setOpaque(false);
         add(scrollingEditor, BorderLayout.CENTER);
 
-        buttonbg = new Background("/backgrounds/buttonbg.gif", 1);
+        clickedbg = new Background("/backgrounds/button_clicked.gif", 1);
+        unclickedbg = new Background("/backgrounds/button_unclicked.gif", 1);
         button = new JButton("Attack!") {
             @Override
             protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                buttonbg.draw((Graphics2D)g);
+                Graphics2D g2 = (Graphics2D) g;
+                if (unclicked) {
+                    unclickedbg.draw(g2);
+                } else {
+                    clickedbg.draw(g2);
+                }
             }
         };
 
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                button.setBorder(BorderFactory.createLoweredBevelBorder());
+                unclicked = false;
+                button.repaint();
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                button.setBorder(null);
+                unclicked = true;
+                button.repaint();
             }
         });
 
 
-        //button.setBorder(null);
-        //button.setBorderPainted(false);
-        //button.setMargin(new Insets(0, 0, 0, 0));
+
         button.setPreferredSize(new Dimension(WIDTH * SCALE - 30, 50));
+        button.setOpaque(false);
         button.addActionListener(this);
-        JPanel buttonCenter = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel buttonCenter = new JPanel(new FlowLayout(FlowLayout.CENTER)){
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setColor(new Color(0, 0, 0, 0));
+                g2.drawRect(0, 0, this.getWidth(), this.getHeight());
+                SwingUtilities.getWindowAncestor(this).repaint();
+            }
+        };
         buttonCenter.add(button);
         add(buttonCenter, BorderLayout.SOUTH);
-        button.setOpaque(false);
+
 
         setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
         setFocusable(true);
