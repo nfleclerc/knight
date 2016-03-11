@@ -36,7 +36,7 @@ public class GameStateManager {
      */
     public GameStateManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        gameStates = new ArrayList<GameState>();
+        gameStates = new ArrayList<>();
         currentState = MENUSTATE;
         gameStates.add(new MenuState(this));
         gameStates.add(new ForestState(this));

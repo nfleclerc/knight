@@ -52,9 +52,18 @@ public class CodeWindow extends GamePanel implements ActionListener{
 
         JScrollPane scrollingEditor = new JScrollPane(editor);
         scrollingEditor.setPreferredSize(new Dimension(WIDTH * SCALE - 20, HEIGHT * SCALE - 80));
+        scrollingEditor.setOpaque(false);
         add(scrollingEditor, BorderLayout.CENTER);
 
-        button = new JButton("Attack!");
+        button = new JButton("Attack!") {
+            @Override
+            protected void paintComponent(Graphics g) {
+                //super.paintComponent(g);
+                new Background("/backgrounds/button.gif", 1).draw((Graphics2D)g);
+            }
+        };
+
+        button.setPreferredSize(new Dimension(WIDTH * SCALE - 30, 50));
         button.addActionListener(this);
         JPanel buttonCenter = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonCenter.add(button);
@@ -131,6 +140,6 @@ public class CodeWindow extends GamePanel implements ActionListener{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        bg.draw((Graphics2D) g);
+        bg.draw((Graphics2D)g);
     }
 }
