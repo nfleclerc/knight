@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
      */
     public static final int SCALE = 3;
 
-    public static Thread thread;
+    private Thread thread;
     private boolean running;
     private int FPS = 60;
     private long targetTime = 1000 / FPS;
@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     private Graphics2D g;
 
     private GameStateManager gameStateManager;
-    public static volatile boolean processingAttack;
+    public  volatile boolean processingAttack;
 
     /**
      * Creates a panel. Only to be used once, when the game is first being created.
@@ -130,7 +130,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         g = (Graphics2D) image.getGraphics();
         running = true;
-        gameStateManager = new GameStateManager();
+        gameStateManager = new GameStateManager(this);
     }
 
     @Override
@@ -147,4 +147,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         gameStateManager.keyReleased(e.getKeyCode());
     }
 
+    public synchronized void setProcessingAttack(boolean processingAttack) {
+        this.processingAttack = processingAttack;
+    }
 }

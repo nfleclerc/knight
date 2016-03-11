@@ -1,6 +1,7 @@
 package gameStates;
 
 import gameStates.levels.*;
+import main.GamePanel;
 
 import java.util.ArrayList;
 
@@ -23,11 +24,13 @@ public class GameStateManager {
      * Index of the forest state in the list of the game states kept by this class.
      */
     public static final int FORESTSTATE = 1;
+    private GamePanel gamePanel;
 
     /**
      * Creates a new game state manager and begins with the menu state.
      */
-    public GameStateManager() {
+    public GameStateManager(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
         gameStates = new ArrayList<GameState>();
         currentState = MENUSTATE;
         gameStates.add(new MenuState(this));
@@ -75,4 +78,7 @@ public class GameStateManager {
         gameStates.get(currentState).keyReleased(k);
     }
 
+    public synchronized GamePanel getGamePanel() {
+        return gamePanel;
+    }
 }

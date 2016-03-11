@@ -11,6 +11,8 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
@@ -19,16 +21,20 @@ import java.awt.image.BufferedImage;
  *
  * Creates a new window to capture input for the code parser.
  */
-public class CodeWindow extends GamePanel {
+public class CodeWindow extends GamePanel implements ActionListener{
 
     private BufferedImage image;
     private Graphics2D g;
     private boolean running;
     private JTextPane editor;
+    private JButton button;
+    private JFrame window;
     private static final int WIDTH = GamePanel.WIDTH * (SCALE - 1);
     private static final int HEIGHT = GamePanel.HEIGHT * (SCALE - 1);
+    private AttackProcessor attackProcessor;
 
-    public CodeWindow(){
+    public CodeWindow(AttackProcessor attackProcessor){
+        this.attackProcessor = attackProcessor;
         StyleContext styleContext = new StyleContext();
         Style style = styleContext.getStyle(StyleContext.DEFAULT_STYLE);
         Style constantWidthStyle = styleContext.addStyle("ConstantWidth", null);
@@ -38,17 +44,24 @@ public class CodeWindow extends GamePanel {
 
         editor = new JTextPane(new Highlighter(style, constantWidthStyle));
         editor.setFont(new Font("Courier New", Font.PLAIN, 12));
+        editor.setOpaque(false);
 
         JScrollPane scrollingEditor = new JScrollPane(editor);
         scrollingEditor.setPreferredSize(new Dimension(WIDTH - 20, HEIGHT - 80));
         add(scrollingEditor, BorderLayout.CENTER);
 
+        button = new JButton("Attack!");
+        button.addActionListener(this);
+        JPanel buttonCenter = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonCenter.add(button);
+        add(buttonCenter, BorderLayout.SOUTH);
+
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setFocusable(true);
         requestFocus();
-        JFrame window = new JFrame("Write Code to Attack!");
+        window = new JFrame("Write Code to Attack!");
         window.setContentPane(this);
-        window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         window.setResizable(false);
         window.pack();
         window.setVisible(true);
@@ -95,5 +108,11 @@ public class CodeWindow extends GamePanel {
 
     public String getText(){
         return editor.getText();
+    }
+
+    @Override
+    public synchronized void actionPerformed(ActionEvent e) {
+        attackProcessor.processClick();
+        window.dispose();
     }
 }

@@ -1,5 +1,7 @@
 package gameStates;
 
+import main.GamePanel;
+
 /**
  * Created by nathaniel on 2/18/16.
  *
@@ -37,4 +39,7 @@ public abstract class GameState {
      */
     public abstract void keyReleased(int k);
 
+    public synchronized GamePanel getGamePanel() {
+        return gameStateManager.getGamePanel();
+    }
 }
