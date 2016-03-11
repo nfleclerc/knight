@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class GameStateManager {
 
     private ArrayList<GameState> gameStates;
+
     private int currentState;
 
     /**
@@ -24,6 +25,10 @@ public class GameStateManager {
      * Index of the forest state in the list of the game states kept by this class.
      */
     public static final int FORESTSTATE = 1;
+
+    public static final int MOUNTAINSTATE = 2;
+
+
     private GamePanel gamePanel;
 
     /**
@@ -35,6 +40,7 @@ public class GameStateManager {
         currentState = MENUSTATE;
         gameStates.add(new MenuState(this));
         gameStates.add(new ForestState(this));
+        gameStates.add(new MountainState(this));
 
     }
 
@@ -80,5 +86,9 @@ public class GameStateManager {
 
     public synchronized GamePanel getGamePanel() {
         return gamePanel;
+    }
+
+    public int getCurrentState() {
+        return currentState;
     }
 }

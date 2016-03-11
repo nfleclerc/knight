@@ -42,4 +42,8 @@ public abstract class GameState {
     public synchronized GamePanel getGamePanel() {
         return gameStateManager.getGamePanel();
     }
+
+    public GameStateManager getGameStateManager() {
+        return gameStateManager;
+    }
 }

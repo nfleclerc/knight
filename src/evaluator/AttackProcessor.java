@@ -5,10 +5,11 @@
 package evaluator;
 
 import gameStates.levels.LevelState;
-import main.GamePanel;
 
 /**
  * Created by nathaniel on 3/10/16.
+ *
+ *
  */
 public class AttackProcessor {
 
@@ -30,5 +31,9 @@ public class AttackProcessor {
             levelState.getGamePanel().notify();
         }
         levelState.getPlayer().setAttacking();
+    }
+
+    public LevelState getLevelState() {
+        return levelState;
     }
 }
