@@ -13,9 +13,7 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -34,11 +32,14 @@ public class CodeWindow extends GamePanel implements ActionListener{
     private JButton button;
     private JFrame window;
     private Background bg;
+    private Background textbg;
+    private Background buttonbg;
     private static final int SCALE = GamePanel.SCALE - 1;
     private AttackProcessor attackProcessor;
 
     public CodeWindow(AttackProcessor attackProcessor){
         this.attackProcessor = attackProcessor;
+
         StyleContext styleContext = new StyleContext();
         Style style = styleContext.getStyle(StyleContext.DEFAULT_STYLE);
         Style constantWidthStyle = styleContext.addStyle("ConstantWidth", null);
@@ -46,8 +47,14 @@ public class CodeWindow extends GamePanel implements ActionListener{
         StyleConstants.setForeground(constantWidthStyle, new Color(176, 0, 72));
         StyleConstants.setBold(constantWidthStyle, true);
 
-        editor = new JTextPane(new Highlighter(style, constantWidthStyle));
-        editor.setFont(new Font("Courier New", Font.PLAIN, 12));
+        editor = new JTextPane(new Highlighter(style, constantWidthStyle)) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                textbg.draw((Graphics2D) g);
+                super.paintComponent(g);
+            }
+        };
+        editor.setFont(new Font("Courier New", Font.PLAIN, 15));
         editor.setOpaque(false);
 
         JScrollPane scrollingEditor = new JScrollPane(editor);
@@ -55,14 +62,31 @@ public class CodeWindow extends GamePanel implements ActionListener{
         scrollingEditor.setOpaque(false);
         add(scrollingEditor, BorderLayout.CENTER);
 
+        buttonbg = new Background("/backgrounds/buttonbg.gif", 1);
         button = new JButton("Attack!") {
             @Override
             protected void paintComponent(Graphics g) {
-                //super.paintComponent(g);
-                new Background("/backgrounds/button.gif", 1).draw((Graphics2D)g);
+                super.paintComponent(g);
+                buttonbg.draw((Graphics2D)g);
             }
         };
 
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                button.setBorder(BorderFactory.createLoweredBevelBorder());
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                button.setBorder(null);
+            }
+        });
+
+
+        //button.setBorder(null);
+        //button.setBorderPainted(false);
+        //button.setMargin(new Insets(0, 0, 0, 0));
         button.setPreferredSize(new Dimension(WIDTH * SCALE - 30, 50));
         button.addActionListener(this);
         JPanel buttonCenter = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -74,6 +98,8 @@ public class CodeWindow extends GamePanel implements ActionListener{
         setFocusable(true);
         requestFocus();
         window = new JFrame("Write Code to Attack!");
+        window.setUndecorated(true);
+        window.setLocation(GamePanel.WIDTH * GamePanel.SCALE - WIDTH * SCALE - 50, GamePanel.HEIGHT - 150);
         window.setContentPane(this);
         window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         window.setResizable(false);
@@ -86,7 +112,6 @@ public class CodeWindow extends GamePanel implements ActionListener{
         image = new BufferedImage(GamePanel.WIDTH, GamePanel.HEIGHT, BufferedImage.TYPE_INT_RGB);
         g = (Graphics2D) image.getGraphics();
         setBackgroundByLevel();
-        bg.setVector(-0.1, 0);
         running = true;
     }
 
@@ -95,9 +120,11 @@ public class CodeWindow extends GamePanel implements ActionListener{
                 .getGameStateManager().getCurrentState()){
             case GameStateManager.FORESTSTATE:
                 bg = new Background("/backgrounds/forestbg_attackwindow.gif", 1);
+                textbg = new Background("/backgrounds/forest_textwindow.gif", 1);
                 break;
             case GameStateManager.MOUNTAINSTATE:
                 bg = new Background("/backgrounds/mountainbg_attackwindow.gif", 1);
+                textbg = new Background("/backgrounds/mountain_textwindow.gif", 1);
                 break;
             default:
 
