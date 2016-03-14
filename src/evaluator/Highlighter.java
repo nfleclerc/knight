@@ -44,7 +44,7 @@ public class Highlighter extends DefaultStyledDocument {
     }
 
     private static  List<Word> processWords(String text) {
-        text += " ";
+        text = text + " ";
         List<Word> keywords = new ArrayList<>();
         int lastWhitespacePosition;
         StringBuilder wordBuilder = new StringBuilder();
