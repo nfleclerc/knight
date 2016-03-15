@@ -6,12 +6,11 @@ package evaluator;
 
 import gameStates.levels.LevelState;
 
-import java.io.BufferedWriter;
+import javax.tools.JavaCompiler;
+import javax.tools.ToolProvider;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.math.BigInteger;
-import java.util.Random;
 
 /**
  * Created by nathaniel on 3/10/16.
@@ -34,7 +33,8 @@ public class AttackProcessor {
     }
 
     public synchronized void processClick() {
-        makeFileFrom(codeWindow.getText());
+        String filePath = makeFileFrom(codeWindow.getText());
+        compile(filePath);
         if (codeWasSuccessFull()) {
             levelState.getGamePanel().setProcessingAttack(false);
             synchronized (levelState.getGamePanel()) {
@@ -55,8 +55,7 @@ public class AttackProcessor {
     private String makeFileFrom(String text){
         String dirPath = "AKnightOfCode/Programs/";
         new File(dirPath).mkdirs();
-        String randomHash = new BigInteger(130, new Random()).toString(32);
-        String filePath = dirPath + randomHash +".java";
+        String filePath = dirPath + getClassName(text) + ".java";
         try(PrintWriter out = new PrintWriter(filePath)){
             out.print(text);
         } catch (FileNotFoundException e){
@@ -64,4 +63,38 @@ public class AttackProcessor {
         }
         return filePath;
     }
+
+    private String getClassName(String text) {
+        String[] words = text.split("\\s");
+        int i = 0;
+        while (i < words.length){
+            if (!isKeyword(words[i])){
+                break;
+            }
+            i++;
+        }
+        return words[i];
+    }
+
+    private static boolean isKeyword(String word) {
+        return(word.trim().equals("private") ||
+                word.trim().equals("public") ||
+                word.trim().equals("protected") ||
+                word.trim().equals("class") ||
+                word.trim().equals("static") ||
+                word.trim().equals("return") ||
+                word.trim().equals("final") ||
+                word.trim().equals("abstract") ||
+                word.trim().equals("enum") ||
+                word.trim().equals("interface") ||
+                word.trim().equals("strictfp"));
+    }
+
+    private boolean compile(String filepath) {
+        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+        int compilationResult = compiler.run(null, null, null, filepath);
+        return compilationResult == 0;
+    }
+
+
 }

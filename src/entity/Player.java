@@ -178,7 +178,7 @@ public class Player extends MapObject {
         checkTileMapCollision();
         setPosition(xtemp, ytemp);
 
-        System.out.println(getX() + ", " + getY());
+        //System.out.println(getX() + ", " + getY());
 
         checkAttackHasStopped();
 
