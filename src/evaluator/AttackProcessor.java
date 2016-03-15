@@ -7,6 +7,8 @@ package evaluator;
 import gameStates.levels.LevelState;
 
 import javax.tools.JavaCompiler;
+import javax.tools.JavaFileObject;
+import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,6 +23,7 @@ public class AttackProcessor {
 
     private LevelState levelState;
     CodeWindow codeWindow;
+    Class<?> compiledClass;
 
     public AttackProcessor(LevelState levelState){
         this.levelState = levelState;
@@ -55,8 +58,8 @@ public class AttackProcessor {
     private String makeFileFrom(String text){
         String dirPath = "AKnightOfCode/Programs/";
         new File(dirPath).mkdirs();
-        String filePath = dirPath + getClassName(text) + ".java";
-        try(PrintWriter out = new PrintWriter(filePath)){
+        String filePath = dirPath + getClassName(text);
+        try(PrintWriter out = new PrintWriter(filePath + ".java")){
             out.print(text);
         } catch (FileNotFoundException e){
             e.printStackTrace();
@@ -92,9 +95,22 @@ public class AttackProcessor {
 
     private boolean compile(String filepath) {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        int compilationResult = compiler.run(null, null, null, filepath);
-        return compilationResult == 0;
-    }
+        StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
+        Iterable<? extends JavaFileObject> sourceFiles = fileManager.getJavaFileObjects(new File(filepath + ".java"));
+        boolean successfulCompilation = compiler.getTask(null, fileManager, null, null, null, sourceFiles).call();
 
+        try {
+            if (successfulCompilation) {
+                compiledClass = Thread.currentThread()
+                        .getContextClassLoader().loadClass(filepath.replace('/', '.'));
+            }
+            System.out.print(compiledClass.getCanonicalName());
+            fileManager.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return successfulCompilation;
+    }
 
 }
