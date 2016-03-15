@@ -13,6 +13,7 @@ import javax.tools.ToolProvider;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 /**
  * Created by nathaniel on 3/10/16.
@@ -97,7 +98,10 @@ public class AttackProcessor {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
         Iterable<? extends JavaFileObject> sourceFiles = fileManager.getJavaFileObjects(new File(filepath + ".java"));
-        boolean successfulCompilation = compiler.getTask(null, fileManager, null, null, null, sourceFiles).call();
+        String classPath = "AKnightOfCode/Classes/";
+        new File(classPath).mkdirs();
+        final Iterable<String> options = Arrays.asList("-d", classPath);
+        boolean successfulCompilation = compiler.getTask(null, fileManager, null, options, null, sourceFiles).call();
 
         try {
             if (successfulCompilation) {
