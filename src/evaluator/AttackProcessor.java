@@ -39,6 +39,7 @@ public class AttackProcessor {
     public synchronized void processClick() {
         String filePath = makeFileFrom(codeWindow.getText());
         compile(filePath);
+        run();
         if (codeWasSuccessFull()) {
             levelState.getGamePanel().setProcessingAttack(false);
             synchronized (levelState.getGamePanel()) {
@@ -115,6 +116,14 @@ public class AttackProcessor {
         }
 
         return successfulCompilation;
+    }
+
+    public void run(){
+        try {
+            Process process = new ProcessBuilder("AKnightOfCode/Classes/").start();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }
