@@ -19,7 +19,7 @@ import java.awt.image.BufferedImage;
 public abstract class Item extends MapObject{
 
     protected final Player player;
-    protected BufferedImage sprite;
+    protected BufferedImage[] sprites;
     protected ItemType type;
 
     protected Item(TileMap tm, Player player) {
@@ -31,10 +31,26 @@ public abstract class Item extends MapObject{
         fallSpeed = 1;
         maxFallSpeed = 1;
 
+        width = 20;
+        height = 15;
+        cWidth = 15;
+        cHeight = 10;
+
+        sprites = loadSprites();
+
+        animation = new Animation();
+        animation.setFrames(sprites);
+        animation.setDelay(300);
+
+        right = true;
+        facingRight = true;
+
     }
 
+    protected abstract BufferedImage[] loadSprites();
+
     public Item make(ItemType type){
-        return (Item)type.constructor().apply(tileMap, player);
+        return type.constructor().apply(tileMap, player);
     }
 
     @Override
@@ -55,7 +71,16 @@ public abstract class Item extends MapObject{
         if (falling) {
             dy += fallSpeed;
         }
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        return object instanceof Item && ((Item) object).type == this.type;
+    }
+
+    @Override
+    public int hashCode(){
+        return this.type.hashCode();
     }
 
 }

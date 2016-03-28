@@ -18,9 +18,9 @@ public enum ItemType {
     BUG_LEGS(BugLegs::new),
     BUG_CARCASS(BugCarcass::new);
 
-    BiFunction constructor;
+    BiFunction<TileMap, Player, Item> constructor;
 
-    public BiFunction constructor() {
+    public BiFunction<TileMap, Player, Item> constructor() {
         return constructor;
     }
 
