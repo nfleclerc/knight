@@ -2,6 +2,7 @@ package entity;
 
 
 import entity.enemies.Enemy;
+import entity.gear.*;
 import entity.items.Item;
 import tileMap.TileMap;
 
@@ -20,6 +21,14 @@ public class Player extends MapObject {
     private boolean dead;
     private int XP;
     private Map<Item, Integer> inventory;
+
+    //gear
+    private Helmet helmet;
+    private Gloves gloves;
+    private Boots boots;
+    private Chest chest;
+    private Shield shield;
+    private Weapon weapon;
 
     // attack
     private boolean attacking;
