@@ -18,10 +18,11 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Item extends MapObject{
 
-    private final Player player;
+    protected final Player player;
     protected BufferedImage sprite;
+    protected ItemType type;
 
-    public Item(TileMap tm, Player player) {
+    protected Item(TileMap tm, Player player) {
         super(tm);
         this.player = player;
 
@@ -30,6 +31,10 @@ public abstract class Item extends MapObject{
         fallSpeed = 1;
         maxFallSpeed = 1;
 
+    }
+
+    public Item make(ItemType type){
+        return (Item)type.constructor().apply(tileMap, player);
     }
 
     @Override
@@ -50,6 +55,7 @@ public abstract class Item extends MapObject{
         if (falling) {
             dy += fallSpeed;
         }
+
     }
 
 }
