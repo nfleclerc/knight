@@ -2,12 +2,15 @@ package entity;
 
 
 import entity.enemies.Enemy;
+import entity.items.Item;
 import tileMap.TileMap;
 
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Player extends MapObject {
 
@@ -16,6 +19,7 @@ public class Player extends MapObject {
     private int maxHealth;
     private boolean dead;
     private int XP;
+    private Map<Item, Integer> inventory;
 
     // attack
     private boolean attacking;
@@ -44,6 +48,8 @@ public class Player extends MapObject {
         height = 30;
         cWidth = 20;
         cHeight = 20;
+
+        inventory = new HashMap<>();
 
         moveSpeed = 1.1;
         maxSpeed = 2;
@@ -307,6 +313,14 @@ public class Player extends MapObject {
             }
         }
         return false;
+    }
+
+    private void gather(Item item){
+        if (inventory.containsKey(item)){
+            inventory.put(item, 1);
+        } else {
+            inventory.replace(item, inventory.get(item)+ 1);
+        }
     }
 
     public void gainXP(int XP){

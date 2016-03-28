@@ -290,5 +290,7 @@ public abstract class MapObject {
         }
     }
 
+    public abstract void update();
+
 
 }

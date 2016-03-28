@@ -99,6 +99,14 @@ public abstract class Enemy extends MapObject {
 
     public void draw(Graphics2D g){
         setMapPosition();
+
+        if(flinching) {
+            long elapsed = (System.nanoTime() - flinchTimer) / 1_000_000;
+            if(elapsed / 100 % 2 == 0) {
+                return;
+            }
+        }
+
         super.draw(g);
     }
 }
