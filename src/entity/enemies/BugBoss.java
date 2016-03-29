@@ -16,7 +16,10 @@ public class BugBoss extends Enemy {
     private static final int WALKING = 0;
     private static final int ROLLING = 1;
 
-    private ArrayList<BufferedImage[]> sprites = new ArrayList<>();
+    private int rollTimer;
+
+    private ArrayList<BufferedImage[]> sprites;
+
     private final int[] numFrames = {
             2, 4
     };
@@ -32,7 +35,7 @@ public class BugBoss extends Enemy {
         width = 240;
         height = 120;
         cWidth = 230;
-        cHeight = 110;
+        cHeight = 80;
 
         health = maxHealth = 30;
         xpWorth = 500;
@@ -47,13 +50,14 @@ public class BugBoss extends Enemy {
                     )
             );
 
+            sprites = new ArrayList<>();
             for (int i = 0; i < numFrames.length; i++) {
 
                 BufferedImage[] bi = new BufferedImage[numFrames[i]];
 
                 for (int j = 0; j < numFrames[i]; j++) {
 
-                    if (i != 1) {
+                    if (i != ROLLING) {
                         bi[j] = spriteSheet.getSubimage(
                                 j * width,
                                 i * height,
@@ -62,9 +66,9 @@ public class BugBoss extends Enemy {
                         );
                     } else {
                         bi[j] = spriteSheet.getSubimage(
-                                j * width / 2,
-                                i * height / 2,
-                                width,
+                                j * (width / 2),
+                                i * height,
+                                width / 2,
                                 height
                         );
                     }
@@ -80,7 +84,7 @@ public class BugBoss extends Enemy {
         animation = new Animation();
         animation.setFrames(sprites.get(WALKING));
         animation.setDelay(400);
-        walking = true;
+        walking = false;
         right = true;
         facingRight = true;
     }
@@ -96,10 +100,25 @@ public class BugBoss extends Enemy {
 
         checkForDirectionChange();
 
+        rollTimer++;
+        if (rollTimer >= 100){
+            rollTimer = 0;
+            walking = !walking;
+        }
+
+
         if (walking) {
             setAnimation(WALKING, 400, 240);
+            maxSpeed = 0.3;
+            cWidth = 160;
+            cHeight = 110;
+            y = 365;
         } else {
-            setAnimation(ROLLING, 200, 120);
+            setAnimation(ROLLING, 100, 120);
+            maxSpeed = 5;
+            cWidth = 80;
+            cHeight = 80;
+            y = 380;
         }
 
 

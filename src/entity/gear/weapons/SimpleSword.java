@@ -14,6 +14,6 @@ public class SimpleSword extends Weapon {
     public SimpleSword() {
         super();
         this.attackRange = 15;
-        this.rating = 1;
+        this.rating = 5;
     }
 }

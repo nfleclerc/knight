@@ -67,12 +67,12 @@ public class Player extends MapObject {
 
         inventory = new HashMap<>();
 
-        moveSpeed = 1.1;
-        maxSpeed = 2;
+        moveSpeed = 1;
+        maxSpeed = 1.8;
         stopSpeed = 0.4;
-        fallSpeed = 0.10;
-        maxFallSpeed = 3.0;
-        jumpStart = -4.8;
+        fallSpeed = 0.2;
+        maxFallSpeed = 4.0;
+        jumpStart = -5.0;
         stopJumpSpeed = 0.3;
 
         facingRight = true;
@@ -92,8 +92,7 @@ public class Player extends MapObject {
             sprites = new ArrayList<>();
             for(int i = 0; i < numFrames.length; i++) {
 
-                BufferedImage[] bi =
-                        new BufferedImage[numFrames[i]];
+                BufferedImage[] bi = new BufferedImage[numFrames[i]];
 
                 for(int j = 0; j < numFrames[i]; j++) {
 
@@ -205,7 +204,7 @@ public class Player extends MapObject {
         checkTileMapCollision();
         setPosition(xtemp, ytemp);
 
-        //System.out.println(getX() + ", " + getY());
+        System.out.println(getX() + ", " + getY());
 
         checkAttackHasStopped();
 

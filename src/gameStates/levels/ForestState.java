@@ -40,7 +40,7 @@ public class ForestState extends LevelState{
         bg = new Background("/backgrounds/forestbg.gif", 0.05);
 
         player = new Player(tileMap);
-        player.setPosition(100, 310);
+        player.setPosition(4000, 140);
 
         hud = new HUD(player);
 
@@ -84,7 +84,7 @@ public class ForestState extends LevelState{
         }
 
         BugBoss bugBoss = new BugBoss(tileMap, player);
-        bugBoss.setPosition(4258, 365);
+        bugBoss.setPosition(4258, 380);
         enemies.add(bugBoss);
 
     }
