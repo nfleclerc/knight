@@ -101,7 +101,7 @@ public class BugBoss extends Enemy {
         checkForDirectionChange();
 
         rollTimer++;
-        if (rollTimer >= 100){
+        if (rollTimer >= 300){
             rollTimer = 0;
             walking = !walking;
         }
