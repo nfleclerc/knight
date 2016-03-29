@@ -3,6 +3,12 @@ package entity;
 
 import entity.enemies.Enemy;
 import entity.gear.*;
+import entity.gear.boots.SimpleGreaves;
+import entity.gear.chests.SimpleBreastplate;
+import entity.gear.gloves.SimpleGauntlets;
+import entity.gear.helmets.SimpleHelm;
+import entity.gear.shields.SimpleShield;
+import entity.gear.weapons.SimpleSword;
 import entity.items.Item;
 import tileMap.TileMap;
 
@@ -16,11 +22,12 @@ import java.util.Map;
 public class Player extends MapObject {
 
     // player stuff
-    private int health;
     private int maxHealth;
+    private int health;
     private boolean dead;
     private int XP;
     private Map<Item, Integer> inventory;
+
 
     //gear
     private Helmet helmet;
@@ -30,10 +37,10 @@ public class Player extends MapObject {
     private Shield shield;
     private Weapon weapon;
 
+
     // attack
     private boolean attacking;
-    private int attackDamage;
-    private int attackRange;
+
 
 
     // animations
@@ -72,8 +79,6 @@ public class Player extends MapObject {
 
         health = maxHealth = 5;
 
-        attackDamage = 5;
-        attackRange = 40;
 
         // load sprites
         try {
@@ -124,6 +129,13 @@ public class Player extends MapObject {
         currentAction = IDLE;
         animation.setFrames(sprites.get(IDLE));
         animation.setDelay(4000);
+
+        boots = new SimpleGreaves();
+        chest = new SimpleBreastplate();
+        gloves = new SimpleGauntlets();
+        helmet = new SimpleHelm();
+        shield = new SimpleShield();
+        weapon = new SimpleSword();
 
     }
 
@@ -258,7 +270,7 @@ public class Player extends MapObject {
 
         enemies.stream().filter(this::intersects).forEach(enemy -> {
             if (attacking) {
-                enemy.hit(attackDamage);
+                enemy.hit(weapon.getRating());
             } else {
                 hit(enemy.getDamage());
             }
@@ -277,7 +289,7 @@ public class Player extends MapObject {
 
     private void hit(int damage) {
         if (flinching) return;
-        health -= damage;
+        takeDamage(damage);
         if (health <= 0){
             health = 0;
             dead = true;
@@ -302,13 +314,13 @@ public class Player extends MapObject {
         if (facingRight) {
             return new Rectangle(
                     (int) x - cWidth, (int) y - cHeight,
-                    cWidth + attackRange,
+                    cWidth + weapon.getAttackRange(),
                     cHeight
             );
         } else {
             return new Rectangle(
-                    (int) x - cWidth - attackRange, (int) y - cHeight,
-                    cWidth + attackRange,
+                    (int) x - cWidth - weapon.getAttackRange(), (int) y - cHeight,
+                    cWidth + weapon.getAttackRange(),
                     cHeight
             );
         }
@@ -324,12 +336,22 @@ public class Player extends MapObject {
         return false;
     }
 
+    private void takeDamage(int damage){
+        health -= Math.ceil((double) damage / (double) getDefenseRating());
+    }
+
     private void gather(Item item){
         if (inventory.containsKey(item)){
             inventory.put(item, 1);
         } else {
             inventory.replace(item, inventory.get(item)+ 1);
         }
+    }
+
+    private int getDefenseRating(){
+        return (boots.getRating() + gloves.getRating() +
+                chest.getRating() + helmet.getRating() +
+                shield.getRating()) / 5 ;
     }
 
     public void gainXP(int XP){

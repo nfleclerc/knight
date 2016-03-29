@@ -7,5 +7,10 @@ package entity.gear;
 /**
  * Created by nathaniel on 3/28/16.
  */
-public class Boots extends Gear{
+public abstract class Boots extends Gear{
+
+    public Boots(){
+        this.type = GearType.BOOTS;
+    }
+
 }
