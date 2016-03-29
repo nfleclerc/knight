@@ -10,6 +10,7 @@ package entity.gear;
 public abstract class Weapon extends Gear{
 
     protected int attackRange;
+    protected int attackSpeed;
 
     public int getAttackRange() {
         return attackRange;
@@ -17,5 +18,9 @@ public abstract class Weapon extends Gear{
 
     public Weapon(){
         this.type = GearType.WEAPON;
+    }
+
+    public int getAttackSpeed() {
+        return attackSpeed;
     }
 }

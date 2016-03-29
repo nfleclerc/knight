@@ -28,6 +28,8 @@ public class Player extends MapObject {
     private int XP;
     private Map<Item, Integer> inventory;
 
+    private int defenseBonus;
+    private int attackBonus;
 
     //gear
     private Helmet helmet;
@@ -212,7 +214,7 @@ public class Player extends MapObject {
 
         // set animation
         if(attacking) {
-            setAnimation(ATTACKING, 80, 60);
+            setAnimation(ATTACKING, getAttackSpeed(), 60);
         } else if(dy > 0) {
             setAnimation(FALLING, 40, 30);
         }
@@ -269,7 +271,7 @@ public class Player extends MapObject {
 
         enemies.stream().filter(this::intersects).forEach(enemy -> {
             if (attacking) {
-                enemy.hit(weapon.getRating());
+                enemy.hit(getAttackRating());
             } else {
                 hit(enemy.getDamage());
             }
@@ -313,13 +315,13 @@ public class Player extends MapObject {
         if (facingRight) {
             return new Rectangle(
                     (int) x - cWidth, (int) y - cHeight,
-                    cWidth + weapon.getAttackRange(),
+                    cWidth + getAttackRange(),
                     cHeight
             );
         } else {
             return new Rectangle(
-                    (int) x - cWidth - weapon.getAttackRange(), (int) y - cHeight,
-                    cWidth + weapon.getAttackRange(),
+                    (int) x - cWidth - getAttackRange(), (int) y - cHeight,
+                    cWidth + getAttackRange(),
                     cHeight
             );
         }
@@ -336,7 +338,7 @@ public class Player extends MapObject {
     }
 
     private void takeDamage(int damage){
-        health -= Math.ceil((double) damage / (double) getDefenseRating());
+        health -= Math.ceil((double)damage /(double) getDefenseRating());
     }
 
     private void gather(Item item){
@@ -350,10 +352,35 @@ public class Player extends MapObject {
     private int getDefenseRating(){
         return (boots.getRating() + gloves.getRating() +
                 chest.getRating() + helmet.getRating() +
-                shield.getRating()) / 5 ;
+                shield.getRating()) / 5 * defenseBonus;
+    }
+
+    private int getAttackRating(){
+        return weapon.getRating() * attackBonus;
+    }
+
+    private int getAttackRange(){
+        return weapon.getAttackRange() * attackBonus;
+    }
+
+    public int getAttackSpeed() {
+        return weapon.getAttackSpeed() * attackBonus;
     }
 
     public void gainXP(int XP){
         this.XP += XP;
+    }
+
+    public void increaseMovement(double movementBonus) {
+        maxSpeed *= movementBonus;
+        moveSpeed *= movementBonus;
+    }
+
+    public void increaseAttack(double attackBonus) {
+        this.attackBonus *= attackBonus;
+    }
+
+    public void increaseDefense(double defenseBonus) {
+        this.defenseBonus *= defenseBonus;
     }
 }
