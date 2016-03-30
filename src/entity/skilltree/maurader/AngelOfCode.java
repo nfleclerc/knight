@@ -12,9 +12,13 @@ import entity.skilltree.Skill;
  */
 public class AngelOfCode extends Skill {
 
-    @Override
-    public void activate(Player player) {
-        
+    public AngelOfCode(Player player, Movement previous) {
+        super(player);
+        this.previous = previous;
     }
 
+    @Override
+    public void activate() {
+
+    }
 }
