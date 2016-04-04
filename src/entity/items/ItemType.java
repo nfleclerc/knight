@@ -14,17 +14,17 @@ import java.util.function.BiFunction;
  */
 public enum ItemType {
 
-    BUG_WINGS(BugWings::new),
-    BUG_LEGS(BugLegs::new),
-    BUG_CARCASS(BugCarcass::new);
+    BUG_WINGS(""),
+    BUG_LEGS(""),
+    BUG_CARCASS("");
 
-    BiFunction<TileMap, Player, Item> constructor;
+    private String sprites;
 
-    public BiFunction<TileMap, Player, Item> constructor() {
-        return constructor;
+    public String getSprites() {
+        return sprites;
     }
 
-    ItemType(BiFunction<TileMap, Player, Item> constructor){
-        this.constructor = constructor;
+    ItemType(String sprites) {
+        this.sprites = sprites;
     }
 }

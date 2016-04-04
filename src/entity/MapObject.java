@@ -80,9 +80,7 @@ public abstract class MapObject {
     }
 
     public boolean intersects(MapObject other) {
-        Rectangle r1 = getRectangle();
-        Rectangle r2 = other.getRectangle();
-        return r1.intersects(r2);
+        return getRectangle().intersects(other.getRectangle());
     }
 
     public Rectangle getRectangle() {

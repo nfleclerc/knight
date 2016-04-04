@@ -22,5 +22,5 @@ public class EliteHacker extends Skill {
     public void activate() {
 
     }
-    
+
 }

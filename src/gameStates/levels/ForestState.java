@@ -48,8 +48,6 @@ public class ForestState extends LevelState{
 
         explosions = new ArrayList<>();
 
-
-
     }
 
     private void populateEnemies() {

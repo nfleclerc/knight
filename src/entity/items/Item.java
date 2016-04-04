@@ -9,21 +9,21 @@ import entity.MapObject;
 import entity.Player;
 import tileMap.TileMap;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
  * Created by nathaniel on 3/28/16.
  */
-public abstract class Item extends MapObject{
+public class Item extends MapObject{
 
-    protected final Player player;
     protected BufferedImage[] sprites;
     protected ItemType type;
 
-    protected Item(TileMap tm, Player player) {
+    protected Item(ItemType type, TileMap tm) {
         super(tm);
-        this.player = player;
+        this.type = type;
 
         moveSpeed = 0;
         maxSpeed = 0;
@@ -35,7 +35,7 @@ public abstract class Item extends MapObject{
         cWidth = 15;
         cHeight = 10;
 
-        sprites = loadSprites();
+        loadSprites(type.getSprites());
 
         animation = new Animation();
         animation.setFrames(sprites);
@@ -46,10 +46,17 @@ public abstract class Item extends MapObject{
 
     }
 
-    protected abstract BufferedImage[] loadSprites();
+    private void loadSprites(String s){
+        try {
+            BufferedImage spriteSheet = ImageIO.read(
+                    getClass().getResourceAsStream(s));
+            sprites = new BufferedImage[1];
+                sprites[1] = spriteSheet.getSubimage(0, 0, width, height);
 
-    public Item make(ItemType type){
-        return type.constructor().apply(tileMap, player);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @Override
