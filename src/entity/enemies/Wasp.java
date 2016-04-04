@@ -2,6 +2,7 @@ package entity.enemies;
 
 import entity.Animation;
 import entity.Player;
+import entity.items.ItemType;
 import tileMap.TileMap;
 
 import javax.imageio.ImageIO;
@@ -15,6 +16,9 @@ public class Wasp extends Enemy{
 
     public Wasp(TileMap tm, Player player) {
         super(tm, player);
+
+        this.dropType = ItemType.BUG_WINGS;
+
         moveSpeed = 0.5;
         maxSpeed = 0.5;
         fallSpeed = 0.0;

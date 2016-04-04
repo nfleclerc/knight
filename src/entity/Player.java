@@ -12,12 +12,11 @@ import entity.gear.weapons.SimpleSword;
 import entity.items.Item;
 import tileMap.TileMap;
 
-import java.util.ArrayList;
+import java.util.*;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class Player extends MapObject {
 
@@ -76,6 +75,9 @@ public class Player extends MapObject {
         maxFallSpeed = 4.0;
         jumpStart = -5.0;
         stopJumpSpeed = 0.3;
+
+        attackBonus = 1;
+        defenseBonus = 1;
 
         facingRight = true;
 
@@ -341,12 +343,15 @@ public class Player extends MapObject {
         health -= Math.ceil((double)damage /(double) getDefenseRating());
     }
 
-    private void gather(Item item){
-        if (inventory.containsKey(item)){
-            inventory.put(item, 1);
-        } else {
-            inventory.replace(item, inventory.get(item)+ 1);
-        }
+    public void checkGather(List<Item> items){
+        items.stream().filter(this::intersects).forEach(item -> {
+            item.setGathered(true);
+            if (!inventory.containsKey(item)) {
+                inventory.put(item, 1);
+            } else {
+                inventory.replace(item, inventory.get(item) + 1);
+            }
+        });
     }
 
     private int getDefenseRating(){

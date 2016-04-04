@@ -14,9 +14,8 @@ import java.util.function.BiFunction;
  */
 public enum ItemType {
 
-    BUG_WINGS(""),
-    BUG_LEGS(""),
-    BUG_CARCASS("");
+    BUG_WINGS("/sprites/items/bug_wing.gif"),
+    BUG_LEGS("/sprites/items/bug_leg.gif");
 
     private String sprites;
 

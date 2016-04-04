@@ -2,6 +2,7 @@ package entity.enemies;
 
 import entity.MapObject;
 import entity.Player;
+import entity.items.ItemType;
 import tileMap.TileMap;
 
 import java.awt.*;
@@ -23,6 +24,7 @@ public abstract class Enemy extends MapObject {
     protected boolean flinching;
     protected long flinchTimer;
     protected int xpWorth;
+    protected ItemType dropType;
 
     public Enemy(TileMap tm, Player player){
         super(tm);
@@ -98,5 +100,9 @@ public abstract class Enemy extends MapObject {
     public void draw(Graphics2D g){
         setMapPosition();
         super.draw(g);
+    }
+
+    public ItemType getDropType() {
+        return dropType;
     }
 }

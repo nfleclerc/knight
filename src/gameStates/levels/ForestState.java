@@ -40,13 +40,14 @@ public class ForestState extends LevelState{
         bg = new Background("/backgrounds/forestbg.gif", 0.05);
 
         player = new Player(tileMap);
-        player.setPosition(4000, 140);
+        player.setPosition(300, 140);
 
         hud = new HUD(player);
 
         populateEnemies();
 
         explosions = new ArrayList<>();
+        items = new ArrayList<>();
 
     }
 

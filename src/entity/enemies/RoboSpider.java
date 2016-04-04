@@ -2,6 +2,7 @@ package entity.enemies;
 
 import entity.Animation;
 import entity.Player;
+import entity.items.ItemType;
 import tileMap.TileMap;
 
 import javax.imageio.ImageIO;
@@ -15,6 +16,10 @@ public class RoboSpider extends Enemy{
 
     public RoboSpider(TileMap tm, Player player){
         super(tm, player);
+
+        this.dropType = ItemType.BUG_LEGS;
+
+
         moveSpeed = 0.3;
         maxSpeed = 0.3;
         fallSpeed = 0.2;

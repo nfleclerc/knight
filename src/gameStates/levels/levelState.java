@@ -8,8 +8,8 @@ import entity.Explosion;
 import entity.HUD;
 import entity.Player;
 import entity.enemies.Enemy;
+import entity.items.Item;
 import evaluator.AttackProcessor;
-import evaluator.CodeWindow;
 import gameStates.GameState;
 import main.GamePanel;
 import tileMap.Background;
@@ -28,6 +28,7 @@ public abstract class LevelState extends GameState{
 
     protected Player player;
     protected ArrayList<Enemy> enemies;
+    protected ArrayList<Item> items;
     protected ArrayList<Explosion> explosions;
     protected HUD hud;
     protected Background bg;
@@ -44,6 +45,7 @@ public abstract class LevelState extends GameState{
         bg.setPosition(tileMap.getX(), tileMap.getY());
 
         player.checkAttack(enemies);
+        player.checkGather(items);
 
         for (int i = 0; i < enemies.size(); i++) {
             Enemy enemy = enemies.get(i);
@@ -52,6 +54,7 @@ public abstract class LevelState extends GameState{
                 enemies.remove(i);
                 i--;
                 explosions.add(new Explosion((int)enemy.getX(), (int)enemy.getY()));
+                items.add(new Item(enemy.getDropType(), enemy.getX(), enemy.getY(), tileMap));
             }
         }
 
@@ -60,6 +63,15 @@ public abstract class LevelState extends GameState{
             explosion.update();
             if (explosion.shouldRemove()){
                 explosions.remove(i);
+                i--;
+            }
+        }
+
+        for (int i = 0; i < items.size(); i++) {
+            Item item = items.get(i);
+            item.update();
+            if (item.wasGathered()){
+                items.remove(i);
                 i--;
             }
         }
@@ -80,6 +92,10 @@ public abstract class LevelState extends GameState{
         for (Explosion explosion : explosions){
             explosion.setMapPostion((int)tileMap.getX(), (int)tileMap.getY());
             explosion.draw(g);
+        }
+
+        for (Item item : items){
+            item.draw(g);
         }
 
         hud.draw(g);

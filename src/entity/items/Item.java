@@ -18,12 +18,17 @@ import java.awt.image.BufferedImage;
  */
 public class Item extends MapObject{
 
-    protected BufferedImage[] sprites;
-    protected ItemType type;
+    private BufferedImage[] sprites;
+    private ItemType type;
+    private boolean gathered;
 
-    protected Item(ItemType type, TileMap tm) {
+
+    public Item(ItemType type, double x, double y, TileMap tm) {
         super(tm);
         this.type = type;
+
+        this.x = x;
+        this.y = y;
 
         moveSpeed = 0;
         maxSpeed = 0;
@@ -43,6 +48,7 @@ public class Item extends MapObject{
 
         right = true;
         facingRight = true;
+        gathered = false;
 
     }
 
@@ -51,7 +57,7 @@ public class Item extends MapObject{
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(s));
             sprites = new BufferedImage[1];
-                sprites[1] = spriteSheet.getSubimage(0, 0, width, height);
+                sprites[0] = spriteSheet.getSubimage(0, 0, width, height);
 
         } catch (Exception e){
             e.printStackTrace();
@@ -78,6 +84,25 @@ public class Item extends MapObject{
             dy += fallSpeed;
         }
     }
+
+    public boolean wasGathered() {
+        return gathered;
+    }
+
+    public void setGathered(boolean gathered){
+        this.gathered = gathered;
+    }
+
+    @Override
+    public Rectangle getRectangle() {
+        return new Rectangle(
+                (int) x - 1,
+                (int) y - cHeight,
+                1,
+                cHeight
+        );
+    }
+
 
     @Override
     public boolean equals(Object object) {
