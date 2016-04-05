@@ -2,14 +2,16 @@ package entity;
 
 
 import entity.enemies.Enemy;
-import entity.gear.*;
-import entity.gear.boots.SimpleGreaves;
-import entity.gear.chests.SimpleBreastplate;
-import entity.gear.gloves.SimpleGauntlets;
-import entity.gear.helmets.SimpleHelm;
-import entity.gear.shields.SimpleShield;
-import entity.gear.weapons.SimpleSword;
+import gear.*;
+import gear.boots.SimpleGreaves;
+import gear.chests.SimpleBreastplate;
+import gear.gloves.SimpleGauntlets;
+import gear.helmets.SimpleHelm;
+import gear.shields.SimpleShield;
+import gear.weapons.SimpleSword;
 import entity.items.Item;
+import skilltree.Skill;
+import skilltree.SkillTree;
 import tileMap.TileMap;
 
 import java.util.*;
@@ -25,6 +27,9 @@ public class Player extends MapObject {
     private int health;
     private boolean dead;
     private int XP;
+    private int level;
+    private int skillPoints;
+    private SkillTree skillTree;
     private Map<Item, Integer> inventory;
 
     private int defenseBonus;
@@ -67,6 +72,7 @@ public class Player extends MapObject {
         cHeight = 20;
 
         inventory = new HashMap<>();
+        skillTree = new SkillTree(this);
 
         moveSpeed = 1;
         maxSpeed = 1.8;
@@ -75,6 +81,9 @@ public class Player extends MapObject {
         maxFallSpeed = 4.0;
         jumpStart = -5.0;
         stopJumpSpeed = 0.3;
+
+        skillPoints = 0;
+        level = 1;
 
         attackBonus = 1;
         defenseBonus = 1;
@@ -208,7 +217,7 @@ public class Player extends MapObject {
         checkTileMapCollision();
         setPosition(xtemp, ytemp);
 
-        System.out.println(getX() + ", " + getY());
+        //System.out.println(getX() + ", " + getY());
 
         checkAttackHasStopped();
 
@@ -237,6 +246,11 @@ public class Player extends MapObject {
             if(right) facingRight = true;
             if(left) facingRight = false;
         }
+
+        updateLevel();
+        System.out.println("Level: " + level);
+        System.out.println("SkillPoints: " + skillPoints);
+        System.out.println("Inventory: " + inventory);
 
     }
 
@@ -360,6 +374,13 @@ public class Player extends MapObject {
                 shield.getRating()) / 5 * defenseBonus;
     }
 
+    private void updateLevel(){
+        if (this.XP >= level * 100){
+            level++;
+            skillPoints++;
+        }
+    }
+
     private int getAttackRating(){
         return weapon.getRating() * attackBonus;
     }
@@ -387,5 +408,16 @@ public class Player extends MapObject {
 
     public void increaseDefense(double defenseBonus) {
         this.defenseBonus *= defenseBonus;
+    }
+
+    public void buySkill(Skill skill){
+        if (skillPoints > 0){
+            skillPoints--;
+            skill.activate();
+        }
+    }
+
+    public SkillTree getSkillTree() {
+        return skillTree;
     }
 }

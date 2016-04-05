@@ -105,4 +105,6 @@ public abstract class Enemy extends MapObject {
     public ItemType getDropType() {
         return dropType;
     }
+
+
 }
