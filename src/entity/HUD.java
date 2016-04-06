@@ -19,10 +19,7 @@ public class HUD {
 
         try {
             image = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/hud/hud.gif"
-                    )
-            );
+                    getClass().getResourceAsStream("/hud/hud.gif"));
             font = new Font("Arial", Font.PLAIN, 14);
         } catch (Exception e) {
             e.printStackTrace();

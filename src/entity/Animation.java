@@ -50,7 +50,7 @@ public class Animation {
 
     }
 
-    public int geFrame() {
+    public int getFrame() {
         return currentFrame;
     }
 
