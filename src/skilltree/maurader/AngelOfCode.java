@@ -12,13 +12,17 @@ import skilltree.Skill;
  */
 public class AngelOfCode extends Skill {
 
-    public AngelOfCode(Player player, Movement previous) {
-        super(player);
+    public AngelOfCode(Player player, Movement previous, int index) {
+        super(player, index);
         this.previous = previous;
     }
 
     @Override
     public void activate() {
-
+        if (!active){
+            if (previous == null || this.previous.isActive()) {
+                this.active = true;
+            }
+        }
     }
 }

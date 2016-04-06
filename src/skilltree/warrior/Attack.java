@@ -15,15 +15,16 @@ public class Attack extends Skill{
 
     private final double attackBonus;
 
-    public Attack(Player player, double attackBonus, Attack previous){
-        super(player);
+    public Attack(Player player, double attackBonus, Attack previous, int index){
+        super(player, index);
         this.previous = previous;
         this.attackBonus = attackBonus;
     }
 
     @Override
     public void activate() {
-        if (previous == null || this.previous.isActive()) {
+        if (!active)
+            if (previous == null || this.previous.isActive()) {
             this.active = true;
             player.increaseAttack(attackBonus);
         }

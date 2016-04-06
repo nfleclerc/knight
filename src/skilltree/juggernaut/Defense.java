@@ -14,15 +14,16 @@ public class Defense extends Skill {
 
     private double defenseBonus;
 
-    public Defense(Player player, double defenseBonus, Defense previous){
-        super(player);
+    public Defense(Player player, double defenseBonus, Defense previous, int index){
+        super(player, index);
         this.previous = previous;
         this.defenseBonus = defenseBonus;
     }
 
     @Override
     public void activate() {
-        if (previous == null || this.previous.isActive()) {
+        if (!active)
+            if (previous == null || this.previous.isActive()) {
             this.active = true;
             player.increaseDefense(defenseBonus);
         }

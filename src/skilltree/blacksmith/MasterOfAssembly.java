@@ -12,14 +12,18 @@ import skilltree.Skill;
  */
 public class MasterOfAssembly extends Skill {
 
-    public MasterOfAssembly(Player player, Blacksmith previous) {
-        super(player);
+    public MasterOfAssembly(Player player, Blacksmith previous, int index) {
+        super(player, index);
         this.previous = previous;
     }
 
     @Override
     public void activate() {
-
+        if (!active){
+            if (previous == null || this.previous.isActive()) {
+                this.active = true;
+            }
+        }
     }
 
 }

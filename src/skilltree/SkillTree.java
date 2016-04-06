@@ -18,42 +18,72 @@ import java.util.List;
  */
 public class SkillTree {
 
-    private List<Skill> blacksmith;
-    private List<Skill> maurader;
-    private List<Skill> warrior;
-    private List<Skill> juggernaut;
+    private List<Skill> skills;
+
+
 
     public SkillTree(Player player) {
 
-        blacksmith = new ArrayList<>();
-        maurader = new ArrayList<>();
-        warrior = new ArrayList<>();
-        juggernaut = new ArrayList<>();
+        skills = new ArrayList<>();
 
-        Movement m1 = new Movement(player, 1.2, null);
-        Movement m2 = new Movement(player, 1.4, m1);
-        Movement m3 = new Movement(player, 1.6, m2);
-        Movement m4 = new Movement(player, 1.8, m3);
-        Movement m5 = new Movement(player, 2.0, m4);
+        Movement m1 = new Movement(player, 1.2, null, 0);
+        Attack a1 = new Attack(player, 1.2, null, 1);
+        Defense d1 = new Defense(player, 1.2, null, 2);
+        Blacksmith b1 = new Blacksmith(player, null, 3);
 
-        Attack a1 = new Attack(player, 1.2, null);
-        Attack a2 = new Attack(player, 1.4, a1);
-        Attack a3 = new Attack(player, 1.6, a2);
-        Attack a4 = new Attack(player, 1.8, a3);
-        Attack a5 = new Attack(player, 2.0, a4);
+        Movement m2 = new Movement(player, 1.4, m1, 4);
+        Attack a2 = new Attack(player, 1.4, a1, 5);
+        Defense d2 = new Defense(player, 1.4, d1, 6);
+        Blacksmith b2 = new Blacksmith(player, b1, 7);
 
-        Defense d1 = new Defense(player, 1.2, null);
-        Defense d2 = new Defense(player, 1.4, d1);
-        Defense d3 = new Defense(player, 1.6, d2);
-        Defense d4 = new Defense(player, 1.8, d3);
-        Defense d5 = new Defense(player, 2.0, d4);
+        Movement m3 = new Movement(player, 1.6, m2, 8);
+        Attack a3 = new Attack(player, 1.6, a2, 9);
+        Defense d3 = new Defense(player, 1.6, d2, 10);
+        Blacksmith b3 = new Blacksmith(player, b2, 11);
 
-        Blacksmith b1 = new Blacksmith(player, null);
-        Blacksmith b2 = new Blacksmith(player, b1);
-        Blacksmith b3 = new Blacksmith(player, b2);
-        Blacksmith b4 = new Blacksmith(player, b3);
-        Blacksmith b5 = new Blacksmith(player, b4);
+        Movement m4 = new Movement(player, 1.8, m3, 12);
+        Attack a4 = new Attack(player, 1.8, a3, 13);
+        Defense d4 = new Defense(player, 1.8, d3, 14);
+        Blacksmith b4 = new Blacksmith(player, b3, 15);
 
+        Movement m5 = new Movement(player, 2.0, m4, 16);
+        Attack a5 = new Attack(player, 2.0, a4, 17);
+        Defense d5 = new Defense(player, 2.0, d4, 18);
+        Blacksmith b5 = new Blacksmith(player, b4, 19);
+
+        skills.add(m1);
+        skills.add(a1);
+        skills.add(d1);
+        skills.add(b1);
+
+        skills.add(m2);
+        skills.add(a2);
+        skills.add(d2);
+        skills.add(b2);
+
+        skills.add(m3);
+        skills.add(a3);
+        skills.add(d3);
+        skills.add(b3);
+
+        skills.add(m4);
+        skills.add(a4);
+        skills.add(d4);
+        skills.add(b4);
+
+        skills.add(m5);
+        skills.add(a5);
+        skills.add(d5);
+        skills.add(b5);
+
+    }
+
+    public Skill getSkillAt(int index){
+        return skills.get(index);
+    }
+
+    public List<Skill> getSkills(){
+        return this.skills;
     }
 
 }

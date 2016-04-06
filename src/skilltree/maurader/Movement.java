@@ -14,14 +14,15 @@ public class Movement extends Skill {
 
     private double movementBonus;
 
-    public Movement(Player player, double movementBonus, Movement previous){
-        super(player);
+    public Movement(Player player, double movementBonus, Movement previous, int index){
+        super(player, index);
         this.previous = previous;
         this.movementBonus = movementBonus;
     }
 
     @Override
     public void activate() {
+        if (!active)
         if (previous == null || this.previous.isActive()) {
             this.active = true;
             player.increaseMovement(movementBonus);

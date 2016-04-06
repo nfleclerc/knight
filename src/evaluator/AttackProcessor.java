@@ -29,7 +29,7 @@ public class AttackProcessor {
     public AttackProcessor(LevelState levelState){
         this.levelState = levelState;
         if (levelState.getPlayer().enemyInRange(levelState.getEnemies())){
-            levelState.getGamePanel().setProcessingAttack(true);
+            levelState.getGamePanel().setInterrupted(true);
             codeWindow = new CodeWindow(this);
         } else {
             levelState.getPlayer().setAttacking();
@@ -41,7 +41,7 @@ public class AttackProcessor {
         compile(filePath);
         run();
         if (codeWasSuccessFull()) {
-            levelState.getGamePanel().setProcessingAttack(false);
+            levelState.getGamePanel().setInterrupted(false);
             synchronized (levelState.getGamePanel()) {
                 levelState.getGamePanel().notify();
             }

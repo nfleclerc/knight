@@ -82,7 +82,7 @@ public class Player extends MapObject {
         jumpStart = -5.0;
         stopJumpSpeed = 0.3;
 
-        skillPoints = 0;
+        skillPoints = 5;
         level = 1;
 
         attackBonus = 1;
@@ -411,9 +411,11 @@ public class Player extends MapObject {
     }
 
     public void buySkill(Skill skill){
-        if (skillPoints > 0){
-            skillPoints--;
-            skill.activate();
+        if (skill.getPrevious() == null || skill.getPrevious().isActive()) {
+            if (skillPoints > 0) {
+                skillPoints--;
+                skill.activate();
+            }
         }
     }
 

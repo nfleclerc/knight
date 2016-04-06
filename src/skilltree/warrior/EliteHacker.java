@@ -13,14 +13,18 @@ import skilltree.Skill;
 public class EliteHacker extends Skill {
 
 
-    public EliteHacker(Player player, Attack previous) {
-        super(player);
+    public EliteHacker(Player player, Attack previous, int index) {
+        super(player, index);
         this.previous = previous;
     }
 
     @Override
     public void activate() {
-
+        if (!active){
+            if (previous == null || this.previous.isActive()) {
+                this.active = true;
+            }
+        }
     }
 
 }

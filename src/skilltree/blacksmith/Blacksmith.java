@@ -12,13 +12,14 @@ import skilltree.Skill;
  */
 public class Blacksmith extends Skill {
 
-    public Blacksmith(Player player, Blacksmith previous) {
-        super(player);
+    public Blacksmith(Player player, Blacksmith previous, int index) {
+        super(player, index);
         this.previous = previous;
     }
 
     @Override
     public void activate() {
+        if (!active)
         if (previous == null || this.previous.isActive()) {
             this.active = true;
         }

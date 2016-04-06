@@ -12,6 +12,7 @@ import entity.items.Item;
 import evaluator.AttackProcessor;
 import gameStates.GameState;
 import main.GamePanel;
+import skilltree.SkillDisplay;
 import tileMap.Background;
 import tileMap.TileMap;
 
@@ -120,6 +121,10 @@ public abstract class LevelState extends GameState{
                 break;
             case KeyEvent.VK_SPACE:
                 new AttackProcessor(this);
+                break;
+            case KeyEvent.VK_K:
+                new SkillDisplay(this.getPlayer());
+                break;
         }
     }
 

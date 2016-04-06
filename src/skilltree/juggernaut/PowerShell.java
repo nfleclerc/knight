@@ -12,13 +12,17 @@ import skilltree.Skill;
  */
 public class PowerShell extends Skill {
 
-    public PowerShell(Player player, Defense previous) {
-        super(player);
+    public PowerShell(Player player, Defense previous, int index) {
+        super(player, index);
         this. previous = previous;
     }
 
     @Override
     public void activate() {
-        
+        if (!active){
+            if (previous == null || this.previous.isActive()) {
+                this.active = true;
+            }
+        }
     }
 }

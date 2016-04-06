@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     private Graphics2D g;
 
     private GameStateManager gameStateManager;
-    public  volatile boolean processingAttack;
+    public  volatile boolean interrupted;
 
     /**
      * Creates a panel. Only to be used once, when the game is first being created.
@@ -85,9 +85,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 
             try {
                 Thread.sleep(wait);
-                if (processingAttack) {
+                if (interrupted) {
                     synchronized (this) {
-                        while (processingAttack) {
+                        while (interrupted) {
                             wait();
                         }
                     }
@@ -147,7 +147,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         gameStateManager.keyReleased(e.getKeyCode());
     }
 
-    public synchronized void setProcessingAttack(boolean processingAttack) {
-        this.processingAttack = processingAttack;
+    public synchronized void setInterrupted(boolean interrupted) {
+        this.interrupted = interrupted;
     }
 }
