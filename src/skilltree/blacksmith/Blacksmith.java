@@ -12,8 +12,8 @@ import skilltree.Skill;
  */
 public class Blacksmith extends Skill {
 
-    public Blacksmith(Player player, Blacksmith previous, int index) {
-        super(player, index);
+    public Blacksmith(Player player, Blacksmith previous, int index, String activeBg, String inactiveBg){
+        super(player, index, activeBg, inactiveBg);
         this.previous = previous;
     }
 

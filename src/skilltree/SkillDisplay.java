@@ -37,7 +37,7 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         this.skillTree = player.getSkillTree();
 
         //window = new JFrame("Skills");
-        GridLayout grid = new GridLayout(5, 4, 80, 30);
+        GridLayout grid = new GridLayout(6, 4, 140, 20);
         setLayout(grid);
 
         JPanel labelPanel = new JPanel();

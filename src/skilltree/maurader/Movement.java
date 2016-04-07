@@ -14,8 +14,8 @@ public class Movement extends Skill {
 
     private double movementBonus;
 
-    public Movement(Player player, double movementBonus, Movement previous, int index){
-        super(player, index);
+    public Movement(Player player, double movementBonus, Movement previous, int index,  String activeBg, String inactiveBg){
+        super(player, index, activeBg, inactiveBg);
         this.previous = previous;
         this.movementBonus = movementBonus;
     }

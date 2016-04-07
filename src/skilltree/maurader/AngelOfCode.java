@@ -12,8 +12,8 @@ import skilltree.Skill;
  */
 public class AngelOfCode extends Skill {
 
-    public AngelOfCode(Player player, Movement previous, int index) {
-        super(player, index);
+    public AngelOfCode(Player player, Movement previous, int index, String activeBg, String inactiveBg){
+        super(player, index, activeBg, inactiveBg);
         this.previous = previous;
     }
 

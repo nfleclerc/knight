@@ -12,8 +12,8 @@ import skilltree.Skill;
  */
 public class MasterOfAssembly extends Skill {
 
-    public MasterOfAssembly(Player player, Blacksmith previous, int index) {
-        super(player, index);
+    public MasterOfAssembly(Player player, Blacksmith previous, int index, String activeBg, String inactiveBg){
+        super(player, index, activeBg, inactiveBg);
         this.previous = previous;
     }
 

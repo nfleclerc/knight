@@ -13,8 +13,8 @@ import skilltree.Skill;
 public class EliteHacker extends Skill {
 
 
-    public EliteHacker(Player player, Attack previous, int index) {
-        super(player, index);
+    public EliteHacker(Player player, Attack previous, int index,  String activeBg, String inactiveBg){
+        super(player, index, activeBg, inactiveBg);
         this.previous = previous;
     }
 

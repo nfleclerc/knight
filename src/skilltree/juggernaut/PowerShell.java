@@ -12,8 +12,8 @@ import skilltree.Skill;
  */
 public class PowerShell extends Skill {
 
-    public PowerShell(Player player, Defense previous, int index) {
-        super(player, index);
+    public PowerShell(Player player, Defense previous, int index, String activeBg, String inactiveBg){
+        super(player, index, activeBg, inactiveBg);
         this. previous = previous;
     }
 
