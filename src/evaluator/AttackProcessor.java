@@ -5,6 +5,7 @@
 package evaluator;
 
 import gameStates.levels.LevelState;
+import main.Game;
 
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
@@ -42,8 +43,8 @@ public class AttackProcessor {
         run();
         if (codeWasSuccessFull()) {
             levelState.getGamePanel().setInterrupted(false);
-            synchronized (levelState.getGamePanel()) {
-                levelState.getGamePanel().notify();
+            synchronized (Game.panel) {
+                Game.panel.notify();
             }
             levelState.getPlayer().setAttacking();
         }

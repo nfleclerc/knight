@@ -9,18 +9,26 @@ import javax.swing.*;
  */
 public class Game {
 
+    public static JFrame window;
+    public static GamePanel panel;
+
     /**
      * Main method for the game.
      * @param args
      */
     public static void main(String... args){
 
-        JFrame window = new JFrame("A Knight of Code");
-        window.setContentPane(new GamePanel());
+        window = new JFrame("A Knight of Code");
+        panel = new GamePanel();
+        window.setContentPane(panel);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.pack();
         window.setVisible(true);
 
+    }
+
+    public static void setPanel(JPanel panel){
+        window.setContentPane(panel);
     }
 }

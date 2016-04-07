@@ -47,6 +47,11 @@ public abstract class Skill extends JButton {
 
     @Override
     public void paintComponent(Graphics g){
+        if (active){
+            setBackground(new Color(121, 0, 52, 255));
+        } else {
+            setBackground(new Color(26, 200, 0, 255));
+        }
         super.paintComponent(g);
     }
 
@@ -55,4 +60,5 @@ public abstract class Skill extends JButton {
             paintComponent(g);
         }
     }
+
 }

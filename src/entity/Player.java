@@ -412,14 +412,20 @@ public class Player extends MapObject {
 
     public void buySkill(Skill skill){
         if (skill.getPrevious() == null || skill.getPrevious().isActive()) {
-            if (skillPoints > 0) {
-                skillPoints--;
-                skill.activate();
+            if (!skill.isActive()) {
+                if (skillPoints > 0) {
+                    skillPoints--;
+                    skill.activate();
+                }
             }
         }
     }
 
     public SkillTree getSkillTree() {
         return skillTree;
+    }
+
+    public int getSkillPoints() {
+        return skillPoints;
     }
 }

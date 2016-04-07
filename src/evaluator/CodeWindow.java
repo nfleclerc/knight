@@ -5,6 +5,7 @@
 package evaluator;
 
 import gameStates.GameStateManager;
+import main.Game;
 import main.GamePanel;
 import tileMap.Background;
 
@@ -116,7 +117,7 @@ public class CodeWindow extends GamePanel implements ActionListener{
         requestFocus();
         window = new JFrame("Write Code to Attack!");
         window.setUndecorated(true);
-        window.setLocation(GamePanel.WIDTH * GamePanel.SCALE - WIDTH * SCALE - 50, GamePanel.HEIGHT - 150);
+        window.setLocation(Game.window.getX() + 250, Game.window.getY() + 50);
         window.setContentPane(this);
         window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         window.setResizable(false);

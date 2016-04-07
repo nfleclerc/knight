@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     private Graphics2D g;
 
     private GameStateManager gameStateManager;
-    public  volatile boolean interrupted;
+    public static volatile boolean interrupted;
 
     /**
      * Creates a panel. Only to be used once, when the game is first being created.
@@ -92,7 +92,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
                         }
                     }
                 }
-            } catch (InterruptedException e){
+            } catch (Exception e){
                 e.printStackTrace();
             }
         }
