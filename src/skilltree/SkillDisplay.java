@@ -40,7 +40,7 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         this.player = player;
         this.skillTree = player.getSkillTree();
 
-        GridLayout grid = new GridLayout(7, 4, 0, 0);
+        GridLayout grid = new GridLayout(6, 4, 0, 0);
         setLayout(grid);
 
         JLabel maurader = new JLabel("Marauder");

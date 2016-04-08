@@ -4,6 +4,7 @@
 
 package gameStates.levels;
 
+import crafting.CraftWindow;
 import entity.Explosion;
 import entity.HUD;
 import entity.Player;
@@ -125,6 +126,8 @@ public abstract class LevelState extends GameState{
             case KeyEvent.VK_K:
                 new SkillDisplay(this.getPlayer());
                 break;
+            case KeyEvent.VK_C:
+                new CraftWindow(this.getPlayer());
         }
     }
 

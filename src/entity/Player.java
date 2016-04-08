@@ -7,7 +7,6 @@ import gear.boots.SimpleGreaves;
 import gear.chests.SimpleBreastplate;
 import gear.gloves.SimpleGauntlets;
 import gear.helmets.SimpleHelm;
-import gear.shields.SimpleShield;
 import gear.weapons.SimpleSword;
 import entity.items.Item;
 import skilltree.Skill;
@@ -32,15 +31,14 @@ public class Player extends MapObject {
     private SkillTree skillTree;
     private Map<Item, Integer> inventory;
 
-    private int defenseBonus;
-    private int attackBonus;
+    private double defenseBonus;
+    private double attackBonus;
 
     //gear
     private Helmet helmet;
     private Gloves gloves;
     private Boots boots;
     private Chest chest;
-    private Shield shield;
     private Weapon weapon;
 
 
@@ -146,7 +144,6 @@ public class Player extends MapObject {
         chest = new SimpleBreastplate();
         gloves = new SimpleGauntlets();
         helmet = new SimpleHelm();
-        shield = new SimpleShield();
         weapon = new SimpleSword();
 
     }
@@ -225,7 +222,7 @@ public class Player extends MapObject {
 
         // set animation
         if(attacking) {
-            setAnimation(ATTACKING, getAttackSpeed(), 60);
+            setAnimation(ATTACKING, (int)getAttackSpeed(), 60);
         } else if(dy > 0) {
             setAnimation(FALLING, 40, 30);
         }
@@ -287,7 +284,7 @@ public class Player extends MapObject {
 
         enemies.stream().filter(this::intersects).forEach(enemy -> {
             if (attacking) {
-                enemy.hit(getAttackRating());
+                enemy.hit((int)getAttackRating());
             } else {
                 hit(enemy.getDamage());
             }
@@ -331,13 +328,13 @@ public class Player extends MapObject {
         if (facingRight) {
             return new Rectangle(
                     (int) x - cWidth, (int) y - cHeight,
-                    cWidth + getAttackRange(),
+                    cWidth + (int)getAttackRange(),
                     cHeight
             );
         } else {
             return new Rectangle(
-                    (int) x - cWidth - getAttackRange(), (int) y - cHeight,
-                    cWidth + getAttackRange(),
+                    (int) x - cWidth - (int)getAttackRange(), (int) y - cHeight,
+                    cWidth + (int)getAttackRange(),
                     cHeight
             );
         }
@@ -368,10 +365,9 @@ public class Player extends MapObject {
         });
     }
 
-    private int getDefenseRating(){
+    private double getDefenseRating(){
         return (boots.getRating() + gloves.getRating() +
-                chest.getRating() + helmet.getRating() +
-                shield.getRating()) / 5 * defenseBonus;
+                chest.getRating() + helmet.getRating()) / 4 * defenseBonus;
     }
 
     private void updateLevel(){
@@ -381,15 +377,15 @@ public class Player extends MapObject {
         }
     }
 
-    private int getAttackRating(){
+    private double getAttackRating(){
         return weapon.getRating() * attackBonus;
     }
 
-    private int getAttackRange(){
+    private double getAttackRange(){
         return weapon.getAttackRange() * attackBonus;
     }
 
-    public int getAttackSpeed() {
+    public double getAttackSpeed() {
         return weapon.getAttackSpeed() * attackBonus;
     }
 
@@ -403,11 +399,11 @@ public class Player extends MapObject {
     }
 
     public void increaseAttack(double attackBonus) {
-        this.attackBonus *= attackBonus;
+        this.attackBonus = attackBonus;
     }
 
     public void increaseDefense(double defenseBonus) {
-        this.defenseBonus *= defenseBonus;
+        this.defenseBonus = defenseBonus;
     }
 
     public void buySkill(Skill skill){
