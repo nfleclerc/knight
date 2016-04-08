@@ -15,8 +15,8 @@ public class Attack extends Skill{
 
     private final double attackBonus;
 
-    public Attack(Player player, double attackBonus, Attack previous, int index, String activeBg, String inactiveBg){
-        super(player, index, activeBg, inactiveBg);
+    public Attack(Player player, double attackBonus, Attack previous, int index, String activeBg, String inactiveBg, String lockedBg){
+        super(player, index, activeBg, inactiveBg, lockedBg);
         this.previous = previous;
         this.attackBonus = attackBonus;
     }

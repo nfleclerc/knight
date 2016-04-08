@@ -14,8 +14,8 @@ public class Defense extends Skill {
 
     private double defenseBonus;
 
-    public Defense(Player player, double defenseBonus, Defense previous, int index, String activeBg, String inactiveBg){
-        super(player, index, activeBg, inactiveBg);
+    public Defense(Player player, double defenseBonus, Defense previous, int index, String activeBg, String inactiveBg, String lockedBg){
+        super(player, index, activeBg, inactiveBg, lockedBg);
         this.previous = previous;
         this.defenseBonus = defenseBonus;
     }

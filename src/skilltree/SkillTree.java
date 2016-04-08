@@ -6,13 +6,9 @@ package skilltree;
 
 import entity.Player;
 import skilltree.blacksmith.Blacksmith;
-import skilltree.blacksmith.MasterOfAssembly;
 import skilltree.juggernaut.Defense;
-import skilltree.juggernaut.PowerShell;
-import skilltree.maurader.AngelOfCode;
 import skilltree.maurader.Movement;
 import skilltree.warrior.Attack;
-import skilltree.warrior.EliteHacker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,36 +26,90 @@ public class SkillTree {
 
         skills = new ArrayList<>();
 
-        Movement m1 = new Movement(player, 1.2, null, 0, "", "");
-        Attack a1 = new Attack(player, 1.2, null, 1, "", "");
-        Defense d1 = new Defense(player, 1.2, null, 2, "", "");
-        Blacksmith b1 = new Blacksmith(player, null, 3, "", "");
+        Movement m1 = new Movement(player, 1.15, null, 0,
+                "/skill_buttons/movement/movement_1_selected.gif",
+                "/skill_buttons/movement/movement_1_unselected.gif",
+                "/skill_buttons/movement/movement_1_locked.gif");
+        Attack a1 = new Attack(player, 1.15, null, 1,
+                "/skill_buttons/attack/attack_1_selected.gif",
+                "/skill_buttons/attack/attack_1_unselected.gif",
+                "/skill_buttons/attack/attack_1_locked.gif");
+        Defense d1 = new Defense(player, 1.15, null, 2,
+                "/skill_buttons/defense/defense_1_selected.gif",
+                "/skill_buttons/defense/defense_1_unselected.gif",
+                "/skill_buttons/defense/defense_1_locked.gif");
+        Blacksmith b1 = new Blacksmith(player, null, 3,
+                "/skill_buttons/smithing/smith_1_selected.gif",
+                "/skill_buttons/smithing/smith_1_unselected.gif",
+                "/skill_buttons/smithing/smith_1_locked.gif");
 
-        Movement m2 = new Movement(player, 1.4, m1, 4, "", "");
-        Attack a2 = new Attack(player, 1.4, a1, 5, "", "");
-        Defense d2 = new Defense(player, 1.4, d1, 6, "", "");
-        Blacksmith b2 = new Blacksmith(player, b1, 7, "", "");
+        Movement m2 = new Movement(player, 1.6050, m1, 4,
+                "/skill_buttons/movement/movement_2_selected.gif",
+                "/skill_buttons/movement/movement_2_unselected.gif",
+                "/skill_buttons/movement/movement_2_locked.gif");
+        Attack a2 = new Attack(player, 1.6050, a1, 5,
+                "/skill_buttons/attack/attack_2_selected.gif",
+                "/skill_buttons/attack/attack_2_unselected.gif",
+                "/skill_buttons/attack/attack_2_locked.gif");
+        Defense d2 = new Defense(player, 1.6050, d1, 6,
+                "/skill_buttons/defense/defense_2_selected.gif",
+                "/skill_buttons/defense/defense_2_unselected.gif",
+                "/skill_buttons/defense/defense_2_locked.gif");
+        Blacksmith b2 = new Blacksmith(player, b1, 7,
+                "/skill_buttons/smithing/smith_2_selected.gif",
+                "/skill_buttons/smithing/smith_2_unselected.gif",
+                "/skill_buttons/smithing/smith_2_locked.gif");
 
-        Movement m3 = new Movement(player, 1.6, m2, 8, "", "");
-        Attack a3 = new Attack(player, 1.6, a2, 9, "", "");
-        Defense d3 = new Defense(player, 1.6, d2, 10, "", "");
-        Blacksmith b3 = new Blacksmith(player, b2, 11, "", "");
+        Movement m3 = new Movement(player, 1.605, m2, 8,
+                "/skill_buttons/movement/movement_3_selected.gif",
+                "/skill_buttons/movement/movement_3_unselected.gif",
+                "/skill_buttons/movement/movement_3_locked.gif");
+        Attack a3 = new Attack(player, 1.605, a2, 9,
+                "/skill_buttons/attack/attack_3_selected.gif",
+                "/skill_buttons/attack/attack_3_unselected.gif",
+                "/skill_buttons/attack/attack_3_locked.gif");
+        Defense d3 = new Defense(player, 1.605, d2, 10,
+                "/skill_buttons/defense/defense_3_selected.gif",
+                "/skill_buttons/defense/defense_3_unselected.gif",
+                "/skill_buttons/defense/defense_3_locked.gif");
+        Blacksmith b3 = new Blacksmith(player, b2, 11,
+                "/skill_buttons/smithing/smith_3_selected.gif",
+                "/skill_buttons/smithing/smith_3_unselected.gif",
+                "/skill_buttons/smithing/smith_3_locked.gif");
 
-        Movement m4 = new Movement(player, 1.8, m3, 12, "", "");
-        Attack a4 = new Attack(player, 1.8, a3, 13, "", "");
-        Defense d4 = new Defense(player, 1.8, d3, 14, "", "");
-        Blacksmith b4 = new Blacksmith(player, b3, 15, "", "");
+        Movement m4 = new Movement(player, 1.60, m3, 12,
+                "/skill_buttons/movement/movement_4_selected.gif",
+                "/skill_buttons/movement/movement_4_unselected.gif",
+                "/skill_buttons/movement/movement_4_locked.gif");
+        Attack a4 = new Attack(player, 1.60, a3, 13,
+                "/skill_buttons/attack/attack_4_selected.gif",
+                "/skill_buttons/attack/attack_4_unselected.gif",
+                "/skill_buttons/attack/attack_4_locked.gif");
+        Defense d4 = new Defense(player, 1.60, d3, 14,
+                "/skill_buttons/defense/defense_4_selected.gif",
+                "/skill_buttons/defense/defense_4_unselected.gif",
+                "/skill_buttons/defense/defense_4_locked.gif");
+        Blacksmith b4 = new Blacksmith(player, b3, 15,
+                "/skill_buttons/smithing/smith_4_selected.gif",
+                "/skill_buttons/smithing/smith_4_unselected.gif",
+                "/skill_buttons/smithing/smith_4_locked.gif");
 
-        Movement m5 = new Movement(player, 2.0, m4, 16, "", "");
-        Attack a5 = new Attack(player, 2.0, a4, 17, "", "");
-        Defense d5 = new Defense(player, 2.0, d4, 18, "", "");
-        Blacksmith b5 = new Blacksmith(player, b4, 19, "", "");
-
-        AngelOfCode m6 = new AngelOfCode(player, m5, 20, "", "");
-        EliteHacker a6 = new EliteHacker(player, a5, 21, "", "");
-        PowerShell d6 = new PowerShell(player, d5, 22, "", "");
-        MasterOfAssembly b6 = new MasterOfAssembly(player, b5, 23, "", "");
-
+        Movement m5 = new Movement(player, 1.75, m4, 16,
+                "/skill_buttons/movement/movement_5_selected.gif",
+                "/skill_buttons/movement/movement_5_unselected.gif",
+                "/skill_buttons/movement/movement_5_locked.gif");
+        Attack a5 = new Attack(player, 1.75, a4, 17,
+                "/skill_buttons/attack/attack_5_selected.gif",
+                "/skill_buttons/attack/attack_5_unselected.gif",
+                "/skill_buttons/attack/attack_5_locked.gif");
+        Defense d5 = new Defense(player, 1.75, d4, 18,
+                "/skill_buttons/defense/defense_5_selected.gif",
+                "/skill_buttons/defense/defense_5_unselected.gif",
+                "/skill_buttons/defense/defense_5_locked.gif");
+        Blacksmith b5 = new Blacksmith(player, b4, 19,
+                "/skill_buttons/smithing/smith_5_selected.gif",
+                "/skill_buttons/smithing/smith_5_unselected.gif",
+                "/skill_buttons/smithing/smith_5_locked.gif");
 
         skills.add(m1);
         skills.add(a1);
@@ -85,12 +135,7 @@ public class SkillTree {
         skills.add(a5);
         skills.add(d5);
         skills.add(b5);
-
-        skills.add(m6);
-        skills.add(a6);
-        skills.add(d6);
-        skills.add(b6);
-
+        
     }
 
     public Skill getSkillAt(int index){

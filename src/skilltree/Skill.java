@@ -21,17 +21,20 @@ public abstract class Skill extends JButton {
     private int index;
     private Background activeBg;
     private Background inactiveBg;
+    private Background lockedBg;
 
 
 
-    public Skill(Player player, int index, String activeBg, String inactiveBg){
+    public Skill(Player player, int index, String activeBg, String inactiveBg, String lockedBg){
         this.player = player;
         this.active = false;
         this.index = index;
         this.activeBg = new Background(activeBg, 1);
         this.inactiveBg = new Background(inactiveBg, 1);
+        this.lockedBg = new Background(lockedBg, 1);
 
-        this.setOpaque(true);
+        this.setOpaque(false);
+        this.setBackground(new Color(0, 0, 0, 0));
 
         this.setActionCommand(String.valueOf(getIndex()));
 
@@ -54,18 +57,11 @@ public abstract class Skill extends JButton {
     @Override
     public void paintComponent(Graphics g){
         if (active){
-            //activeBg.draw((Graphics2D) g);
-            setBackground(new Color(121, 0, 52, 255));
+            activeBg.draw((Graphics2D) g);
+        } else if (previous != null && !previous.isActive()) {
+            lockedBg.draw((Graphics2D) g);
         } else {
-            //inactiveBg.draw((Graphics2D) g);
-            setBackground(new Color(55, 55, 121, 255));
-        }
-        super.paintComponent(g);
-    }
-
-    public void checkForRepaint(Graphics2D g) {
-        if (active){
-            paintComponent(g);
+            inactiveBg.draw((Graphics2D) g);
         }
     }
 

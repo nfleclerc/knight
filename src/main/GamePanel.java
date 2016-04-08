@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by nathaniel on 2/18/16.
@@ -131,6 +133,18 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         g = (Graphics2D) image.getGraphics();
         running = true;
         gameStateManager = new GameStateManager(this);
+
+
+        try {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("/fonts/Fipps-Regular.otf")));
+            for (Font font : ge.getAllFonts()){
+                System.out.println(font);
+            }
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
