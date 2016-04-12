@@ -40,13 +40,13 @@ public class CraftWindow extends GamePanel implements ActionListener {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(2, 5, 80, 0));
-        List<CraftButton> buttons = new ArrayList<>();
+        List<JRadioButton> buttons = new ArrayList<>();
         ButtonGroup buttonGroup = new ButtonGroup();
-        CraftButton b1 = new CraftButton(player, "", "", "");
-        CraftButton b2 = new CraftButton(player, "", "", "");
-        CraftButton b3 = new CraftButton(player, "", "", "");
-        CraftButton b4 = new CraftButton(player, "", "", "");
-        CraftButton b5 = new CraftButton(player, "", "", "");
+        JRadioButton b1 = new JRadioButton();
+        JRadioButton b2 = new JRadioButton();
+        JRadioButton b3 = new JRadioButton();
+        JRadioButton b4 = new JRadioButton();
+        JRadioButton b5 = new JRadioButton();
         buttons.add(b1);
         buttons.add(b2);
         buttons.add(b3);
@@ -64,7 +64,7 @@ public class CraftWindow extends GamePanel implements ActionListener {
         buttonPanel.add(new JLabel("Helm"));
         buttonPanel.add(new JLabel("Weapon"));
 
-        for (CraftButton button : buttons){
+        for (JRadioButton button : buttons){
             buttonPanel.add(button);
         }
 
