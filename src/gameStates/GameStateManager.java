@@ -24,9 +24,12 @@ public class GameStateManager {
     /**
      * Index of the forest state in the list of the game states kept by this class.
      */
-    public static final int FORESTSTATE = 1;
 
-    public static final int MOUNTAINSTATE = 2;
+    public static final int WORLDSTATE = 1;
+
+    public static final int FORESTSTATE = 2;
+
+    public static final int MOUNTAINSTATE = 3;
 
 
     private GamePanel gamePanel;
@@ -39,6 +42,7 @@ public class GameStateManager {
         gameStates = new ArrayList<>();
         currentState = MENUSTATE;
         gameStates.add(new MenuState(this));
+        gameStates.add(new WorldState(this));
         gameStates.add(new ForestState(this));
         gameStates.add(new MountainState(this));
 

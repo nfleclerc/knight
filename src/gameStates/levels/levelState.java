@@ -82,6 +82,9 @@ public abstract class LevelState extends GameState{
     @Override
     public void draw(Graphics2D g) {
 
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
+
         bg.draw(g);
 
         tileMap.draw(g);
@@ -128,6 +131,9 @@ public abstract class LevelState extends GameState{
                 break;
             case KeyEvent.VK_C:
                 new CraftWindow(this.getPlayer());
+                break;
+            case KeyEvent.VK_P:
+                System.out.println((player.getX() + ", " + player.getY()));
         }
     }
 
