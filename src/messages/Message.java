@@ -22,8 +22,9 @@ public class Message implements Comparable<Message>{
 
         RUNTIME_ERROR(new Font("Arial", Font.PLAIN, 12), Color.PINK, 2, "Runtime Error: "),
         COMPILE_ERROR(new Font("Arial", Font.PLAIN, 12), Color.RED, 1, "Compile Error: "),
-        LEVEL_UP(new Font("Arial", Font.BOLD, 40), new Color(186, 168, 36, 255), 3, ""),
-        TIP(new Font("Arial", Font.ITALIC, 12), Color.YELLOW, 4, "");
+        LEVEL_UP(new Font("Arial", Font.BOLD, 40), new Color(186, 168, 36, 255), 4, ""),
+        TIP(new Font("Arial", Font.ITALIC, 12), Color.YELLOW, 5, ""),
+        WARNING(new Font("Arial", Font.PLAIN, 12), Color.MAGENTA, 3, "");
 
         private Color color;
         private Font font;
@@ -79,4 +80,8 @@ public class Message implements Comparable<Message>{
         return Integer.compare(this.getPriority(), message.getPriority());
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Message && this.message.equals(((Message) obj).message);
+    }
 }

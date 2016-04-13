@@ -45,8 +45,11 @@ public class MessageFactory {
         }
     }
 
-    public void createMessage (String message, Message.MessageType type){
-        messagesToDisplay.add(new Message(message, type));
+    public void createMessage (String string, Message.MessageType type){
+        Message message = new Message(string, type);
+        if (!messagesToDisplay.contains(message)) {
+            messagesToDisplay.add(message);
+        }
     }
 
 }

@@ -165,6 +165,10 @@ public class Player extends MapObject {
 
     private void getNextPosition() {
 
+
+        //check for out of level bounds
+        checkLevelBounds();
+
         // movement
         if(left) {
             dx -= moveSpeed;
@@ -208,6 +212,21 @@ public class Player extends MapObject {
             if(dy < 0 && !jumping) dy += stopJumpSpeed;
             if(dy > maxFallSpeed) dy = maxFallSpeed;
         }
+
+    }
+
+    private void checkLevelBounds() {
+        if (level < 10 && x <= 52514){
+            x = 52514;
+            facingRight = true;
+            MessageFactory.getInstance().createMessage("You Must Be Level 10 or Higher to Enter This Area",
+                    Message.MessageType.WARNING);
+        } else if (level < 10 && x >= 75194){
+            x = 75193;
+            facingRight = false;
+            MessageFactory.getInstance().createMessage("You Must Be Level 5 or Higher to Enter This Area",
+                    Message.MessageType.WARNING);
+        }
     }
 
     public void update() {
@@ -216,8 +235,6 @@ public class Player extends MapObject {
         getNextPosition();
         checkTileMapCollision();
         setPosition(xtemp, ytemp);
-
-        //System.out.println(getX() + ", " + getY());
 
         checkAttackHasStopped();
 
