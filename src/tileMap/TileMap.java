@@ -54,7 +54,7 @@ public class TileMap {
         this.tileSize = tileSize;
         numRowsToDraw = GamePanel.HEIGHT / tileSize + 2;
         numColToDraw = GamePanel.WIDTH / tileSize + 2;
-        tween = 0.04;
+        tween = 0.5;
     }
 
     /**

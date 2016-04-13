@@ -13,6 +13,7 @@ import entity.items.Item;
 import evaluator.AttackProcessor;
 import gameStates.GameState;
 import main.GamePanel;
+import messages.MessageFactory;
 import skilltree.SkillDisplay;
 import tileMap.Background;
 import tileMap.TileMap;
@@ -77,6 +78,8 @@ public abstract class LevelState extends GameState{
                 i--;
             }
         }
+
+        MessageFactory.getInstance().update();
     }
 
     @Override
@@ -103,7 +106,11 @@ public abstract class LevelState extends GameState{
             item.draw(g);
         }
 
+
         hud.draw(g);
+
+        MessageFactory.getInstance().draw(g);
+
 
     }
 

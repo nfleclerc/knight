@@ -9,6 +9,8 @@ import gear.gloves.SimpleGauntlets;
 import gear.helmets.SimpleHelm;
 import gear.weapons.SimpleSword;
 import entity.items.Item;
+import messages.Message;
+import messages.MessageFactory;
 import skilltree.Skill;
 import skilltree.SkillTree;
 import tileMap.TileMap;
@@ -80,8 +82,9 @@ public class Player extends MapObject {
         jumpStart = -5.0;
         stopJumpSpeed = 0.3;
 
-        skillPoints = 5;
+        skillPoints = 0;
         level = 1;
+        XP = 90;
 
         attackBonus = 1;
         defenseBonus = 1;
@@ -245,9 +248,6 @@ public class Player extends MapObject {
         }
 
         updateLevel();
-        System.out.println("Level: " + level);
-        System.out.println("SkillPoints: " + skillPoints);
-        System.out.println("Inventory: " + inventory);
 
     }
 
@@ -374,6 +374,11 @@ public class Player extends MapObject {
         if (this.XP >= level * 100){
             level++;
             skillPoints++;
+            MessageFactory.getInstance().createMessage("LEVEL UP!", Message.MessageType.LEVEL_UP);
+            if (level == 2){
+                MessageFactory.getInstance().createMessage("Press C to Access Your Skill Tree",
+                        Message.MessageType.TIP);
+            }
         }
     }
 

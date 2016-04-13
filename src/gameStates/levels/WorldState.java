@@ -6,11 +6,14 @@ package gameStates.levels;
 
 import entity.HUD;
 import entity.Player;
+import entity.enemies.Wasp;
 import gameStates.GameStateManager;
 import tileMap.Background;
 import tileMap.TileMap;
 
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nathaniel on 4/12/16.
@@ -46,6 +49,16 @@ public class WorldState extends LevelState {
 
     private void populateEnemies() {
         enemies = new ArrayList<>();
+
+        List<Point> waspPoints = new ArrayList<>();
+        waspPoints.add(new Point(52907, 1250));
+
+        for (Point point : waspPoints){
+            Wasp wasp = new Wasp(tileMap, player);
+            wasp.setPosition(point.x, point.y);
+            enemies.add(wasp);
+        }
+
     }
 
 
