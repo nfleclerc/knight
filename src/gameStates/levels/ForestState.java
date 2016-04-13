@@ -1,21 +1,16 @@
 package gameStates.levels;
 
-import entity.Explosion;
-import entity.HUD;
+import hud.HUD;
 import entity.enemies.BugBoss;
-import entity.enemies.Enemy;
 import entity.Player;
 import entity.enemies.RoboSpider;
 import entity.enemies.Wasp;
-import evaluator.CodeWindow;
-import gameStates.GameState;
 import gameStates.GameStateManager;
-import main.GamePanel;
+import hud.Health;
 import tileMap.Background;
 import tileMap.TileMap;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 /**
@@ -42,7 +37,7 @@ public class ForestState extends LevelState{
         player = new Player(tileMap);
         player.setPosition(300, 140);
 
-        hud = new HUD(player);
+        health = new Health(player);
 
         populateEnemies();
 

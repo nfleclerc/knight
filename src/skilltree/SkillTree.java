@@ -26,7 +26,7 @@ public class SkillTree {
 
         skills = new ArrayList<>();
 
-        Movement m1 = new Movement(player, 1.15, null, 0,
+        Movement m1 = new Movement(player, 1.05, null, 0,
                 "/skill_buttons/movement/movement_1_selected.gif",
                 "/skill_buttons/movement/movement_1_unselected.gif",
                 "/skill_buttons/movement/movement_1_locked.gif");
@@ -43,7 +43,7 @@ public class SkillTree {
                 "/skill_buttons/smithing/smith_1_unselected.gif",
                 "/skill_buttons/smithing/smith_1_locked.gif");
 
-        Movement m2 = new Movement(player, 1.6050, m1, 4,
+        Movement m2 = new Movement(player, 1.10, m1, 4,
                 "/skill_buttons/movement/movement_2_selected.gif",
                 "/skill_buttons/movement/movement_2_unselected.gif",
                 "/skill_buttons/movement/movement_2_locked.gif");
@@ -60,7 +60,7 @@ public class SkillTree {
                 "/skill_buttons/smithing/smith_2_unselected.gif",
                 "/skill_buttons/smithing/smith_2_locked.gif");
 
-        Movement m3 = new Movement(player, 1.605, m2, 8,
+        Movement m3 = new Movement(player, 1.15, m2, 8,
                 "/skill_buttons/movement/movement_3_selected.gif",
                 "/skill_buttons/movement/movement_3_unselected.gif",
                 "/skill_buttons/movement/movement_3_locked.gif");
@@ -77,7 +77,7 @@ public class SkillTree {
                 "/skill_buttons/smithing/smith_3_unselected.gif",
                 "/skill_buttons/smithing/smith_3_locked.gif");
 
-        Movement m4 = new Movement(player, 1.60, m3, 12,
+        Movement m4 = new Movement(player, 1.20, m3, 12,
                 "/skill_buttons/movement/movement_4_selected.gif",
                 "/skill_buttons/movement/movement_4_unselected.gif",
                 "/skill_buttons/movement/movement_4_locked.gif");
@@ -94,7 +94,7 @@ public class SkillTree {
                 "/skill_buttons/smithing/smith_4_unselected.gif",
                 "/skill_buttons/smithing/smith_4_locked.gif");
 
-        Movement m5 = new Movement(player, 1.75, m4, 16,
+        Movement m5 = new Movement(player, 1.25, m4, 16,
                 "/skill_buttons/movement/movement_5_selected.gif",
                 "/skill_buttons/movement/movement_5_unselected.gif",
                 "/skill_buttons/movement/movement_5_locked.gif");

@@ -82,7 +82,7 @@ public class Player extends MapObject {
         jumpStart = -5.0;
         stopJumpSpeed = 0.3;
 
-        skillPoints = 0;
+        skillPoints = 5;
         level = 1;
         XP = 90;
 
@@ -91,7 +91,7 @@ public class Player extends MapObject {
 
         facingRight = true;
 
-        health = maxHealth = 5;
+        health = maxHealth = 6;
 
 
         // load sprites
@@ -374,6 +374,8 @@ public class Player extends MapObject {
         if (this.XP >= level * 100){
             level++;
             skillPoints++;
+            maxHealth++;
+            health = maxHealth;
             MessageFactory.getInstance().createMessage("LEVEL UP!", Message.MessageType.LEVEL_UP);
             if (level == 2){
                 MessageFactory.getInstance().createMessage("Press K to Access Your Skill Tree",

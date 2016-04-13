@@ -6,12 +6,13 @@ package gameStates.levels;
 
 import crafting.CraftWindow;
 import entity.Explosion;
-import entity.HUD;
+import hud.HUD;
 import entity.Player;
 import entity.enemies.Enemy;
 import entity.items.Item;
 import evaluator.AttackProcessor;
 import gameStates.GameState;
+import hud.Health;
 import main.GamePanel;
 import messages.MessageFactory;
 import skilltree.SkillDisplay;
@@ -33,7 +34,7 @@ public abstract class LevelState extends GameState{
     protected ArrayList<Enemy> enemies;
     protected ArrayList<Item> items;
     protected ArrayList<Explosion> explosions;
-    protected HUD hud;
+    protected Health health;
     protected Background bg;
 
     @Override
@@ -107,7 +108,7 @@ public abstract class LevelState extends GameState{
         }
 
 
-        hud.draw(g);
+        health.draw(g);
 
         MessageFactory.getInstance().draw(g);
 

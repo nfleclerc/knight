@@ -1,4 +1,6 @@
-package entity;
+package hud;
+
+import entity.Player;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

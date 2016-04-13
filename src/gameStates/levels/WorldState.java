@@ -4,10 +4,11 @@
 
 package gameStates.levels;
 
-import entity.HUD;
+import hud.HUD;
 import entity.Player;
 import entity.enemies.Wasp;
 import gameStates.GameStateManager;
+import hud.Health;
 import tileMap.Background;
 import tileMap.TileMap;
 
@@ -38,7 +39,7 @@ public class WorldState extends LevelState {
         player = new Player(tileMap);
         player.setPosition(52800, 1280);
 
-        hud = new HUD(player);
+        health = new Health(player);
 
         populateEnemies();
 
