@@ -102,8 +102,8 @@ public abstract class MapObject {
         xtemp = x;
         ytemp = y;
 
-        calculateCollisionInYDirection();
         calculateCollisionInXDirection();
+        calculateCollisionInYDirection();
 
         if (!falling) {
             calculateCorners(x, ydest + 1);
