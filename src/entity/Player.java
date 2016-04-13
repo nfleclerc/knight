@@ -376,7 +376,7 @@ public class Player extends MapObject {
             skillPoints++;
             MessageFactory.getInstance().createMessage("LEVEL UP!", Message.MessageType.LEVEL_UP);
             if (level == 2){
-                MessageFactory.getInstance().createMessage("Press C to Access Your Skill Tree",
+                MessageFactory.getInstance().createMessage("Press K to Access Your Skill Tree",
                         Message.MessageType.TIP);
             }
         }

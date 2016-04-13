@@ -6,15 +6,15 @@ package evaluator;
 
 import gameStates.levels.LevelState;
 import main.Game;
+import messages.Message;
+import messages.MessageFactory;
 
-import javax.tools.JavaCompiler;
-import javax.tools.JavaFileObject;
-import javax.tools.StandardJavaFileManager;
-import javax.tools.ToolProvider;
+import javax.tools.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by nathaniel on 3/10/16.
@@ -98,19 +98,27 @@ public class AttackProcessor {
 
     private boolean compile(String filepath) {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
+        DiagnosticCollector<JavaFileObject> diagnosticsCollector = new DiagnosticCollector<JavaFileObject>();
+        StandardJavaFileManager fileManager = compiler.getStandardFileManager(diagnosticsCollector, null, null);
         Iterable<? extends JavaFileObject> sourceFiles = fileManager.getJavaFileObjects(new File(filepath + ".java"));
-        String classPath = "AKnightOfCode/Classes/";
+        String classPath = filepath.replace("Programs", "Classes");
         new File(classPath).mkdirs();
         final Iterable<String> options = Arrays.asList("-d", classPath);
-        boolean successfulCompilation = compiler.getTask(null, fileManager, null, options, null, sourceFiles).call();
-
+        boolean successfulCompilation = compiler.getTask(null, fileManager,
+                diagnosticsCollector, options, null, sourceFiles).call();
+        for (JavaFileObject file : sourceFiles){
+            System.out.println(file.getName());
+        }
         try {
             if (successfulCompilation) {
-                compiledClass = Thread.currentThread()
-                        .getContextClassLoader().loadClass(filepath.replace('/', '.'));
+                compiledClass = Class.forName(filepath.replace("/", "."));
+            } else {
+                List<Diagnostic<? extends JavaFileObject>> diagnostics = diagnosticsCollector.getDiagnostics();
+                for (Diagnostic<? extends JavaFileObject> diagnostic : diagnostics) {
+                    MessageFactory.getInstance().createMessage(diagnostic.getMessage(null),
+                            Message.MessageType.COMPILE_ERROR);
+                }
             }
-            System.out.print(compiledClass.getCanonicalName());
             fileManager.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,9 +127,11 @@ public class AttackProcessor {
         return successfulCompilation;
     }
 
+
     public void run(){
         try {
-            Process process = new ProcessBuilder("AKnightOfCode/Classes/").start();
+            System.out.println("AKnightOfCode/Classes/" + compiledClass.getName());
+            Process process = new ProcessBuilder("AKnightOfCode/Classes/" + compiledClass.getName()).start();
         } catch (Exception e){
             e.printStackTrace();
         }

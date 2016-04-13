@@ -20,19 +20,21 @@ public class Message implements Comparable<Message>{
 
     public enum MessageType {
 
-        RUNTIME_ERROR(new Font("Arial", Font.PLAIN, 12), Color.PINK, 2),
-        COMPILE_ERROR(new Font("Arial", Font.PLAIN, 12), Color.RED, 1),
-        LEVEL_UP(new Font("Arial", Font.BOLD, 40), new Color(186, 168, 36, 255), 3),
-        TIP(new Font("Arial", Font.ITALIC, 12), Color.YELLOW, 4);
+        RUNTIME_ERROR(new Font("Arial", Font.PLAIN, 12), Color.PINK, 2, "Runtime Error: "),
+        COMPILE_ERROR(new Font("Arial", Font.PLAIN, 12), Color.RED, 1, "Compile Error: "),
+        LEVEL_UP(new Font("Arial", Font.BOLD, 40), new Color(186, 168, 36, 255), 3, ""),
+        TIP(new Font("Arial", Font.ITALIC, 12), Color.YELLOW, 4, "");
 
         private Color color;
         private Font font;
         private int priority;
+        private String prefix;
 
-        MessageType(Font font, Color color, int priority) {
+        MessageType(Font font, Color color, int priority, String prefix) {
             this.font = font;
             this.color = color;
             this.priority = priority;
+            this.prefix = prefix;
         }
 
         int getPriority(){
@@ -46,11 +48,15 @@ public class Message implements Comparable<Message>{
         Font getFont() {
             return font;
         }
+
+        String getPrefix(){
+            return prefix;
+        }
     }
 
     protected Message(String message, MessageType type) {
 
-            this.message = message;
+            this.message = type.getPrefix() + message;
             priority = type.getPriority();
             color = type.getColor();
             font = type.getFont();
