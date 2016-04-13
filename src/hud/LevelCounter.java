@@ -20,7 +20,7 @@ public class LevelCounter {
 
     public LevelCounter(Player player){
         this.player = player;
-        font = new Font("Arial", Font.PLAIN, 12);
+        font = new Font("Arial", Font.BOLD, 12);
     }
 
 
@@ -28,8 +28,7 @@ public class LevelCounter {
         g.setColor(Color.WHITE);
         g.setFont(font);
         level = "Level " + player.getLevel();
-        int width = g.getFontMetrics().stringWidth(level);
-        g.drawString(level, GamePanel.WIDTH / 2 - width / 2, 17);
+        g.drawString(level, 10, GamePanel.HEIGHT - 20);
     }
 
 

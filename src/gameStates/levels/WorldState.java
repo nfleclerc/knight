@@ -53,6 +53,14 @@ public class WorldState extends LevelState {
 
         List<Point> waspPoints = new ArrayList<>();
         waspPoints.add(new Point(52907, 1250));
+        waspPoints.add(new Point(54339, 1220));
+        waspPoints.add(new Point(54181, 1190));
+        waspPoints.add(new Point(54125, 1190));
+        waspPoints.add(new Point(53852, 1160));
+        waspPoints.add(new Point(53602, 1160));
+        waspPoints.add(new Point(53354, 1190));
+        waspPoints.add(new Point(53102, 1220));
+
 
         for (Point point : waspPoints){
             Wasp wasp = new Wasp(tileMap, player);
