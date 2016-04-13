@@ -34,7 +34,7 @@ public abstract class LevelState extends GameState{
     protected ArrayList<Enemy> enemies;
     protected ArrayList<Item> items;
     protected ArrayList<Explosion> explosions;
-    protected Health health;
+    protected HUD hud;
     protected Background bg;
 
     @Override
@@ -108,7 +108,7 @@ public abstract class LevelState extends GameState{
         }
 
 
-        health.draw(g);
+        hud.draw(g);
 
         MessageFactory.getInstance().draw(g);
 

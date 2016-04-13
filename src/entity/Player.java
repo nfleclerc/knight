@@ -431,4 +431,8 @@ public class Player extends MapObject {
     public int getSkillPoints() {
         return skillPoints;
     }
+
+    public int getLevel() {
+        return level;
+    }
 }

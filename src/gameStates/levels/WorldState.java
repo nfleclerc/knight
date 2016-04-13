@@ -39,7 +39,7 @@ public class WorldState extends LevelState {
         player = new Player(tileMap);
         player.setPosition(52800, 1280);
 
-        health = new Health(player);
+        hud = new HUD(player);
 
         populateEnemies();
 

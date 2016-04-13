@@ -11,30 +11,19 @@ import java.awt.image.BufferedImage;
  */
 public class HUD {
 
+    private final LevelCounter levelCounter;
     private Player player;
+    private Health health;
 
-    private BufferedImage image;
-    private Font font;
-
-    public HUD (Player player) {
-        this.player = player;
-
-        try {
-            image = ImageIO.read(
-                    getClass().getResourceAsStream("/hud/hud.gif"));
-            font = new Font("Arial", Font.PLAIN, 14);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public HUD(Player player) {
+        this.health = new Health(player);
+        this.levelCounter = new LevelCounter(player);
 
     }
 
-    public void draw(Graphics2D g){
-        g.drawImage(image, 0, 10, null);
-        g.setFont(font);
-        g.setColor(Color.WHITE);
-        g.drawString(player.getHealth() + "/" + player.getMaxHealth(), 30, 25);
-        g.drawString(String.valueOf(player.getXP()), 30, 45);
+    public void draw(Graphics2D g) {
+        health.draw(g);
+        levelCounter.draw(g);
     }
 
 }

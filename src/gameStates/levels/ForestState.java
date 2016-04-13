@@ -37,7 +37,7 @@ public class ForestState extends LevelState{
         player = new Player(tileMap);
         player.setPosition(300, 140);
 
-        health = new Health(player);
+        hud = new HUD(player);
 
         populateEnemies();
 

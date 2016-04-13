@@ -64,12 +64,9 @@ public class Health {
                 x = 0;
             }
 
-
             i++;
 
-
         }
-
 
     }
 

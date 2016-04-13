@@ -29,8 +29,6 @@ public class GameStateManager {
 
     public static final int FORESTSTATE = 2;
 
-    public static final int MOUNTAINSTATE = 3;
-
 
     private GamePanel gamePanel;
 
@@ -44,7 +42,6 @@ public class GameStateManager {
         gameStates.add(new MenuState(this));
         gameStates.add(new WorldState(this));
         gameStates.add(new ForestState(this));
-        gameStates.add(new MountainState(this));
 
     }
 
