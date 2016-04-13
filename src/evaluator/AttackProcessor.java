@@ -26,6 +26,7 @@ public class AttackProcessor {
     private LevelState levelState;
     CodeWindow codeWindow;
     Class<?> compiledClass;
+    private String className;
 
     public AttackProcessor(LevelState levelState){
         this.levelState = levelState;
@@ -61,7 +62,8 @@ public class AttackProcessor {
     private String makeFileFrom(String text){
         String dirPath = "AKnightOfCode/Programs/";
         new File(dirPath).mkdirs();
-        String filePath = dirPath + getClassName(text);
+        className = getClassName(text);
+        String filePath = dirPath + className;
         try(PrintWriter out = new PrintWriter(filePath + ".java")){
             out.print(text);
         } catch (FileNotFoundException e){
@@ -101,7 +103,7 @@ public class AttackProcessor {
         DiagnosticCollector<JavaFileObject> diagnosticsCollector = new DiagnosticCollector<JavaFileObject>();
         StandardJavaFileManager fileManager = compiler.getStandardFileManager(diagnosticsCollector, null, null);
         Iterable<? extends JavaFileObject> sourceFiles = fileManager.getJavaFileObjects(new File(filepath + ".java"));
-        String classPath = filepath.replace("Programs", "Classes");
+        String classPath = "AKnightOfCode/Classes/";
         new File(classPath).mkdirs();
         final Iterable<String> options = Arrays.asList("-d", classPath);
         boolean successfulCompilation = compiler.getTask(null, fileManager,
@@ -111,7 +113,7 @@ public class AttackProcessor {
         }
         try {
             if (successfulCompilation) {
-                compiledClass = Class.forName(filepath.replace("/", "."));
+                compiledClass = Class.forName(filepath.replace("/", ".").replace("Programs", "Classes"));
             } else {
                 List<Diagnostic<? extends JavaFileObject>> diagnostics = diagnosticsCollector.getDiagnostics();
                 for (Diagnostic<? extends JavaFileObject> diagnostic : diagnostics) {
@@ -130,8 +132,7 @@ public class AttackProcessor {
 
     public void run(){
         try {
-            System.out.println("AKnightOfCode/Classes/" + compiledClass.getName());
-            Process process = new ProcessBuilder("AKnightOfCode/Classes/" + compiledClass.getName()).start();
+            Process process = new ProcessBuilder(("AKnightOfCode/Classes/" + className).replace("/", ".")).start();
         } catch (Exception e){
             e.printStackTrace();
         }

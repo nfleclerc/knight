@@ -185,6 +185,8 @@ public class CodeWindow extends GamePanel implements ActionListener{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        bg.draw((Graphics2D)g);
+        if (bg != null) {
+            bg.draw((Graphics2D) g);
+        }
     }
 }
