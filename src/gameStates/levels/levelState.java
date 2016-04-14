@@ -150,9 +150,6 @@ public abstract class LevelState extends GameState{
             case KeyEvent.VK_K:
                 new SkillDisplay(this.getPlayer());
                 break;
-            case KeyEvent.VK_C:
-                new CraftWindow(this.getPlayer());
-                break;
             case KeyEvent.VK_P:
                 System.out.println((player.getX() + ", " + player.getY()));
         }

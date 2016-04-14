@@ -98,7 +98,7 @@ public class AttackProcessor {
                 word.trim().equals("strictfp"));
     }
 
-    private boolean compile(String filepath) {
+    private static Class compile(String filepath) {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         DiagnosticCollector<JavaFileObject> diagnosticsCollector = new DiagnosticCollector<JavaFileObject>();
         StandardJavaFileManager fileManager = compiler.getStandardFileManager(diagnosticsCollector, null, null);
@@ -111,6 +111,7 @@ public class AttackProcessor {
         for (JavaFileObject file : sourceFiles){
             System.out.println(file.getName());
         }
+        Class compiledClass = null;
         try {
             if (successfulCompilation) {
                 compiledClass = Class.forName(filepath.replace("/", ".").replace("Programs", "Classes"));
@@ -126,7 +127,7 @@ public class AttackProcessor {
             e.printStackTrace();
         }
 
-        return successfulCompilation;
+        return compiledClass;
     }
 
 

@@ -17,6 +17,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.List;
@@ -27,10 +28,10 @@ import java.util.List;
 public class CraftWindow extends GamePanel implements ActionListener {
 
     private final JFrame window;
-    private final JTextPane editor;
     private final Player player;
     private BufferedImage image;
     private Graphics2D g;
+    private List<JRadioButton> buttons;
 
 
     public CraftWindow(Player player) {
@@ -40,7 +41,7 @@ public class CraftWindow extends GamePanel implements ActionListener {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(2, 5, 80, 0));
-        List<JRadioButton> buttons = new ArrayList<>();
+        buttons = new ArrayList<>();
         ButtonGroup buttonGroup = new ButtonGroup();
         JRadioButton b1 = new JRadioButton();
         JRadioButton b2 = new JRadioButton();
@@ -64,26 +65,14 @@ public class CraftWindow extends GamePanel implements ActionListener {
         buttonPanel.add(new JLabel("Helm"));
         buttonPanel.add(new JLabel("Weapon"));
 
+        int i = 0;
         for (JRadioButton button : buttons){
+            button.setEnabled(player.canCraft(i));
             buttonPanel.add(button);
+            i++;
         }
 
-        StyleContext styleContext = new StyleContext();
-        Style style = styleContext.getStyle(StyleContext.DEFAULT_STYLE);
-        Style constantWidthStyle = styleContext.addStyle("ConstantWidth", null);
-
-        StyleConstants.setForeground(constantWidthStyle, new Color(176, 0, 72));
-        StyleConstants.setBold(constantWidthStyle, true);
-
-        editor = new JTextPane(new Highlighter(style, constantWidthStyle));
-        editor.setFont(new Font("Courier New", Font.PLAIN, 15));
-        editor.setOpaque(false);
-
-        JScrollPane scrollingEditor = new JScrollPane(editor);
-        scrollingEditor.setPreferredSize(new Dimension(WIDTH * SCALE - 20, HEIGHT * SCALE - 80));
-        scrollingEditor.setOpaque(false);
         add(buttonPanel, BorderLayout.NORTH);
-        add(scrollingEditor, BorderLayout.CENTER);
 
         window = new JFrame("The MATLAB");
         window.setLocation(Game.window.getX(), Game.window.getY() + 22);
@@ -98,8 +87,9 @@ public class CraftWindow extends GamePanel implements ActionListener {
     }
 
 
-    @Override
+            @Override
     public void actionPerformed(ActionEvent e) {
+        requestFocus();
         repaint();
     }
 
@@ -117,6 +107,10 @@ public class CraftWindow extends GamePanel implements ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        close();
+    }
+
+    private void close() {
         GamePanel.interrupted = false;
         synchronized (Game.panel) {
             Game.panel.notify();

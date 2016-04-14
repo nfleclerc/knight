@@ -12,9 +12,13 @@ import skilltree.Skill;
  */
 public class Blacksmith extends Skill {
 
-    public Blacksmith(Player player, Blacksmith previous, int index, String activeBg, String inactiveBg, String lockedBg){
+    private final int craftIndex;
+
+    public Blacksmith(Player player, Blacksmith previous, int index,
+                      int craftIndex, String activeBg, String inactiveBg, String lockedBg){
         super(player, index, activeBg, inactiveBg, lockedBg);
         this.previous = previous;
+        this.craftIndex = craftIndex;
     }
 
     @Override
@@ -22,6 +26,7 @@ public class Blacksmith extends Skill {
         if (!active)
         if (previous == null || this.previous.isActive()) {
             this.active = true;
+            player.setCraftingEnabled(craftIndex);
         }
     }
 

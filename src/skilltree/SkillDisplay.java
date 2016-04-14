@@ -40,7 +40,7 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         this.player = player;
         this.skillTree = player.getSkillTree();
 
-        GridLayout grid = new GridLayout(6, 4, 0, 0);
+        GridLayout grid = new GridLayout(6, 3, 103, 0);
         setLayout(grid);
 
         JLabel maurader = new JLabel("Marauder");
@@ -65,20 +65,12 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         juggernaut.setBackground(new Color(0, 0, 0, 0));
         juggernaut.setToolTipText("Increases defense by 15% each rank.");
 
-        JLabel blacksmith = new JLabel("Blacksmith");
-        blacksmith.setHorizontalAlignment(JLabel.CENTER);
-        blacksmith.setFont(new Font("Fipps", Font.PLAIN, 20));
-        blacksmith.setForeground(Color.BLACK);
-        blacksmith.setBackground(new Color(0, 0, 0, 0));
-        blacksmith.setToolTipText("Increases dank memes by 15% each rank.");
 
-
-        Queue<JLabel> labels = new ArrayBlockingQueue<>(4);
+        Queue<JLabel> labels = new ArrayBlockingQueue<>(3);
 
         labels.add(maurader);
         labels.add(warrior);
         labels.add(juggernaut);
-        labels.add(blacksmith);
 
         while (!labels.isEmpty()){
             add(labels.poll());

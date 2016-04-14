@@ -37,12 +37,13 @@ public class Player extends MapObject {
     private double attackBonus;
 
     //gear
-    private Helmet helmet;
     private Gloves gloves;
     private Boots boots;
     private Chest chest;
+    private Helmet helmet;
     private Weapon weapon;
 
+    private boolean[] canCraftGear;
 
     // attack
     private boolean attacking;
@@ -85,6 +86,12 @@ public class Player extends MapObject {
         skillPoints = 5;
         level = 1;
         XP = 0;
+
+        canCraftGear = new boolean[5];
+
+        for (int i = 0; i < canCraftGear.length; i++) {
+            canCraftGear[i] = false;
+        }
 
         attackBonus = 1;
         defenseBonus = 1;
@@ -455,6 +462,10 @@ public class Player extends MapObject {
         }
     }
 
+    public void setCraftingEnabled(int index){
+        canCraftGear[index] = true;
+    }
+
     public SkillTree getSkillTree() {
         return skillTree;
     }
@@ -465,5 +476,9 @@ public class Player extends MapObject {
 
     public int getLevel() {
         return level;
+    }
+
+    public boolean canCraft(int i) {
+        return canCraftGear[i];
     }
 }
