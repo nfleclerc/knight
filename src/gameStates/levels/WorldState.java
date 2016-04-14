@@ -32,9 +32,9 @@ public class WorldState extends LevelState {
         tileMap = new TileMap(30);
         tileMap.loadTiles("/tilesets/worldmapset.gif");
         tileMap.loadMap("/maps/world.map");
-        tileMap.setPosition(52800, 1280);
+        tileMap.setPosition(0, 0);
 
-        bg = new Background("/backgrounds/mountainbg.gif", 0.5);
+        bg = new Background("/backgrounds/mountainbg.gif", 0.1);
 
         player = new Player(tileMap);
         player.setPosition(52800, 1280);
