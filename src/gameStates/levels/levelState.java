@@ -14,6 +14,7 @@ import evaluator.AttackProcessor;
 import gameStates.GameState;
 import hud.Health;
 import main.GamePanel;
+import messages.Message;
 import messages.MessageFactory;
 import skilltree.SkillDisplay;
 import tileMap.Background;
@@ -36,6 +37,7 @@ public abstract class LevelState extends GameState{
     protected ArrayList<Explosion> explosions;
     protected HUD hud;
     protected Background bg;
+    protected int frames;
 
     @Override
     public void update() {
@@ -110,7 +112,18 @@ public abstract class LevelState extends GameState{
 
         hud.draw(g);
 
+
+
+
+        if (frames < 179){
+            g.setColor(Color.BLACK);
+            g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
+            MessageFactory.getInstance().createMessage("Loading...", Message.MessageType.LOADING);
+        }
+
         MessageFactory.getInstance().draw(g);
+
+        frames++;
 
 
     }

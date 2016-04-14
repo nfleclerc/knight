@@ -83,7 +83,7 @@ public class Player extends MapObject {
         stopJumpSpeed = 0.3;
 
         skillPoints = 5;
-        level = 10;
+        level = 1;
         XP = 0;
 
         attackBonus = 1;

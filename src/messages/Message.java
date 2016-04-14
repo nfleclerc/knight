@@ -24,7 +24,8 @@ public class Message implements Comparable<Message>{
         COMPILE_ERROR(new Font("Arial", Font.PLAIN, 12), Color.RED, 1, "Compile Error: "),
         LEVEL_UP(new Font("Arial", Font.BOLD, 40), new Color(186, 168, 36, 255), 4, ""),
         TIP(new Font("Arial", Font.ITALIC, 12), Color.YELLOW, 5, ""),
-        WARNING(new Font("Arial", Font.PLAIN, 12), Color.MAGENTA, 3, "");
+        WARNING(new Font("Arial", Font.PLAIN, 12), Color.MAGENTA, 3, ""),
+        LOADING(new Font("Arial", Font.PLAIN, 12), Color.WHITE, 0, "");
 
         private Color color;
         private Font font;
