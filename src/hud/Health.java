@@ -19,6 +19,7 @@ public class Health {
     private Player player;
 
     private ArrayList<BufferedImage> hearts;
+    private int frames;
 
     public  Health(Player player) {
         hearts = new ArrayList<>();
@@ -44,6 +45,15 @@ public class Health {
         while (i < player.getHealth()){
 
 
+            if (player.getHealth() == 1){
+                if (frames % 3 == 0){
+                    i++;
+                    frames++;
+                    continue;
+                }
+            }
+
+
             if (i <= 5){
                 y = 5;
             } else if (i <= 10){
@@ -67,6 +77,7 @@ public class Health {
             i++;
 
         }
+        frames++;
 
     }
 

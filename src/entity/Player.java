@@ -62,6 +62,8 @@ public class Player extends MapObject {
     private static final int JUMPING = 2;
     private static final int FALLING = 3;
     private static final int ATTACKING = 4;
+    private int framesSinceAttack = 0;
+    private boolean healthMessagePlayedOnce = false;
 
     public Player(TileMap tm) {
 
@@ -249,6 +251,8 @@ public class Player extends MapObject {
 
         checkIfMoved();
 
+        checkHealthRegen();
+
         // set animation
         if(attacking) {
             setAnimation(ATTACKING, (int)getAttackSpeed(), 60);
@@ -275,6 +279,22 @@ public class Player extends MapObject {
 
         updateLevel();
 
+        framesSinceAttack++;
+
+    }
+
+    private void checkHealthRegen() {
+        if (health < 2 && !healthMessagePlayedOnce){
+            MessageFactory.getInstance().createMessage("Your Health Is Low! Go Somewhere Safe To Recover!",
+                    Message.MessageType.TIP);
+            healthMessagePlayedOnce = true;
+        }
+        if (health < maxHealth){
+            if (framesSinceAttack >= 600){
+                health++;
+                framesSinceAttack = 570;
+            }
+        }
     }
 
     private void checkIfMoved() {
@@ -316,6 +336,7 @@ public class Player extends MapObject {
     public void checkAttack(ArrayList<Enemy> enemies) {
 
         enemies.stream().filter(this::intersects).forEach(enemy -> {
+            framesSinceAttack = 0;
             if (attacking) {
                 enemy.hit((int)getAttackRating());
             } else {
