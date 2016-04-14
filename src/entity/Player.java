@@ -82,9 +82,9 @@ public class Player extends MapObject {
         jumpStart = -5.0;
         stopJumpSpeed = 0.3;
 
-        skillPoints = 5;
+        skillPoints = 0;
         level = 1;
-        XP = 90;
+        XP = 0;
 
         attackBonus = 1;
         defenseBonus = 1;
@@ -226,6 +226,11 @@ public class Player extends MapObject {
             facingRight = false;
             MessageFactory.getInstance().createMessage("You Must Be Level 5 or Higher to Enter This Area",
                     Message.MessageType.WARNING);
+        } else if (level < 15 && x <= 4550){
+            x = 75193;
+            facingRight = true;
+            MessageFactory.getInstance().createMessage("You Must Be Level 15 or Higher to Enter This Area",
+                    Message.MessageType.WARNING);
         }
     }
 
@@ -239,6 +244,8 @@ public class Player extends MapObject {
         checkAttackHasStopped();
 
         checkDoneFlinching(1000);
+
+        checkIfMoved();
 
         // set animation
         if(attacking) {
@@ -266,6 +273,13 @@ public class Player extends MapObject {
 
         updateLevel();
 
+    }
+
+    private void checkIfMoved() {
+        if (x == 52800 && XP == 0){
+            MessageFactory.getInstance().createMessage("Use The Arrow Keys to Move",
+                    Message.MessageType.TIP);
+        }
     }
 
     private void setAnimation(int currentAction, int delay, int width){
