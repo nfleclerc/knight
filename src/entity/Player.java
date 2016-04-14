@@ -84,7 +84,7 @@ public class Player extends MapObject {
         stopJumpSpeed = 0.3;
 
         skillPoints = 5;
-        level = 1;
+        level = 10;
         XP = 0;
 
         canCraftGear = new boolean[5];
@@ -232,11 +232,6 @@ public class Player extends MapObject {
             x = 75193;
             facingRight = false;
             MessageFactory.getInstance().createMessage("You Must Be Level 5 or Higher to Enter This Area",
-                    Message.MessageType.WARNING);
-        } else if (level < 15 && x <= 4550){
-            x = 75193;
-            facingRight = true;
-            MessageFactory.getInstance().createMessage("You Must Be Level 15 or Higher to Enter This Area",
                     Message.MessageType.WARNING);
         }
     }

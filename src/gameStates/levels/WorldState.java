@@ -30,8 +30,8 @@ public class WorldState extends LevelState {
     @Override
     public void init() {
         tileMap = new TileMap(30);
-        tileMap.loadTiles("/tilesets/worldmapset.gif");
-        tileMap.loadMap("/maps/world.map");
+        tileMap.loadTiles("/tilesets/worldset_withoutramps.gif");
+        tileMap.loadMap("/maps/worldwithoutramps.map");
         tileMap.setPosition(0, 0);
 
         bg = new Background("/backgrounds/mountainbg.gif", 0.1);
