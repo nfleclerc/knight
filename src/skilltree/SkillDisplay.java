@@ -8,6 +8,7 @@ import entity.Player;
 import gameStates.GameStateManager;
 import main.Game;
 import main.GamePanel;
+import main.SubWindowManager;
 import tileMap.Background;
 
 import javax.swing.*;
@@ -117,8 +118,13 @@ public class SkillDisplay extends GamePanel implements ActionListener {
                 }
             }
         };
-        window = new JFrame("Skill Tree");
-        window.setLocation(Game.window.getX(), Game.window.getY() + 22);
+        window = new JFrame("Skill Tree") {
+            @Override
+            public Container getContentPane() {
+                return SkillDisplay.this;
+            }
+        };
+        window.setLocation(Game.window.getX(), Game.window.getY() + getYInset());
         window.setUndecorated(true);
         titlePanel.setOpaque(false);
         setOpaque(false);
@@ -131,6 +137,7 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         backgroundPanel.add(this, BorderLayout.CENTER);
         backgroundPanel.add(exitPanel, BorderLayout.SOUTH);
         window.setContentPane(backgroundPanel);
+        SubWindowManager.setAsSubWindow(window);
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setResizable(false);
         window.pack();
@@ -161,11 +168,12 @@ public class SkillDisplay extends GamePanel implements ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-            GamePanel.interrupted = false;
-            synchronized (Game.panel) {
-                Game.panel.notify();
-            }
-            window.dispose();
+        GamePanel.interrupted = false;
+        SubWindowManager.removeSubWindow();
+        synchronized (Game.panel) {
+            Game.panel.notify();
+        }
+        window.dispose();
     }
 
     @Override
@@ -178,5 +186,10 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         Graphics g2 = getGraphics();
         g2.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
         g2.dispose();
+    }
+
+    @Override
+    public int getYInset() {
+        return 23;
     }
 }

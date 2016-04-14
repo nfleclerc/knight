@@ -5,6 +5,8 @@ import gameStates.GameStateManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -43,6 +45,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 
     private GameStateManager gameStateManager;
     public static volatile boolean interrupted;
+
 
     /**
      * Creates a panel. Only to be used once, when the game is first being created.
@@ -144,6 +147,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 
     }
 
+    public int getXInset(){
+        return 0;
+    }
+
+    public int getYInset(){
+        return 0;
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
     }
@@ -161,4 +172,5 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     public synchronized void setInterrupted(boolean interrupted) {
         this.interrupted = interrupted;
     }
+
 }

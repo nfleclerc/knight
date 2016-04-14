@@ -7,6 +7,7 @@ package evaluator;
 import gameStates.GameStateManager;
 import main.Game;
 import main.GamePanel;
+import main.SubWindowManager;
 import tileMap.Background;
 
 import javax.swing.*;
@@ -116,12 +117,14 @@ public class CodeWindow extends GamePanel implements ActionListener{
         setFocusable(true);
         requestFocus();
         window = new JFrame("Write Code to Attack!");
+
         window.setUndecorated(true);
-        window.setLocation(Game.window.getX() + 250, Game.window.getY() + 50);
+        window.setLocation(Game.window.getX() + getXInset(), Game.window.getY() + getYInset());
         window.setContentPane(this);
         window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         window.setResizable(false);
         window.pack();
+        SubWindowManager.setAsSubWindow(window);
         window.setVisible(true);
     }
 
@@ -131,6 +134,16 @@ public class CodeWindow extends GamePanel implements ActionListener{
         g = (Graphics2D) image.getGraphics();
         setBackgroundByLevel();
         running = true;
+    }
+
+    @Override
+    public int getXInset(){
+        return 250;
+    }
+
+    @Override
+    public int getYInset(){
+        return 50;
     }
 
     private void setBackgroundByLevel(){
@@ -178,6 +191,7 @@ public class CodeWindow extends GamePanel implements ActionListener{
     @Override
     public synchronized void actionPerformed(ActionEvent e) {
         attackProcessor.processClick();
+        SubWindowManager.removeSubWindow();
         window.dispose();
     }
 
