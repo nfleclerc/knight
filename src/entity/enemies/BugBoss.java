@@ -94,7 +94,6 @@ public class BugBoss extends Enemy {
     @Override
     public void update() {
 
-        System.out.println(x + ", " + y);
 
         getNextPosition();
         checkTileMapCollision();
