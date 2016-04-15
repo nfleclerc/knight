@@ -50,8 +50,10 @@ public abstract class LevelState extends GameState{
 
         bg.setPosition(tileMap.getX(), tileMap.getY());
 
-        player.checkAttack(enemies);
-        player.checkGather(items);
+        if (frames > 179) {
+            player.checkAttack(enemies);
+            player.checkGather(items);
+        }
 
         for (int i = 0; i < enemies.size(); i++) {
             Enemy enemy = enemies.get(i);
@@ -95,8 +97,10 @@ public abstract class LevelState extends GameState{
         tileMap.draw(g);
         player.draw(g);
 
-        for (Enemy enemy : enemies){
-            enemy.draw(g);
+        if (frames > 179) {
+            for (Enemy enemy : enemies) {
+                enemy.draw(g);
+            }
         }
 
         for (Explosion explosion : explosions){

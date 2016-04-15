@@ -335,14 +335,18 @@ public class Player extends MapObject {
 
     public void checkAttack(ArrayList<Enemy> enemies) {
 
-        enemies.stream().filter(this::intersects).forEach(enemy -> {
-            framesSinceAttack = 0;
-            if (attacking) {
-                enemy.hit((int)getAttackRating());
-            } else {
-                hit(enemy.getDamage());
-            }
-        });
+        try {
+            enemies.stream().filter(this::intersects).forEach(enemy -> {
+                framesSinceAttack = 0;
+                if (attacking) {
+                    enemy.hit((int) getAttackRating());
+                } else {
+                    hit(enemy.getDamage());
+                }
+            });
+        } catch (ConcurrentModificationException e){
+            e.printStackTrace();
+        }
 
     }
 

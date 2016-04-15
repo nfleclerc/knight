@@ -59,7 +59,7 @@ public class Bat extends Enemy {
 
         animation = new Animation();
         animation.setFrames(sprites);
-        animation.setDelay(90);
+        animation.setDelay(60);
 
         right = true;
         facingRight = true;
