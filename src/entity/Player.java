@@ -85,8 +85,8 @@ public class Player extends MapObject {
         jumpStart = -5.0;
         stopJumpSpeed = 0.3;
 
-        skillPoints = 0;
-        level = 1;
+        skillPoints = 5;
+        level = 10;
         XP = 0;
 
         canCraftGear = new boolean[5];
