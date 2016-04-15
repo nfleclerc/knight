@@ -22,7 +22,7 @@ public class Moose extends Enemy{
         this.dropType = null;
 
         moveSpeed = 0.3;
-        maxSpeed = 0.3;
+        maxSpeed = 4.0;
         fallSpeed = 0.8;
         maxFallSpeed = 1.8;
 
@@ -58,7 +58,7 @@ public class Moose extends Enemy{
 
         animation = new Animation();
         animation.setFrames(sprites);
-        animation.setDelay(200);
+        animation.setDelay(100);
 
         right = true;
         facingRight = true;

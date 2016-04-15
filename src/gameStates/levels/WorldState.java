@@ -37,9 +37,13 @@ public class WorldState extends LevelState {
         bg = new Background("/backgrounds/mountainbg.gif", 0.1);
 
         player = new Player(tileMap);
-        player.setPosition(52800, 1280);
+
+        //correct starting loc 52800 1280
+        player.setPosition(41595, 1280);
 
         hud = new HUD(player);
+
+        loadFrames = 250;
 
         populateEnemies();
 
@@ -424,15 +428,39 @@ public class WorldState extends LevelState {
         }
 
         List<Point> moosePoints = new ArrayList<>();
-        moosePoints.add(new Point(44218, 1430));
-                
+        moosePoints.add(new Point(44218, 1420));
+        moosePoints.add(new Point(47928, 1420));
+        moosePoints.add(new Point(47442, 1420));
+        moosePoints.add(new Point(46187, 1420));
+        moosePoints.add(new Point(45441, 1420));
+        moosePoints.add(new Point(44742, 1420));
+        moosePoints.add(new Point(44147, 1420));
+        moosePoints.add(new Point(43827, 1420));
+        moosePoints.add(new Point(42390, 1260));
+        moosePoints.add(new Point(41595, 1260));
+
+
+        for (Point point : moosePoints){
+            Moose moose = new Moose(tileMap, player);
+            moose.setPosition(point.x, point.y);
+            enemies.add(moose);
+        }
 
         List<Point> demonPoints = new ArrayList<>();
+        demonPoints.add(new Point(67633, 1440));
+        demonPoints.add(new Point(67997, 1440));
+        demonPoints.add(new Point(69028, 1440));
+        demonPoints.add(new Point(70237, 1440));
 
+        for (Point point : demonPoints){
+            Demon demon = new Demon(tileMap, player);
+            demon.setPosition(point.x, point.y);
+            enemies.add(demon);
+        }
 
-        List<Point> beetlePoints = new ArrayList<>();
-        
-
+        BugBoss boss = new BugBoss(tileMap, player);
+        boss.setPosition(42074, 1430);
+        enemies.add(boss);
     }
 
 

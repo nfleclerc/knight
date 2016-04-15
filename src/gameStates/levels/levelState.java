@@ -38,6 +38,7 @@ public abstract class LevelState extends GameState{
     protected HUD hud;
     protected Background bg;
     protected int frames;
+    protected int loadFrames;
 
     @Override
     public void update() {
@@ -50,7 +51,7 @@ public abstract class LevelState extends GameState{
 
         bg.setPosition(tileMap.getX(), tileMap.getY());
 
-        if (frames > 179) {
+        if (frames > loadFrames) {
             player.checkAttack(enemies);
             player.checkGather(items);
         }
@@ -97,7 +98,7 @@ public abstract class LevelState extends GameState{
         tileMap.draw(g);
         player.draw(g);
 
-        if (frames > 179) {
+        if (frames > loadFrames) {
             for (Enemy enemy : enemies) {
                 enemy.draw(g);
             }
@@ -114,7 +115,7 @@ public abstract class LevelState extends GameState{
 
         hud.draw(g);
 
-        if (frames < 179){
+        if (frames < loadFrames){
             g.setColor(Color.BLACK);
             g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
             MessageFactory.getInstance().createMessage("Loading...", Message.MessageType.LOADING);

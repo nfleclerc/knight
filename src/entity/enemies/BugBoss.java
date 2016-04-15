@@ -33,8 +33,8 @@ public class BugBoss extends Enemy {
 
         moveSpeed = 0.2;
         maxSpeed = 0.3;
-        fallSpeed = 0.2;
-        maxFallSpeed = 10.0;
+        fallSpeed = 0.10;
+        maxFallSpeed = 4.0;
 
         width = 240;
         height = 120;
@@ -43,8 +43,6 @@ public class BugBoss extends Enemy {
 
         health = maxHealth = 30;
         xpWorth = 500;
-
-
 
         //loadSprites
         try{
@@ -96,6 +94,8 @@ public class BugBoss extends Enemy {
     @Override
     public void update() {
 
+        System.out.println(x + ", " + y);
+
         getNextPosition();
         checkTileMapCollision();
         setPosition(xtemp, ytemp);
@@ -115,13 +115,13 @@ public class BugBoss extends Enemy {
             maxSpeed = 0.3;
             cWidth = 160;
             cHeight = 110;
-            y = 365;
+            y = 1415;
         } else {
             setAnimation(ROLLING, 100, 120);
             maxSpeed = 5;
             cWidth = 80;
             cHeight = 80;
-            y = 380;
+            y = 1430;
         }
 
 
