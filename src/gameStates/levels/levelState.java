@@ -60,7 +60,9 @@ public abstract class LevelState extends GameState{
                 enemies.remove(i);
                 i--;
                 explosions.add(new Explosion((int)enemy.getX(), (int)enemy.getY()));
-                items.add(new Item(enemy.getDropType(), enemy.getX(), enemy.getY(), tileMap));
+                if (enemy.getDropType() != null) {
+                    items.add(new Item(enemy.getDropType(), enemy.getX(), enemy.getY(), tileMap));
+                }
             }
         }
 
@@ -88,9 +90,6 @@ public abstract class LevelState extends GameState{
     @Override
     public void draw(Graphics2D g) {
 
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
-
         bg.draw(g);
 
         tileMap.draw(g);
@@ -109,11 +108,7 @@ public abstract class LevelState extends GameState{
             item.draw(g);
         }
 
-
         hud.draw(g);
-
-
-
 
         if (frames < 179){
             g.setColor(Color.BLACK);
@@ -124,7 +119,6 @@ public abstract class LevelState extends GameState{
         MessageFactory.getInstance().draw(g);
 
         frames++;
-
 
     }
 

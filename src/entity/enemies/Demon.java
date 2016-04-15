@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2016.
+ */
+
 package entity.enemies;
 
 import entity.Animation;
@@ -9,38 +13,37 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 /**
- * Created by nathaniel on 2/22/16.
+ * Created by nathaniel on 4/14/16.
  */
-public class Wasp extends Enemy{
+public class Demon extends Enemy{
 
-
-    public Wasp(TileMap tm, Player player) {
+    public Demon(TileMap tm, Player player) {
         super(tm, player);
 
-        this.dropType = ItemType.BUG_WINGS;
+        this.dropType = null;
 
-        moveSpeed = 0.5;
-        maxSpeed = 0.5;
-        fallSpeed = 0.0;
-        maxFallSpeed = 0.0;
+        moveSpeed = 0.3;
+        maxSpeed = 0.3;
+        fallSpeed = 0.8;
+        maxFallSpeed = 1.8;
 
-        width = 30;
-        height = 30;
-        cWidth = 20;
-        cHeight = 20;
+        width = 60;
+        height = 60;
+        cWidth = 40;
+        cHeight = 40;
 
-        health = maxHealth = 2;
-        xpWorth = 15;
+        health = maxHealth = 15;
+        xpWorth = 50;
 
         //loadSprites
         try{
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
-                            "/sprites/enemies/bugs/wasp.gif"
+                            "/sprites/enemies/demon.gif"
                     )
             );
 
-            sprites = new BufferedImage[3];
+            sprites = new BufferedImage[4];
             for (int i = 0; i < sprites.length; i++) {
                 sprites[i] = spriteSheet.getSubimage(
                         i * width,
@@ -56,11 +59,9 @@ public class Wasp extends Enemy{
 
         animation = new Animation();
         animation.setFrames(sprites);
-        animation.setDelay(45);
+        animation.setDelay(200);
 
         right = true;
         facingRight = true;
     }
-
-
 }

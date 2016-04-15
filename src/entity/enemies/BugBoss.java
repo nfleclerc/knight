@@ -29,7 +29,7 @@ public class BugBoss extends Enemy {
     public BugBoss(TileMap tm, Player player){
         super(tm, player);
 
-        this.dropType = ItemType.BUG_LEGS;
+        this.dropType = null;
 
         moveSpeed = 0.2;
         maxSpeed = 0.3;
@@ -109,7 +109,6 @@ public class BugBoss extends Enemy {
             rollTimer = 0;
             walking = !walking;
         }
-
 
         if (walking) {
             setAnimation(WALKING, 400, 240);

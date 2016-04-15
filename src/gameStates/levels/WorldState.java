@@ -4,9 +4,9 @@
 
 package gameStates.levels;
 
+import entity.enemies.*;
 import hud.HUD;
 import entity.Player;
-import entity.enemies.Wasp;
 import gameStates.GameStateManager;
 import hud.Health;
 import tileMap.Background;
@@ -61,9 +61,8 @@ public class WorldState extends LevelState {
         waspPoints.add(new Point(53354, 1190));
         waspPoints.add(new Point(53102, 1220));
 
-
         for (Point point : waspPoints){
-            Wasp wasp = new Wasp(tileMap, player);
+            Warrior wasp = new Warrior(tileMap, player);
             wasp.setPosition(point.x, point.y);
             enemies.add(wasp);
         }

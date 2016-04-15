@@ -86,11 +86,13 @@ public abstract class Enemy extends MapObject {
     }
 
     protected void checkForDirectionChange(){
-        if (right && dx == 0){
+        if (!bottomRight || (right && dx == 0)){
+            dx = 0;
             right = false;
             left = true;
             facingRight = false;
-        } else if (left && dx == 0){
+        } else if (!bottomLeft || (left && dx == 0)){
+            dx = 0;
             right = true;
             left = false;
             facingRight = true;
