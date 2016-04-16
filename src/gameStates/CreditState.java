@@ -15,36 +15,26 @@ import java.awt.*;
  */
 public class CreditState extends GameState {
 
-    private final AudioPlayer bgMusic;
-    private int loadFrames;
     private Font font;
     private double y;
 
     public CreditState(GameStateManager gameStateManager){
         this.gameStateManager = gameStateManager;
+    }
+
+    @Override
+    public void init() {
         try {
             font = new Font("Arial", Font.PLAIN, 12);
         } catch (Exception e){
             e.printStackTrace();
         }
-
-        bgMusic = new AudioPlayer("/music/Left-Behind_Looping.mp3");
-
-        loadFrames = 1;
-
         y = GamePanel.HEIGHT;
-
-    }
-
-    @Override
-    public void init() {
-
     }
 
     @Override
     public void update() {
         y -= 0.4;
-        System.out.println(y);
         if (y < -657){
             gameStateManager.setState(GameStateManager.MENUSTATE);
         }
@@ -53,6 +43,7 @@ public class CreditState extends GameState {
     @Override
     public void draw(Graphics2D g) {
         g.setColor(Color.BLACK);
+        g.setFont(font);
         g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
         g.setColor(Color.WHITE);
         drawString(g);
@@ -60,7 +51,7 @@ public class CreditState extends GameState {
 
     @Override
     public void keyPressed(int k) {
-
+        getGameStateManager().setState(GameStateManager.MENUSTATE);
     }
 
     @Override
@@ -106,7 +97,7 @@ public class CreditState extends GameState {
                 "\n" +
                 "\n" +
                 "All art has been adapted from its original form. The owner\n" +
-                "of each piece does not endorse their use in this project.\n" +
+                "of each piece does not endorse its use in this project.\n" +
                 "\n" +
                 "All art and sound has been licensed under the Creative\n" +
                 "Commons Attribution 3.0 License which is available at\n" +

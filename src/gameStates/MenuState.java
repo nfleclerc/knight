@@ -20,7 +20,6 @@ public class MenuState extends GameState {
 
     private String[] options = {
             "Start",
-            "Help",
             "Load",
             "Credits",
             "Quit"
@@ -126,15 +125,12 @@ public class MenuState extends GameState {
                 gameStateManager.setState(GameStateManager.WORLDSTATE);
                 break;
             case 1:
-                //help
-                break;
-            case 2:
                 //load game
                 break;
-            case 3:
+            case 2:
                 gameStateManager.setState(GameStateManager.CREDITSTATE);
                 break;
-            case 4:
+            case 3:
                 System.exit(0);
                 break;
             default:
