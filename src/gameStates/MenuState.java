@@ -1,6 +1,7 @@
 package gameStates;
 
 import audio.AudioPlayer;
+import main.GamePanel;
 import tileMap.Background;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -76,7 +77,8 @@ public class MenuState extends GameState {
         //draw title
         g.setColor(titleColor);
         g.setFont(titleFont);
-        g.drawString("A Knight of Code", 50, 70);
+        g.drawString("A Knight of Code", GamePanel.WIDTH / 2 -
+                g.getFontMetrics().stringWidth("A Knight of Code") / 2, 70);
 
         //draw menu
         g.setFont(font);
@@ -86,7 +88,9 @@ public class MenuState extends GameState {
             } else {
                 g.setColor(Color.WHITE);
             }
-            g.drawString(options[i], 145, 140 + i * 15);
+            g.drawString(options[i],
+                    GamePanel.WIDTH / 2 - g.getFontMetrics().stringWidth(options[i]) / 2,
+                    140 + i * 15);
         }
     }
 
@@ -128,7 +132,7 @@ public class MenuState extends GameState {
                 //load game
                 break;
             case 3:
-                //quit
+                gameStateManager.setState(GameStateManager.CREDITSTATE);
                 break;
             case 4:
                 System.exit(0);

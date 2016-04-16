@@ -43,7 +43,7 @@ public class WorldState extends LevelState {
 
         hud = new HUD(player);
 
-        loadFrames = 250;
+        loadFrames = 359;
 
         populateEnemies();
 
