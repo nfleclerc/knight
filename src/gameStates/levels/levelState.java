@@ -41,9 +41,15 @@ public abstract class LevelState extends GameState{
     protected int frames;
     protected int loadFrames;
     protected AudioPlayer bgMusic;
+    private boolean musicStarted;
 
     @Override
     public void update() {
+
+        if (frames > loadFrames && !musicStarted){
+            bgMusic.loop();
+            musicStarted = true;
+        }
 
         player.update();
         tileMap.setPosition(
@@ -149,7 +155,7 @@ public abstract class LevelState extends GameState{
                 new AttackProcessor(this);
                 break;
             case KeyEvent.VK_K:
-                new SkillDisplay(this.getPlayer());
+                new SkillDisplay(this.getPlayer(), this);
                 break;
             case KeyEvent.VK_P:
                 System.out.println((player.getX() + ", " + player.getY()));
@@ -184,4 +190,8 @@ public abstract class LevelState extends GameState{
         return player;
     }
 
+
+    public AudioPlayer getBgMusic() {
+        return bgMusic;
+    }
 }

@@ -149,10 +149,6 @@ public class CodeWindow extends GamePanel implements ActionListener{
     private void setBackgroundByLevel(){
         switch (attackProcessor.getLevelState()
                 .getGameStateManager().getCurrentState()){
-            case GameStateManager.FORESTSTATE:
-                bg = new Background("/backgrounds/forestbg_attackwindow.gif", 1);
-                textbg = new Background("/backgrounds/forest_textwindow.gif", 1);
-                break;
             case GameStateManager.WORLDSTATE:
                 bg = new Background("/backgrounds/mountainbg_attackwindow.gif", 1);
                 textbg = new Background("/backgrounds/mountain_textwindow.gif", 1);

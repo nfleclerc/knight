@@ -4,6 +4,7 @@
 
 package gameStates.levels;
 
+import audio.AudioPlayer;
 import entity.enemies.*;
 import hud.HUD;
 import entity.Player;
@@ -48,6 +49,8 @@ public class WorldState extends LevelState {
 
         explosions = new ArrayList<>();
         items = new ArrayList<>();
+
+        bgMusic = new AudioPlayer("/music/Clock-Maker-the-Hero_Looping.mp3");
 
     }
 

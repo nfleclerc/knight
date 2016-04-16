@@ -1,5 +1,6 @@
 package gameStates;
 
+import audio.AudioPlayer;
 import tileMap.Background;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -12,6 +13,7 @@ import java.awt.event.KeyEvent;
 public class MenuState extends GameState {
 
     private Background bg;
+    private AudioPlayer bgMusic;
 
     private int currentChoice = 0;
 
@@ -26,18 +28,25 @@ public class MenuState extends GameState {
     private Color titleColor;
     private Font titleFont;
     private Font font;
+    private int frames;
+    private int loadFrames;
+    private boolean startedPlaying;
 
     public MenuState(GameStateManager gameStateManager){
         this.gameStateManager = gameStateManager;
         try {
             bg = new Background("/backgrounds/mountainbg.gif", 1);
-            bg.setVector(-0.1, 0);
+            bg.setVector(-1, 0);
             titleColor = Color.RED;
             titleFont = new Font("Arial", Font.PLAIN, 28);
             font = new Font("Arial", Font.PLAIN, 12);
         } catch (Exception e){
             e.printStackTrace();
         }
+
+        bgMusic = new AudioPlayer("/music/Left-Behind_Looping.mp3");
+
+        loadFrames = 1;
 
     }
 
@@ -48,7 +57,15 @@ public class MenuState extends GameState {
 
     @Override
     public void update() {
+
+        if (frames > loadFrames && !startedPlaying){
+            bgMusic.loop();
+            startedPlaying = true;
+        }
+
         bg.update();
+
+        frames++;
     }
 
     @Override
@@ -101,6 +118,7 @@ public class MenuState extends GameState {
         switch (currentChoice){
             case 0:
                 //start
+                bgMusic.close();
                 gameStateManager.setState(GameStateManager.WORLDSTATE);
                 break;
             case 1:
@@ -111,6 +129,8 @@ public class MenuState extends GameState {
                 break;
             case 3:
                 //quit
+                break;
+            case 4:
                 System.exit(0);
                 break;
             default:

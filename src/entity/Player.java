@@ -1,6 +1,7 @@
 package entity;
 
 
+import audio.AudioPlayer;
 import entity.enemies.Enemy;
 import gear.*;
 import gear.boots.SimpleGreaves;
@@ -62,8 +63,13 @@ public class Player extends MapObject {
     private static final int JUMPING = 2;
     private static final int FALLING = 3;
     private static final int ATTACKING = 4;
+
     private int framesSinceAttack = 0;
     private boolean healthMessagePlayedOnce = false;
+
+    private HashMap<String, AudioPlayer> sfx;
+
+
 
     public Player(TileMap tm) {
 
@@ -147,6 +153,9 @@ public class Player extends MapObject {
             e.printStackTrace();
         }
 
+        sfx = new HashMap<>();
+        sfx.put("swing", new AudioPlayer("/sfx/sword-swing.mp3"));
+
         animation = new Animation();
         currentAction = IDLE;
         animation.setFrames(sprites.get(IDLE));
@@ -169,6 +178,7 @@ public class Player extends MapObject {
     }
 
     public void setAttacking() {
+        sfx.get("swing").playOnce();
         attacking = true;
     }
 

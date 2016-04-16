@@ -62,8 +62,8 @@ public class Background {
      * Updates the background on the current game window.
      */
     public void update(){
-        x += dx % GamePanel.WIDTH;
-        y += dy % GamePanel.HEIGHT;
+        x += dx;
+        y += dy;
     }
 
     /**
@@ -72,6 +72,7 @@ public class Background {
      */
     public void draw(Graphics2D g){
         g.drawImage(image, (int)x, (int)y, null);
+        if (Math.abs(x) == GamePanel.WIDTH) x = 1;
         if (x < 0){
             g.drawImage(image, (int)x + GamePanel.WIDTH, (int)y, null);
         }

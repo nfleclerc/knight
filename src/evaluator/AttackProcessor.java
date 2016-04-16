@@ -6,6 +6,7 @@ package evaluator;
 
 import gameStates.levels.LevelState;
 import main.Game;
+import main.GamePanel;
 import messages.Message;
 import messages.MessageFactory;
 
@@ -47,6 +48,7 @@ public class AttackProcessor {
             synchronized (Game.panel) {
                 Game.panel.notify();
             }
+            levelState.getBgMusic().play();
             levelState.getPlayer().setAttacking();
         }
     }

@@ -50,6 +50,12 @@ public class AudioPlayer {
     public void play() {
         if (clip == null) return;
         stop();
+        clip.start();
+    }
+
+    public void playOnce(){
+        if (clip == null) return;
+        stop();
         clip.setFramePosition(0);
         clip.start();
     }
@@ -64,4 +70,10 @@ public class AudioPlayer {
     }
 
 
+    public void loop() {
+        if (clip == null) return;
+        stop();
+        clip.setFramePosition(0);
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
 }

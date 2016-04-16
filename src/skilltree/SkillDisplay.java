@@ -4,8 +4,10 @@
 
 package skilltree;
 
+import audio.AudioPlayer;
 import entity.Player;
 import gameStates.GameStateManager;
+import gameStates.levels.LevelState;
 import main.Game;
 import main.GamePanel;
 import main.SubWindowManager;
@@ -32,10 +34,14 @@ public class SkillDisplay extends GamePanel implements ActionListener {
     private JLabel skillpoints;
     private BufferedImage image;
     private Background bg;
+    private LevelState levelState;
+    private AudioPlayer skillMusic;
 
 
-    public SkillDisplay(Player player){
+    public SkillDisplay(Player player, LevelState levelState){
         GamePanel.interrupted = true;
+        this.levelState = levelState;
+        skillMusic = new AudioPlayer("/music/Realm-of-Fantasy_Looping.mp3");
         bg = new Background("/backgrounds/skillbg.gif", 1);
 
         this.player = player;
@@ -141,6 +147,8 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setResizable(false);
         window.pack();
+        levelState.getBgMusic().stop();
+        skillMusic.loop();
         window.setVisible(true);
     }
 
@@ -169,11 +177,13 @@ public class SkillDisplay extends GamePanel implements ActionListener {
     @Override
     public void keyPressed(KeyEvent e) {
         GamePanel.interrupted = false;
-        SubWindowManager.removeSubWindow();
+        skillMusic.close();
         synchronized (Game.panel) {
             Game.panel.notify();
         }
+        levelState.getBgMusic().play();
         window.dispose();
+        SubWindowManager.removeSubWindow();
     }
 
     @Override
