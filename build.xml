@@ -1,4 +1,4 @@
-<project name="knight" basedir="." default="clean-build">
+<project name="knight" basedir="." default="clean-run">
 
     <property name="src.dir"     value="src"/>
     <property name="bin.dir"     value="bin"/>
@@ -38,6 +38,8 @@
     <path id="application" location="${jar.dir}/${ant.project.name}.jar"/>
 
     <target name="clean-build" depends="clean,jar,doc"/>
+
+    <target name="clean-run" depends="clean-build, run"/>
 
     <target name="run" depends="jar">
         <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>

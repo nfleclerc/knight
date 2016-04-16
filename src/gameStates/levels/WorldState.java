@@ -21,7 +21,6 @@ import java.util.List;
  */
 public class WorldState extends LevelState {
 
-
     public WorldState(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
         init();
@@ -39,7 +38,7 @@ public class WorldState extends LevelState {
         player = new Player(tileMap);
 
         //correct starting loc 52800 1280
-        player.setPosition(41595, 1280);
+        player.setPosition(52800, 1280);
 
         hud = new HUD(player);
 

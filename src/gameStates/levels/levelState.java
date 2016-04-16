@@ -4,6 +4,7 @@
 
 package gameStates.levels;
 
+import audio.AudioPlayer;
 import crafting.CraftWindow;
 import entity.Explosion;
 import hud.HUD;
@@ -39,6 +40,7 @@ public abstract class LevelState extends GameState{
     protected Background bg;
     protected int frames;
     protected int loadFrames;
+    protected AudioPlayer bgMusic;
 
     @Override
     public void update() {
