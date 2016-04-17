@@ -25,7 +25,8 @@ public class XPBar {
 
         int barWidth = GamePanel.WIDTH - 20;
 
-        double ratio = (double)(player.getXP() % 100) / 100.0;
+        double ratio = (double)(player.getXP() % player.getXPRequiredForLevelUp()) /
+                (double)player.getXPRequiredForLevelUp();
 
         g.setColor(new Color(186, 168, 36, 183));
         g.drawRect(10, GamePanel.HEIGHT - 15, barWidth, 5);

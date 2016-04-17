@@ -3,6 +3,7 @@ package entity;
 
 import audio.AudioPlayer;
 import entity.enemies.Enemy;
+import gameStates.GameStateManager;
 import gear.*;
 import gear.boots.SimpleGreaves;
 import gear.chests.SimpleBreastplate;
@@ -12,6 +13,7 @@ import gear.weapons.SimpleSword;
 import entity.items.Item;
 import messages.Message;
 import messages.MessageFactory;
+import save.Saver;
 import skilltree.Skill;
 import skilltree.SkillTree;
 import tileMap.TileMap;
@@ -67,7 +69,7 @@ public class Player extends MapObject {
     private boolean healthMessagePlayedOnce = false;
 
     private HashMap<String, AudioPlayer> sfx;
-
+    private int frames;
 
 
     public Player(TileMap tm) {
@@ -347,6 +349,8 @@ public class Player extends MapObject {
 
     public void update() {
 
+        autoSave();
+
         // update position
         getNextPosition();
         checkTileMapCollision();
@@ -387,7 +391,19 @@ public class Player extends MapObject {
         updateLevel();
 
         framesSinceAttack++;
+        frames++;
 
+    }
+
+    private void autoSave() {
+        if (frames % 5400 == 0 && frames != 0) {
+            new Saver(this, GameStateManager.key);
+            if (frames == 5400 && XP != 0){
+                MessageFactory.getInstance().createMessage(
+                        "This Game Uses AutoSave. Do Not Quit While Saving.",
+                        Message.MessageType.TIP);
+            }
+        }
     }
 
     private void checkHealthRegen() {
@@ -537,7 +553,7 @@ public class Player extends MapObject {
     }
 
     private void updateLevel(){
-        if (this.XP >= level * 100){
+        if (this.XP >= getXPRequiredForLevelUp()){
             level++;
             skillPoints++;
             maxHealth++;
@@ -550,6 +566,10 @@ public class Player extends MapObject {
                         Message.MessageType.TIP);
             }
         }
+    }
+
+    public int getXPRequiredForLevelUp(){
+        return level * 100;
     }
 
     private double getAttackRating(){

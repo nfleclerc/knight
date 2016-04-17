@@ -5,6 +5,8 @@
 package save;
 
 import entity.Player;
+import messages.Message;
+import messages.MessageFactory;
 import skilltree.Skill;
 
 import javax.crypto.Cipher;
@@ -50,6 +52,8 @@ public class Saver {
             desCipher.init(Cipher.ENCRYPT_MODE, key);
 
             out.write(desCipher.doFinal(byteText));
+
+            MessageFactory.getInstance().createMessage("Saving...", Message.MessageType.FILEIO);
 
 
         } catch (Exception e) {

@@ -4,18 +4,18 @@
 
 package save;
 
+import audio.AudioPlayer;
 import entity.Player;
 import gameStates.GameStateManager;
+import messages.Message;
+import messages.MessageFactory;
 import org.apache.commons.io.FileUtils;
 import sun.misc.IOUtils;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
+import java.io.*;
 
 /**
  * Created by nathaniel on 4/16/16.
@@ -34,7 +34,9 @@ public class Loader {
     private  boolean facingRight;
     private  int XP;
 
-    public Loader(GameStateManager gameStateManager, SecretKey key){
+    public Loader(GameStateManager gameStateManager, SecretKey key, AudioPlayer bgMusic){
+
+        boolean shouldClose = true;
 
         File file = new File("AKnightOfCode/Saves/knight.save");
 
@@ -65,9 +67,17 @@ public class Loader {
             }
 
 
+        } catch (IOException e){
+            MessageFactory.getInstance().createMessage("Couldn't Find Save File in AKnightOfCode/Saves",
+                    Message.MessageType.FILEIO);
+            shouldClose = false;
         } catch (Exception e){
-            e.printStackTrace();
+            MessageFactory.getInstance().createMessage("Save File Is Corrupted",
+                    Message.MessageType.FILEIO);
+            shouldClose = false;
         }
+
+        if (shouldClose) bgMusic.close();
 
         gameStateManager.loadWorldState(new Player(
                 gameStateManager.getTileMap(),

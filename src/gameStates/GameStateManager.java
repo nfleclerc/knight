@@ -22,7 +22,7 @@ public class GameStateManager {
 
     private int currentState;
 
-    private SecretKey key;
+    public static SecretKey key;
 
     /**
      * Index of the menu state in the list of game states kept by this class.

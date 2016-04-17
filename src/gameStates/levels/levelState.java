@@ -167,9 +167,6 @@ public abstract class LevelState extends GameState{
             case KeyEvent.VK_P:
                 System.out.println((player.getX() + ", " + player.getY()));
                 break;
-            case KeyEvent.VK_S:
-                new Saver(player, gameStateManager.getKey());
-                break;
         }
     }
 

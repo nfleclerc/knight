@@ -3,6 +3,7 @@ package gameStates;
 import audio.AudioPlayer;
 import entity.Player;
 import main.GamePanel;
+import messages.MessageFactory;
 import save.Loader;
 import tileMap.Background;
 import tileMap.TileMap;
@@ -23,8 +24,8 @@ public class MenuState extends GameState {
     private int currentChoice = 0;
 
     private String[] options = {
-            "Start",
-            "Load",
+            "Continue",
+            "New Game",
             "Credits",
             "Quit"
     };
@@ -69,6 +70,8 @@ public class MenuState extends GameState {
 
         bg.update();
 
+        MessageFactory.getInstance().update();
+
         frames++;
     }
 
@@ -95,6 +98,8 @@ public class MenuState extends GameState {
                     GamePanel.WIDTH / 2 - g.getFontMetrics().stringWidth(options[i]) / 2,
                     140 + i * 15);
         }
+
+        MessageFactory.getInstance().draw(g);
     }
 
     @Override
@@ -121,16 +126,15 @@ public class MenuState extends GameState {
         }
     }
 
-    private void select(){
-        switch (currentChoice){
+    private void select() {
+        switch (currentChoice) {
             case 0:
+                new Loader(gameStateManager, gameStateManager.getKey(), bgMusic);
+                break;
+            case 1:
                 //start
                 bgMusic.close();
                 gameStateManager.setState(GameStateManager.WORLDSTATE);
-                break;
-            case 1:
-                bgMusic.close();
-                new Loader(gameStateManager, gameStateManager.getKey());
                 break;
             case 2:
                 gameStateManager.setState(GameStateManager.CREDITSTATE);
@@ -138,7 +142,7 @@ public class MenuState extends GameState {
             case 3:
                 System.exit(0);
                 break;
-            default:
+            case 4:
                 System.exit(0);
         }
     }
