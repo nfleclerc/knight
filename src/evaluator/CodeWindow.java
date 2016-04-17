@@ -117,7 +117,6 @@ public class CodeWindow extends GamePanel implements ActionListener{
         setFocusable(true);
         requestFocus();
         window = new JFrame("Write Code to Attack!");
-
         window.setUndecorated(true);
         window.setLocation(Game.window.getX() + getXInset(), Game.window.getY() + getYInset());
         window.setContentPane(this);

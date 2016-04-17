@@ -1,6 +1,8 @@
 package gameStates;
 
+import entity.Player;
 import main.GamePanel;
+import tileMap.TileMap;
 
 /**
  * Created by nathaniel on 2/18/16.
@@ -46,4 +48,10 @@ public abstract class GameState {
     public GameStateManager getGameStateManager() {
         return gameStateManager;
     }
+
+
+    public abstract void load(Player player);
+
+    public abstract TileMap getTileMap();
+
 }

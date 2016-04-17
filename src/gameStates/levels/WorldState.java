@@ -14,6 +14,7 @@ import tileMap.Background;
 import tileMap.TileMap;
 
 import java.awt.*;
+import java.awt.color.ICC_ColorSpace;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,15 +25,16 @@ public class WorldState extends LevelState {
 
     public WorldState(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
+        tileMap = new TileMap(30);
+        tileMap.loadTiles("/tilesets/worldset_withoutramps.gif");
+        tileMap.loadMap("/maps/worldwithoutramps.map");
+        tileMap.setPosition(0, 0);
         init();
     }
 
     @Override
     public void init() {
-        tileMap = new TileMap(30);
-        tileMap.loadTiles("/tilesets/worldset_withoutramps.gif");
-        tileMap.loadMap("/maps/worldwithoutramps.map");
-        tileMap.setPosition(0, 0);
+
 
         bg = new Background("/backgrounds/mountainbg.gif", 0.1);
 
@@ -52,6 +54,25 @@ public class WorldState extends LevelState {
 
         bgMusic = new AudioPlayer("/music/Clock-Maker-the-Hero_Looping.mp3");
 
+    }
+
+    @Override
+    public void load(Player player) {
+
+        bg = new Background("/backgrounds/mountainbg.gif", 0.1);
+
+        this.player = player;
+
+        hud = new HUD(player);
+
+        loadFrames = 539;
+
+        populateEnemies();
+
+        explosions = new ArrayList<>();
+        items = new ArrayList<>();
+
+        bgMusic = new AudioPlayer("/music/Clock-Maker-the-Hero_Looping.mp3");
     }
 
     private void populateEnemies() {
@@ -463,7 +484,9 @@ public class WorldState extends LevelState {
         BugBoss boss = new BugBoss(tileMap, player);
         boss.setPosition(42074, 1430);
         enemies.add(boss);
+
     }
+
 
 
 }

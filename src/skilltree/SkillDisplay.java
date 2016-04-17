@@ -181,7 +181,7 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         synchronized (Game.panel) {
             Game.panel.notify();
         }
-        levelState.getBgMusic().play();
+        levelState.getBgMusic().loop();
         window.dispose();
         SubWindowManager.removeSubWindow();
     }

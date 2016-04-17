@@ -44,7 +44,6 @@ public class Player extends MapObject {
     private Helmet helmet;
     private Weapon weapon;
 
-    private boolean[] canCraftGear;
 
     // attack
     private boolean attacking;
@@ -92,14 +91,9 @@ public class Player extends MapObject {
         stopJumpSpeed = 0.3;
 
         skillPoints = 5;
-        level = 1;
+        level = 10;
         XP = 0;
 
-        canCraftGear = new boolean[5];
-
-        for (int i = 0; i < canCraftGear.length; i++) {
-            canCraftGear[i] = false;
-        }
 
         attackBonus = 1;
         defenseBonus = 1;
@@ -167,6 +161,109 @@ public class Player extends MapObject {
         helmet = new SimpleHelm();
         weapon = new SimpleSword();
 
+    }
+
+    public Player(TileMap tm, double x, double y, int skillPoints,
+                  int level, double attackBonus, double defenseBonus, int health,
+                  int maxHealth, boolean facingRight, int XP,
+                  boolean[] skillIsActive){
+
+
+        super(tm);
+
+        width = 30;
+        height = 30;
+        cWidth = 20;
+        cHeight = 20;
+
+        this.x = x;
+        this.y = y;
+
+        inventory = new HashMap<>();
+        skillTree = new SkillTree(this);
+
+        for (int i = 0; i < skillTree.getSkills().size(); i++) {
+            if (skillIsActive[i]) skillTree.getSkillAt(i).activate();
+        }
+
+        moveSpeed = 1;
+        maxSpeed = 1.8;
+        stopSpeed = 0.4;
+        fallSpeed = 0.2;
+        maxFallSpeed = 4.0;
+        jumpStart = -5.0;
+        stopJumpSpeed = 0.3;
+
+        this.skillPoints = skillPoints;
+        this.level = level;
+        this.XP = XP;
+
+        this.attackBonus = attackBonus;
+        this.defenseBonus = defenseBonus;
+
+        this.facingRight = facingRight;
+
+        this.health = health;
+        this.maxHealth = maxHealth;
+
+
+        // load sprites
+        try {
+
+            BufferedImage spritesheet = ImageIO.read(
+                    getClass().getResourceAsStream(
+                            "/sprites/player/knightsprites.gif"
+                    )
+            );
+
+            sprites = new ArrayList<>();
+            for(int i = 0; i < numFrames.length; i++) {
+
+                BufferedImage[] bi = new BufferedImage[numFrames[i]];
+
+                for(int j = 0; j < numFrames[i]; j++) {
+
+                    if(i != ATTACKING) {
+                        bi[j] = spritesheet.getSubimage(
+                                j * width,
+                                i * height,
+                                width,
+                                height
+                        );
+                    }
+                    else {
+                        bi[j] = spritesheet.getSubimage(
+                                j * width * 2,
+                                i * height,
+                                width * 2,
+                                height
+                        );
+                    }
+
+                }
+
+                sprites.add(bi);
+
+            }
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        sfx = new HashMap<>();
+        sfx.put("swing", new AudioPlayer("/sfx/sword-swing.mp3"));
+
+        animation = new Animation();
+        currentAction = IDLE;
+        animation.setFrames(sprites.get(IDLE));
+        animation.setDelay(4000);
+
+        boots = new SimpleGreaves();
+        chest = new SimpleBreastplate();
+        gloves = new SimpleGauntlets();
+        helmet = new SimpleHelm();
+        weapon = new SimpleSword();
     }
 
     public int getHealth() {
@@ -335,6 +432,7 @@ public class Player extends MapObject {
             }
         }
 
+
         super.draw(g);
 
     }
@@ -443,6 +541,8 @@ public class Player extends MapObject {
             level++;
             skillPoints++;
             maxHealth++;
+            attackBonus++;
+            defenseBonus++;
             health = maxHealth;
             MessageFactory.getInstance().createMessage("LEVEL UP!", Message.MessageType.LEVEL_UP);
             if (level == 2){
@@ -492,9 +592,6 @@ public class Player extends MapObject {
         }
     }
 
-    public void setCraftingEnabled(int index){
-        canCraftGear[index] = true;
-    }
 
     public SkillTree getSkillTree() {
         return skillTree;
@@ -508,7 +605,19 @@ public class Player extends MapObject {
         return level;
     }
 
-    public boolean canCraft(int i) {
-        return canCraftGear[i];
+    public boolean isDead() {
+        return dead;
+    }
+
+    public double getDefenseBonus() {
+        return defenseBonus;
+    }
+
+    public double getAttackBonus() {
+        return attackBonus;
+    }
+
+    public boolean getFacingRight() {
+        return facingRight;
     }
 }

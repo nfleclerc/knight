@@ -1,8 +1,11 @@
 package main;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nathaniel on 2/18/16.
@@ -27,9 +30,13 @@ public class Game{
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.pack();
+        List<Image> icons = new ArrayList<>();
+        icons.add(new ImageIcon("res/sprites/items/bug_wing.gif").getImage());
+        window.setIconImages(icons);
         window.setVisible(true);
 
     }
+
 
     public static void setPanel(JPanel panel){
         window.setContentPane(panel);

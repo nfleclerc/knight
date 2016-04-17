@@ -65,4 +65,8 @@ public abstract class Skill extends JButton {
         }
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(isActive());
+    }
 }

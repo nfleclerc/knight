@@ -1,0 +1,32 @@
+/* Your sword is one of a kind, Ruby! I expect you to use it for good.
+It has the ability to hack into any robotic creature and disable it! To
+successfully hack a robot you will need to make sure you upload correct
+code into the robot. The Bugged Forest is teeming with the evil robotic
+minions of the evil wizard Javar. The enemy doesn't look like a
+robot, it is underneath its fake skin and fur! 
+
+Since this is the first enemy you've fought here, I've decided to help
+you out and provide you the code to hack this one. Just hit the Attack
+Button when you're ready, and the code will stream straight from your
+sword into the enemy! As you make progress on your journey, your enemies
+will get more difficult and you'll need more complex code to hack them.
+If you ever get too stuck, you can press 'H' and I'll give you all the 
+tips I know. You're our best knight Ruby; I expect that your knowledge
+will soon outgrow even mine. Good Luck; you'll need it. The Prince is
+counting on you to rescue him. The whole kingdom is counting on you.
+
+The code below is similar to what you'll have to write in the future.
+All classes in Java must be declared as they are below. In this 
+adventure, all classes will be public and all of your code will go
+in the main method 
+
+- Queen Sharp */
+
+public class RescueThePrince {
+
+	public static void main(String... args){
+		/*This is a comment. Comments are not checked by the 
+		compiler and do not affect the program. In future fights
+		your code will all go here*/
+	}
+}

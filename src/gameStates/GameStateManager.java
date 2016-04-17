@@ -1,7 +1,9 @@
 package gameStates;
 
+import entity.Player;
 import gameStates.levels.*;
 import main.GamePanel;
+import tileMap.TileMap;
 
 import java.util.ArrayList;
 
@@ -56,6 +58,11 @@ public class GameStateManager {
         gameStates.get(currentState).init();
     }
 
+    public void loadWorldState(Player player){
+        currentState = WORLDSTATE;
+        gameStates.get(WORLDSTATE).load(player);
+    }
+
     /**
      * Updates the current game state.
      */
@@ -93,5 +100,9 @@ public class GameStateManager {
 
     public int getCurrentState() {
         return currentState;
+    }
+
+    public TileMap getTileMap(){
+        return gameStates.get(WORLDSTATE).getTileMap();
     }
 }

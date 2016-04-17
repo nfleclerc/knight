@@ -5,8 +5,10 @@
 package gameStates;
 
 import audio.AudioPlayer;
+import entity.Player;
 import main.GamePanel;
 import tileMap.Background;
+import tileMap.TileMap;
 
 import java.awt.*;
 
@@ -57,6 +59,16 @@ public class CreditState extends GameState {
     @Override
     public void keyReleased(int k) {
 
+    }
+
+    @Override
+    public void load(Player player) {
+
+    }
+
+    @Override
+    public TileMap getTileMap() {
+        return null;
     }
 
     private String getCreditReel() {

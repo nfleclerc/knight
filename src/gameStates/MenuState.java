@@ -1,8 +1,12 @@
 package gameStates;
 
 import audio.AudioPlayer;
+import entity.Player;
 import main.GamePanel;
+import save.Loader;
 import tileMap.Background;
+import tileMap.TileMap;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -125,7 +129,8 @@ public class MenuState extends GameState {
                 gameStateManager.setState(GameStateManager.WORLDSTATE);
                 break;
             case 1:
-                //load game
+                bgMusic.close();
+                new Loader(gameStateManager);
                 break;
             case 2:
                 gameStateManager.setState(GameStateManager.CREDITSTATE);
@@ -141,5 +146,15 @@ public class MenuState extends GameState {
     @Override
     public void keyReleased(int k) {
 
+    }
+
+    @Override
+    public void load(Player player) {
+
+    }
+
+    @Override
+    public TileMap getTileMap() {
+        return null;
     }
 }

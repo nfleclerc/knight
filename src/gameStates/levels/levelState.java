@@ -5,7 +5,6 @@
 package gameStates.levels;
 
 import audio.AudioPlayer;
-import crafting.CraftWindow;
 import entity.Explosion;
 import hud.HUD;
 import entity.Player;
@@ -17,6 +16,7 @@ import hud.Health;
 import main.GamePanel;
 import messages.Message;
 import messages.MessageFactory;
+import save.Saver;
 import skilltree.SkillDisplay;
 import tileMap.Background;
 import tileMap.TileMap;
@@ -51,7 +51,6 @@ public abstract class LevelState extends GameState{
             musicStarted = true;
         }
 
-        player.update();
         tileMap.setPosition(
                 GamePanel.WIDTH / 2 - player.getX(),
                 GamePanel.HEIGHT / 2 - player.getY()
@@ -94,6 +93,8 @@ public abstract class LevelState extends GameState{
                 i--;
             }
         }
+        player.update();
+
 
         MessageFactory.getInstance().update();
     }
@@ -104,7 +105,6 @@ public abstract class LevelState extends GameState{
         bg.draw(g);
 
         tileMap.draw(g);
-        player.draw(g);
 
         if (frames > loadFrames) {
             for (Enemy enemy : enemies) {
@@ -112,22 +112,29 @@ public abstract class LevelState extends GameState{
             }
         }
 
+        for (Item item : items){
+            item.draw(g);
+        }
+
         for (Explosion explosion : explosions){
             explosion.setMapPostion((int)tileMap.getX(), (int)tileMap.getY());
             explosion.draw(g);
         }
 
-        for (Item item : items){
-            item.draw(g);
-        }
+
 
         hud.draw(g);
+
+        player.draw(g);
+
 
         if (frames < loadFrames){
             g.setColor(Color.BLACK);
             g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
             MessageFactory.getInstance().createMessage("Loading...", Message.MessageType.LOADING);
         }
+
+
 
         MessageFactory.getInstance().draw(g);
 
@@ -159,6 +166,10 @@ public abstract class LevelState extends GameState{
                 break;
             case KeyEvent.VK_P:
                 System.out.println((player.getX() + ", " + player.getY()));
+                break;
+            case KeyEvent.VK_S:
+                new Saver(player);
+                break;
         }
     }
 
@@ -190,8 +201,11 @@ public abstract class LevelState extends GameState{
         return player;
     }
 
-
     public AudioPlayer getBgMusic() {
         return bgMusic;
+    }
+
+    public TileMap getTileMap(){
+        return tileMap;
     }
 }
