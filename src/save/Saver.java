@@ -53,7 +53,6 @@ public class Saver {
 
             out.write(desCipher.doFinal(byteText));
 
-            MessageFactory.getInstance().createMessage("Saving...", Message.MessageType.FILEIO);
 
 
         } catch (Exception e) {

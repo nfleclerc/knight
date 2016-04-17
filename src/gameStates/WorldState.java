@@ -8,6 +8,7 @@ import audio.AudioPlayer;
 import entity.enemies.*;
 import hud.HUD;
 import entity.Player;
+import messages.MessageFactory;
 import tileMap.Background;
 import tileMap.TileMap;
 
@@ -53,6 +54,8 @@ public class WorldState extends LevelState {
 
         musicStarted = false;
 
+        MessageFactory.getInstance().flush();
+
 
     }
 
@@ -75,6 +78,9 @@ public class WorldState extends LevelState {
         bgMusic = new AudioPlayer("/music/Clock-Maker-the-Hero_Looping.mp3");
 
         musicStarted = false;
+
+        MessageFactory.getInstance().flush();
+
 
     }
 

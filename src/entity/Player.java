@@ -430,7 +430,7 @@ public class Player extends MapObject {
     }
 
     private void checkIfMoved() {
-        if (x == 52800 && XP == 0){
+        if (x == 52800 && XP == 0 && frames > 420){
             MessageFactory.getInstance().createMessage("Use The Arrow Keys to Move",
                     Message.MessageType.TIP);
         }

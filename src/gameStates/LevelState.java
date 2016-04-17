@@ -169,6 +169,7 @@ public abstract class LevelState extends GameState{
                 System.out.println((player.getX() + ", " + player.getY()));
                 break;
             case KeyEvent.VK_S:
+                MessageFactory.getInstance().createMessage("Saving...", Message.MessageType.FILEIO);
                 new Saver(player, GameStateManager.key);
                 break;
             case KeyEvent.VK_R:
