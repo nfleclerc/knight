@@ -5,6 +5,10 @@ import gameStates.levels.*;
 import main.GamePanel;
 import tileMap.TileMap;
 
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 /**
@@ -17,6 +21,8 @@ public class GameStateManager {
     private ArrayList<GameState> gameStates;
 
     private int currentState;
+
+    private SecretKey key;
 
     /**
      * Index of the menu state in the list of game states kept by this class.
@@ -46,6 +52,8 @@ public class GameStateManager {
         gameStates.add(new MenuState(this));
         gameStates.add(new WorldState(this));
         gameStates.add(new CreditState(this));
+        key = new SecretKeySpec(new byte[]{127, -128, 0, 0, 0, 0, 0, 0}, "DES");
+
 
     }
 
@@ -104,5 +112,9 @@ public class GameStateManager {
 
     public TileMap getTileMap(){
         return gameStates.get(WORLDSTATE).getTileMap();
+    }
+
+    public SecretKey getKey() {
+        return key;
     }
 }

@@ -5,7 +5,6 @@
 package skilltree;
 
 import entity.Player;
-import skilltree.blacksmith.Blacksmith;
 import skilltree.juggernaut.Defense;
 import skilltree.maurader.Movement;
 import skilltree.warrior.Attack;

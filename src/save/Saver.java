@@ -7,40 +7,52 @@ package save;
 import entity.Player;
 import skilltree.Skill;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import java.io.*;
 
 /**
  * Created by nathaniel on 4/16/16.
  */
 public class Saver {
 
-    public Saver(Player player){
+    public Saver(Player player, SecretKey key){
 
         String dirPath = "AKnightOfCode/Saves/";
 
         new File(dirPath).mkdirs();
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(dirPath + "knight.save"))){
-            bw.write(player.getX() + "\n");
-            bw.write(player.getY() + "\n");
-            bw.write(player.getSkillPoints() + "\n");
-            bw.write(player.getLevel() + "\n");
-            bw.write(player.getAttackBonus() + "\n");
-            bw.write(player.getDefenseBonus() + "\n");
-            bw.write(player.getHealth() + "\n");
-            bw.write(player.getMaxHealth() + "\n");
-            bw.write(player.getFacingRight() + "\n");
-            bw.write(player.getXP() + "\n");
-            bw.write(player.getSkillTree().getSkills().toString()
-                    .replace("[", "")
-                    .replace("]", "")
-                    .replace(",", "")
-                    .replace("\"", ""));
+        String text = (player.getX() + "\n" +
+        player.getY() + "\n"+
+        player.getSkillPoints() + "\n"+
+        player.getLevel() + "\n"+
+        player.getAttackBonus() + "\n"+
+        player.getDefenseBonus() + "\n"+
+        player.getHealth() + "\n"+
+        player.getMaxHealth() + "\n"+
+        player.getFacingRight() + "\n"+
+        player.getXP() + "\n"+
+        player.getSkillTree().getSkills().toString()
+                .replace("[", "")
+                .replace("]", "")
+                .replace(",", "")
+                .replace("\"", ""));
 
-        } catch (IOException e) {
+
+
+        try (FileOutputStream out = new FileOutputStream(dirPath + "knight.save")){
+
+            Cipher desCipher = Cipher.getInstance("DES");
+
+            byte[] byteText = text.getBytes("UTF8");
+
+            desCipher.init(Cipher.ENCRYPT_MODE, key);
+
+            out.write(desCipher.doFinal(byteText));
+
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

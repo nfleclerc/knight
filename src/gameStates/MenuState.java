@@ -130,7 +130,7 @@ public class MenuState extends GameState {
                 break;
             case 1:
                 bgMusic.close();
-                new Loader(gameStateManager);
+                new Loader(gameStateManager, gameStateManager.getKey());
                 break;
             case 2:
                 gameStateManager.setState(GameStateManager.CREDITSTATE);
