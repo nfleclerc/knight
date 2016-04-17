@@ -4,9 +4,8 @@
 
 package evaluator;
 
-import gameStates.levels.LevelState;
+import gameStates.LevelState;
 import main.Game;
-import main.GamePanel;
 import messages.Message;
 import messages.MessageFactory;
 

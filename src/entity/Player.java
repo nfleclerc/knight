@@ -184,9 +184,6 @@ public class Player extends MapObject {
         inventory = new HashMap<>();
         skillTree = new SkillTree(this);
 
-        for (int i = 0; i < skillTree.getSkills().size(); i++) {
-            if (skillIsActive[i]) skillTree.getSkillAt(i).activate();
-        }
 
         moveSpeed = 1;
         maxSpeed = 1.8;
@@ -207,6 +204,10 @@ public class Player extends MapObject {
 
         this.health = health;
         this.maxHealth = maxHealth;
+
+        for (int i = 0; i < skillTree.getSkills().size(); i++) {
+            if (skillIsActive[i]) skillTree.getSkillAt(i).activate();
+        }
 
 
         // load sprites
@@ -398,7 +399,7 @@ public class Player extends MapObject {
     private void autoSave() {
         if (frames % 5400 == 0 && frames != 0) {
             new Saver(this, GameStateManager.key);
-            if (frames == 5400 && XP != 0){
+            if (frames == 5400 && XP == 0){
                 MessageFactory.getInstance().createMessage(
                         "This Game Uses AutoSave. Do Not Quit While Saving.",
                         Message.MessageType.TIP);

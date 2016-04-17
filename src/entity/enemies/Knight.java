@@ -39,11 +39,11 @@ public class Knight extends Enemy {
         try{
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
-                            "/sprites/enemies/knight.gif"
+                            "/sprites/enemies/warrior.gif"
                     )
             );
 
-            sprites = new BufferedImage[3];
+            sprites = new BufferedImage[2];
             for (int i = 0; i < sprites.length; i++) {
                 sprites[i] = spriteSheet.getSubimage(
                         i * width,

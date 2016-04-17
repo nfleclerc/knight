@@ -2,19 +2,16 @@
  * Copyright (c) 2016.
  */
 
-package gameStates.levels;
+package gameStates;
 
 import audio.AudioPlayer;
 import entity.enemies.*;
 import hud.HUD;
 import entity.Player;
-import gameStates.GameStateManager;
-import hud.Health;
 import tileMap.Background;
 import tileMap.TileMap;
 
 import java.awt.*;
-import java.awt.color.ICC_ColorSpace;
 import java.util.ArrayList;
 import java.util.List;
 

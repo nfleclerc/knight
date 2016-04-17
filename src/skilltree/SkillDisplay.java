@@ -6,8 +6,7 @@ package skilltree;
 
 import audio.AudioPlayer;
 import entity.Player;
-import gameStates.GameStateManager;
-import gameStates.levels.LevelState;
+import gameStates.LevelState;
 import main.Game;
 import main.GamePanel;
 import main.SubWindowManager;
@@ -18,7 +17,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
-import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**

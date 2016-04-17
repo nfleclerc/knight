@@ -16,6 +16,7 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.io.*;
+import java.util.Arrays;
 
 /**
  * Created by nathaniel on 4/16/16.
@@ -63,8 +64,10 @@ public class Loader {
             String[] activeFlags = attributes[i].split(" ");
             skillsActive = new boolean[activeFlags.length];
             for (int j = 0; j < skillsActive.length; j++) {
-                skillsActive[i] = Boolean.parseBoolean(activeFlags[i]);
+                skillsActive[j] = Boolean.parseBoolean(activeFlags[j]);
             }
+
+
 
 
         } catch (IOException e){

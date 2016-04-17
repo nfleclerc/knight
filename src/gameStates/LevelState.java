@@ -2,7 +2,7 @@
  * Copyright (c) 2016.
  */
 
-package gameStates.levels;
+package gameStates;
 
 import audio.AudioPlayer;
 import entity.Explosion;
