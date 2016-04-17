@@ -406,6 +406,9 @@ public class Player extends MapObject {
                 MessageFactory.getInstance().createMessage(
                         "Press S To Save Manually",
                         Message.MessageType.TIP);
+                MessageFactory.getInstance().createMessage(
+                        "Press Q to Save and Quit To The Main Menu",
+                        Message.MessageType.TIP);
             }
         }
     }
@@ -415,8 +418,6 @@ public class Player extends MapObject {
             MessageFactory.getInstance().createMessage("Your Health Is Low! Go Somewhere Safe To Recover!",
                     Message.MessageType.TIP);
             MessageFactory.getInstance().createMessage("Press R To Revert To Your Last Save",
-                    Message.MessageType.TIP);
-            MessageFactory.getInstance().createMessage("Press Q to Save and Quit To The Main Menu",
                     Message.MessageType.TIP);
             healthMessagePlayedOnce = true;
         }

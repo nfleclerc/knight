@@ -59,4 +59,8 @@ public class MessageFactory {
         }
     }
 
+    public void flush(){
+        messagesToDisplay.clear();
+    }
+
 }

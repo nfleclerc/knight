@@ -175,6 +175,7 @@ public abstract class LevelState extends GameState{
                 frames = 0;
                 musicStarted = false;
                 bgMusic.stop();
+                MessageFactory.getInstance().flush();
                 new Loader(gameStateManager, GameStateManager.key, bgMusic);
                 break;
             case KeyEvent.VK_Q:
@@ -182,6 +183,7 @@ public abstract class LevelState extends GameState{
                 new Saver(player, GameStateManager.key);
                 bgMusic.stop();
                 gameStateManager.setState(GameStateManager.MENUSTATE);
+                MessageFactory.getInstance().flush();
                 break;
         }
     }
