@@ -73,6 +73,9 @@ public class WorldState extends LevelState {
         items = new ArrayList<>();
 
         bgMusic = new AudioPlayer("/music/Clock-Maker-the-Hero_Looping.mp3");
+
+        musicStarted = false;
+
     }
 
     private void populateEnemies() {

@@ -47,7 +47,6 @@ public class AttackProcessor {
             synchronized (Game.panel) {
                 Game.panel.notify();
             }
-            levelState.getBgMusic().play();
             levelState.getPlayer().setAttacking();
         }
     }

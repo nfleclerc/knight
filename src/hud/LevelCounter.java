@@ -28,7 +28,9 @@ public class LevelCounter {
         g.setColor(Color.WHITE);
         g.setFont(font);
         level = "Level " + player.getLevel();
-        g.drawString(level, 10, GamePanel.HEIGHT - 20);
+        g.drawString(level,
+                GamePanel.WIDTH / 2 - g.getFontMetrics().stringWidth(level) / 2,
+                17);
     }
 
 

@@ -175,7 +175,7 @@ public class SkillDisplay extends GamePanel implements ActionListener {
     @Override
     public void keyPressed(KeyEvent e) {
         GamePanel.interrupted = false;
-        skillMusic.close();
+        skillMusic.stop();
         synchronized (Game.panel) {
             Game.panel.notify();
         }

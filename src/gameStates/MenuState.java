@@ -10,6 +10,9 @@ import tileMap.TileMap;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Created by nathaniel on 2/18/16.
@@ -134,8 +137,13 @@ public class MenuState extends GameState {
                 new Loader(gameStateManager, gameStateManager.getKey(), bgMusic);
                 break;
             case 1:
-                //start
-                bgMusic.close();
+
+                try {
+                    Files.deleteIfExists(Paths.get("AKnightOfCode/Saves/knight.save"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                bgMusic.stop();
                 gameStateManager.setState(GameStateManager.WORLDSTATE);
                 break;
             case 2:
