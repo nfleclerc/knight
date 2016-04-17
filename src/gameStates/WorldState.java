@@ -51,6 +51,9 @@ public class WorldState extends LevelState {
 
         bgMusic = new AudioPlayer("/music/Clock-Maker-the-Hero_Looping.mp3");
 
+        musicStarted = false;
+
+
     }
 
     @Override

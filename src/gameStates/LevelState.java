@@ -16,6 +16,7 @@ import hud.Health;
 import main.GamePanel;
 import messages.Message;
 import messages.MessageFactory;
+import save.Loader;
 import save.Saver;
 import skilltree.SkillDisplay;
 import tileMap.Background;
@@ -41,7 +42,7 @@ public abstract class LevelState extends GameState{
     protected int frames;
     protected int loadFrames;
     protected AudioPlayer bgMusic;
-    private boolean musicStarted;
+    protected boolean musicStarted;
 
     @Override
     public void update() {
@@ -166,6 +167,21 @@ public abstract class LevelState extends GameState{
                 break;
             case KeyEvent.VK_P:
                 System.out.println((player.getX() + ", " + player.getY()));
+                break;
+            case KeyEvent.VK_S:
+                new Saver(player, GameStateManager.key);
+                break;
+            case KeyEvent.VK_R:
+                frames = 0;
+                musicStarted = false;
+                bgMusic.stop();
+                new Loader(gameStateManager, GameStateManager.key, bgMusic);
+                break;
+            case KeyEvent.VK_Q:
+                frames = 0;
+                new Saver(player, GameStateManager.key);
+                bgMusic.stop();
+                gameStateManager.setState(GameStateManager.MENUSTATE);
                 break;
         }
     }

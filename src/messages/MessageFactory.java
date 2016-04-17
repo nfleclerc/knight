@@ -38,7 +38,7 @@ public class MessageFactory {
     public void update(){
         if (!messagesToDisplay.isEmpty()) {
             targetTime++;
-            if (targetTime == 180) {
+            if (targetTime == 120) {
                 messagesToDisplay.poll();
                 targetTime = 0;
             }

@@ -35,7 +35,7 @@ public class MenuState extends GameState {
     private Font font;
     private int frames;
     private int loadFrames;
-    private boolean startedPlaying;
+    private boolean musicStarted;
 
     public MenuState(GameStateManager gameStateManager){
         this.gameStateManager = gameStateManager;
@@ -53,19 +53,21 @@ public class MenuState extends GameState {
 
         loadFrames = 1;
 
+        init();
+
     }
 
     @Override
     public void init() {
-
+        musicStarted = false;
     }
 
     @Override
     public void update() {
 
-        if (frames > loadFrames && !startedPlaying){
+        if (frames > loadFrames && !musicStarted){
             bgMusic.loop();
-            startedPlaying = true;
+            musicStarted = true;
         }
 
         bg.update();

@@ -101,6 +101,12 @@ public class AttackProcessor {
 
     private static Class compile(String filepath) {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+        if (compiler == null){
+            MessageFactory.getInstance().createMessage(
+                    "Compiler Not Found. Please Download The Latest JDK.",
+                    Message.MessageType.COMPILE_ERROR);
+            return null;
+        }
         DiagnosticCollector<JavaFileObject> diagnosticsCollector = new DiagnosticCollector<JavaFileObject>();
         StandardJavaFileManager fileManager = compiler.getStandardFileManager(diagnosticsCollector, null, null);
         Iterable<? extends JavaFileObject> sourceFiles = fileManager.getJavaFileObjects(new File(filepath + ".java"));

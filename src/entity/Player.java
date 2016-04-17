@@ -403,6 +403,9 @@ public class Player extends MapObject {
                 MessageFactory.getInstance().createMessage(
                         "This Game Uses AutoSave. Do Not Quit While Saving.",
                         Message.MessageType.TIP);
+                MessageFactory.getInstance().createMessage(
+                        "Press S To Save",
+                        Message.MessageType.TIP);
             }
         }
     }

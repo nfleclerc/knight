@@ -80,7 +80,7 @@ public class Loader {
             shouldClose = false;
         }
 
-        if (shouldClose) bgMusic.close();
+        if (shouldClose) bgMusic.stop();
 
         gameStateManager.loadWorldState(new Player(
                 gameStateManager.getTileMap(),
