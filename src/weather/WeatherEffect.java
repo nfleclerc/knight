@@ -19,15 +19,14 @@ public abstract class WeatherEffect {
 
 
     protected BufferedImage makeTransparent(BufferedImage image, float transparency) {
-        BufferedImage dest = new BufferedImage(image.getWidth(), image.getHeight(),
+        BufferedImage adjustedImage = new BufferedImage(
+                image.getWidth(), image.getHeight(),
                 BufferedImage.TYPE_INT_ARGB);
-
-        Graphics2D g3 = dest.createGraphics();
-        AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, transparency);
-        g3.setComposite(ac);
-        g3.drawImage(image, 0, 0, null);
-
-        return dest;
+        Graphics2D graphics = adjustedImage.createGraphics();
+        AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, transparency);
+        graphics.setComposite(alphaComposite);
+        graphics.drawImage(image, 0, 0, null);
+        return adjustedImage;
     }
 
 
