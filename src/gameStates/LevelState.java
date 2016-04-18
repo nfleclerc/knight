@@ -21,6 +21,8 @@ import save.Saver;
 import skilltree.SkillDisplay;
 import tileMap.Background;
 import tileMap.TileMap;
+import weather.Rain;
+import weather.Snow;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -43,6 +45,8 @@ public abstract class LevelState extends GameState{
     protected int loadFrames;
     protected AudioPlayer bgMusic;
     protected boolean musicStarted;
+    protected Rain rain;
+    protected Snow snow;
 
     @Override
     public void update() {
@@ -50,6 +54,12 @@ public abstract class LevelState extends GameState{
         if (frames > loadFrames && !musicStarted){
             bgMusic.loop();
             musicStarted = true;
+        }
+
+        if (player.getX() <= 52242) {
+            snow.update();
+        }else {
+            rain.update();
         }
 
         tileMap.setPosition(
@@ -104,6 +114,12 @@ public abstract class LevelState extends GameState{
     public void draw(Graphics2D g) {
 
         bg.draw(g);
+
+        if (player.getX() <= 52242) {
+            snow.draw(g);
+        }else if (player.getX() >= 52800){
+            rain.draw(g);
+        }
 
         tileMap.draw(g);
 

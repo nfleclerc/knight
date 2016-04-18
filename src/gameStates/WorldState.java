@@ -11,6 +11,8 @@ import entity.Player;
 import messages.MessageFactory;
 import tileMap.Background;
 import tileMap.TileMap;
+import weather.Rain;
+import weather.Snow;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -53,6 +55,8 @@ public class WorldState extends LevelState {
         bgMusic = new AudioPlayer("/music/Clock-Maker-the-Hero_Looping.mp3");
 
         musicStarted = false;
+        rain = new Rain();
+        snow = new Snow();
 
         MessageFactory.getInstance().flush();
 
@@ -80,6 +84,10 @@ public class WorldState extends LevelState {
         musicStarted = false;
 
         MessageFactory.getInstance().flush();
+        rain = new Rain();
+        snow = new Snow();
+
+
 
 
     }

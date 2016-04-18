@@ -7,6 +7,7 @@ import messages.MessageFactory;
 import save.Loader;
 import tileMap.Background;
 import tileMap.TileMap;
+import weather.Rain;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -39,6 +40,7 @@ public class MenuState extends GameState {
     private int frames;
     private int loadFrames;
     private boolean musicStarted;
+    private Rain rain;
 
     public MenuState(GameStateManager gameStateManager){
         this.gameStateManager = gameStateManager;
@@ -55,6 +57,8 @@ public class MenuState extends GameState {
         bgMusic = new AudioPlayer("/music/Left-Behind_Looping.mp3");
 
         loadFrames = 1;
+
+        rain = new Rain();
 
         init();
 
@@ -75,6 +79,8 @@ public class MenuState extends GameState {
 
         bg.update();
 
+        rain.update();
+
         MessageFactory.getInstance().update();
 
         frames++;
@@ -85,11 +91,14 @@ public class MenuState extends GameState {
 
         bg.draw(g);
 
+
+
         //draw title
         g.setColor(titleColor);
         g.setFont(titleFont);
         g.drawString("A Knight of Code", GamePanel.WIDTH / 2 -
                 g.getFontMetrics().stringWidth("A Knight of Code") / 2, 70);
+
 
         //draw menu
         g.setFont(font);
@@ -103,6 +112,9 @@ public class MenuState extends GameState {
                     GamePanel.WIDTH / 2 - g.getFontMetrics().stringWidth(options[i]) / 2,
                     140 + i * 15);
         }
+
+        rain.draw(g);
+
 
         MessageFactory.getInstance().draw(g);
     }
