@@ -8,6 +8,7 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import java.io.BufferedInputStream;
 
 /**
  * Created by nathaniel on 4/15/16.
@@ -20,11 +21,10 @@ public class AudioPlayer {
 
         try {
 
-            AudioInputStream ais = AudioSystem.getAudioInputStream(
-                    getClass().getResourceAsStream(s)
-            );
+            BufferedInputStream in = new BufferedInputStream(getClass().getResourceAsStream(s));
+            AudioInputStream audio = AudioSystem.getAudioInputStream(in);
 
-            AudioFormat baseFormat = ais.getFormat();
+            AudioFormat baseFormat = audio.getFormat();
             AudioFormat decodeFormat = new AudioFormat(
                     AudioFormat.Encoding.PCM_SIGNED,
                     baseFormat.getSampleRate(),
@@ -36,7 +36,7 @@ public class AudioPlayer {
             );
 
             AudioInputStream decodedAis = AudioSystem.getAudioInputStream(
-                    decodeFormat, ais);
+                    decodeFormat, audio);
 
             clip = AudioSystem.getClip();
             clip.open(decodedAis);

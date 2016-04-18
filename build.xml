@@ -21,17 +21,19 @@
 
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac includeantruntime="true" srcdir="${src.dir}" destdir="${classes.dir}"/>
+        <javac includeantruntime="true" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="lib.jars">
+        </javac>
     </target>
 
     <target name="jar" depends="compile">
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
             <fileset dir="${res.dir}"/>
+            <path id="lib.jars"/>
             <manifest>
                 <attribute name="Main-Class" value="${main-class}"/>
+                <attribute name="Class-Path" value="${lib.dir}"/>
             </manifest>
-
         </jar>
     </target>
 
