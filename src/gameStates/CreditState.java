@@ -82,6 +82,7 @@ public class CreditState extends GameState {
                 "\n" +
                 "Tileset - Jordan Trudgett\n" +
                 "Mountain Background - ansimuz\n" +
+                "Loading Background - ansimuz" +
                 "Ruby Sprites - killyoverdrive\n" +
                 "Wasp Sprites - Stephen Challener and Poss\n" +
                 "Spider Sprites - Stephen Challener and Poss\n" +
