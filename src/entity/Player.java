@@ -105,7 +105,7 @@ public class Player extends MapObject {
 
         facingRight = true;
 
-        health = maxHealth = 20;
+        health = maxHealth = 3;
 
 
         // load sprites
@@ -376,10 +376,10 @@ public class Player extends MapObject {
             setAnimation(FALLING, 40, 30);
         }
         else if(dy < 0) {
-            setAnimation(JUMPING, -1, 30);
+            setAnimation(JUMPING, 0, 30);
         }
         else if(left || right) {
-            setAnimation(WALKING, 125, 30);
+            setAnimation(WALKING, 90, 30);
         }
         else {
             setAnimation(IDLE, 400, 30);
