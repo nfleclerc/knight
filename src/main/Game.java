@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,21 @@ public class Game{
      */
     public static void main(String... args){
 
-        window = new JFrame("A Knight of Code");
+
+        window = new JFrame("A Knight of Code") {
+            @Override
+            public void paint(Graphics g) {
+                g.setColor(Color.BLACK);
+                g.setFont(new Font("Arial", Font.PLAIN, 22));
+                g.fillRect(0, 0, GamePanel.WIDTH * GamePanel.SCALE, GamePanel.WIDTH * GamePanel.SCALE);
+                g.setColor(Color.WHITE);
+                String text = "A Nathaniel Leclerc & Brian Sherman Production";
+                g.drawString(text,
+                        GamePanel.WIDTH  * GamePanel.SCALE / 2 -
+                                g.getFontMetrics().stringWidth(text) / 2,
+                        GamePanel.HEIGHT * GamePanel.SCALE / 2);
+            }
+        };
         window.addComponentListener(new SubWindowManager());
         panel = new GamePanel();
         window.setContentPane(panel);

@@ -61,13 +61,6 @@ public class MessageFactory {
         }
     }
 
-    public void createMessage(String string, Message.MessageType type, int height){
-        Message message = new Message(string, type, height);
-        if (!messagesToDisplay.contains(message)) {
-            messagesToDisplay.add(message);
-        }
-    }
-
     public void flush(){
         messagesToDisplay.clear();
     }

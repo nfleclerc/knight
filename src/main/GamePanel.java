@@ -137,13 +137,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         running = true;
         gameStateManager = new GameStateManager(this);
 
-
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("res/fonts/Fipps-Regular.otf")));
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
+
 
     }
 
