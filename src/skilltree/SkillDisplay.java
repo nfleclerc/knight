@@ -131,6 +131,12 @@ public class SkillDisplay extends GamePanel implements ActionListener {
                 return SkillDisplay.this;
             }
         };
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException |
+                UnsupportedLookAndFeelException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
         window.setLocation(Game.window.getX(), Game.window.getY());
         window.setSize(GamePanel.WIDTH * SCALE, GamePanel.HEIGHT * SCALE);
         window.setUndecorated(true);

@@ -26,6 +26,8 @@ public abstract class Skill extends JButton {
 
 
     public Skill(Player player, int index, String activeBg, String inactiveBg, String lockedBg){
+        setContentAreaFilled(false);
+        setBorderPainted(false);
         this.player = player;
         this.active = false;
         this.index = index;
