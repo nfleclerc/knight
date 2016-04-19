@@ -112,7 +112,10 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         setFocusable(true);
         requestFocus();
         setBorder(BorderFactory.createEmptyBorder(0, 60, 0, 60));
-        setPreferredSize(new Dimension(GamePanel.WIDTH * (SCALE), GamePanel.HEIGHT * (SCALE) - 168));
+        setPreferredSize(new Dimension(
+                GamePanel.WIDTH * (SCALE),
+                GamePanel.HEIGHT * (SCALE) - titlePanel.getHeight() - exitPanel.getHeight() - 168
+        ));
         JPanel backgroundPanel = new JPanel(){
             @Override
             protected void paintComponent(Graphics g) {
@@ -128,7 +131,8 @@ public class SkillDisplay extends GamePanel implements ActionListener {
                 return SkillDisplay.this;
             }
         };
-        window.setLocation(Game.window.getX(), Game.window.getY() + getYInset());
+        window.setLocation(Game.window.getX(), Game.window.getY());
+        window.setSize(GamePanel.WIDTH * SCALE, GamePanel.HEIGHT * SCALE);
         window.setUndecorated(true);
         titlePanel.setOpaque(false);
         setOpaque(false);

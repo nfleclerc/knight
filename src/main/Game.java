@@ -1,5 +1,7 @@
 package main;
 
+import com.sun.xml.internal.messaging.saaj.soap.JpegDataContentHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
@@ -41,6 +43,7 @@ public class Game{
             }
         };
         window.addComponentListener(new SubWindowManager());
+        window.setUndecorated(true);
         panel = new GamePanel();
         window.setContentPane(panel);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -49,13 +52,13 @@ public class Game{
         List<Image> icons = new ArrayList<>();
         icons.add(new ImageIcon("res/sprites/items/bug_wing.gif").getImage());
         window.setIconImages(icons);
+        window.setLocation((int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2 -
+                        GamePanel.WIDTH  * GamePanel.SCALE / 2,
+                        (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2 -
+                        GamePanel.HEIGHT  * GamePanel.SCALE / 2);
         window.setVisible(true);
 
     }
 
-
-    public static void setPanel(JPanel panel){
-        window.setContentPane(panel);
-    }
 
 }
