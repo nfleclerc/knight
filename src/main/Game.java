@@ -50,7 +50,7 @@ public class Game{
         window.setResizable(false);
         window.pack();
         List<Image> icons = new ArrayList<>();
-        icons.add(new ImageIcon("res/sprites/items/bug_wing.gif").getImage());
+        icons.add(new ImageIcon("res/sprites/player/ruby.gif").getImage());
         window.setIconImages(icons);
         window.setLocation((int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2 -
                         GamePanel.WIDTH  * GamePanel.SCALE / 2,

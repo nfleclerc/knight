@@ -17,6 +17,7 @@ import java.awt.*;
  */
 public class CreditState extends GameState {
 
+    private static final int LINES = 70;
     private Font font;
     private double y;
 
@@ -37,9 +38,6 @@ public class CreditState extends GameState {
     @Override
     public void update() {
         y -= 0.4;
-        if (y < -657){
-            gameStateManager.setState(GameStateManager.MENUSTATE);
-        }
     }
 
     @Override
@@ -49,6 +47,9 @@ public class CreditState extends GameState {
         g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
         g.setColor(Color.WHITE);
         drawString(g);
+        if (y < -g.getFontMetrics().getHeight() * LINES){
+            gameStateManager.setState(GameStateManager.MENUSTATE);
+        }
     }
 
     @Override
@@ -89,10 +90,20 @@ public class CreditState extends GameState {
                 "Rat Sprites - Calciumtrice\n" +
                 "Moose Sprites - Calciumtrice\n" +
                 "Ghost Sprites - sonild\n" +
-                "Skeleton Knight - sonild\n" +
+                "Skeleton Knight Sprites - sonild\n" +
                 "Demon Sprites - Redshrike and William.Thomsonj\n" +
                 "Heart Sprite - ForeignGuyMike\n" +
                 "Fipps Font - pheist\n" +
+                "\n" +
+                "The above art has been adapted from its original\n" +
+                "form. The owner of each piece does not endorse\n" +
+                "its use in this project.\n" +
+                "\n" +
+                "Javar Sprites - Chase Corpus\n" +
+                "Dragon Sprites - Chase Corpus\n" +
+                "Python Sprites - Chase Corpus\n" +
+                "Yeti Sprites - Chase Corpus\n" +
+                "\n" +
                 "All other art by Nathaniel Leclerc and Brian Sherman\n" +
                 "\n" +
                 "\n" +
@@ -108,12 +119,18 @@ public class CreditState extends GameState {
                 "Dragon Tale by ForeignGuyMike\n" +
                 "\n" +
                 "\n" +
-                "All art has been adapted from its original form. The owner\n" +
-                "of each piece does not endorse its use in this project.\n" +
-                "\n" +
-                "All art and sound has been licensed under the Creative\n" +
-                "Commons Attribution 3.0 License which is available at\n" +
+                "All non-commissioned art and sound has been licensed\n" +
+                "under the Creative Commons Attribution 3.0 License\n" +
+                "which is available at\n" +
                 "creativecommons.org/licenses/by/3.0/legalcode\n" +
+                "\n" +
+                "\n" +
+                "Special Thanks\n" +
+                "\n" +
+                "Fred Li\n" +
+                "Kristin Wilinkiewicz\n" +
+                "Gavin-Rae Barnaby\n" +
+                "Ella Perry\n" +
                 "\n" +
                 "\n" +
                 "\n" +
