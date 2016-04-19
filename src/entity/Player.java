@@ -95,8 +95,8 @@ public class Player extends MapObject {
         jumpStart = -5.0;
         stopJumpSpeed = 0.3;
 
-        skillPoints = 5;
-        level = 10;
+        skillPoints = 0;
+        level = 1;
         XP = 0;
 
 
@@ -105,7 +105,7 @@ public class Player extends MapObject {
 
         facingRight = true;
 
-        health = maxHealth = 6;
+        health = maxHealth = 3;
 
 
         // load sprites
