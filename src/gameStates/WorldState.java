@@ -29,6 +29,7 @@ public class WorldState extends LevelState {
         tileMap.loadTiles("/tilesets/worldset_withoutramps.gif");
         tileMap.loadMap("/maps/worldwithoutramps.map");
         tileMap.setPosition(0, 0);
+        helpBg = new Background("/backgrounds/helpbg.gif", 0);
         init();
     }
 

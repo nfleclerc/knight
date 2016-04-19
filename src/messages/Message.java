@@ -27,7 +27,6 @@ public class Message implements Comparable<Message>{
         LEVEL_UP(new Font("Arial", Font.BOLD, 40), new Color(186, 168, 36, 255), 4, "", 80),
         TIP(new Font("Arial", Font.ITALIC, 12), Color.YELLOW, 5, "", 70),
         WARNING(new Font("Arial", Font.PLAIN, 12), Color.MAGENTA, 3, "", 70),
-        LOADING(new Font("Arial", Font.PLAIN, 12), Color.WHITE, 0, "", GamePanel.HEIGHT - 20),
         FILEIO(new Font("Arial", Font.PLAIN, 12), Color.RED, 6, "", GamePanel.HEIGHT - 20),
         DEATH(new Font("Arial", Font.BOLD, 60), new Color(110, 0, 7, 255), 0, "", GamePanel.HEIGHT / 2);
 

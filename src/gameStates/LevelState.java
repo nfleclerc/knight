@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public abstract class LevelState extends GameState{
 
     protected TileMap tileMap;
-
+    protected Background helpBg;
     protected Player player;
     protected ArrayList<Enemy> enemies;
     protected ArrayList<Item> items;
@@ -75,15 +75,17 @@ public abstract class LevelState extends GameState{
                 player.checkGather(items);
             }
 
-            for (int i = 0; i < enemies.size(); i++) {
-                Enemy enemy = enemies.get(i);
-                enemy.update();
-                if (enemy.isDead()) {
-                    enemies.remove(i);
-                    i--;
-                    explosions.add(new Explosion((int) enemy.getX(), (int) enemy.getY()));
-                    if (enemy.getDropType() != null) {
-                        items.add(new Item(enemy.getDropType(), enemy.getX(), enemy.getY(), tileMap));
+            if (frames > loadFrames) {
+                for (int i = 0; i < enemies.size(); i++) {
+                    Enemy enemy = enemies.get(i);
+                    enemy.update();
+                    if (enemy.isDead()) {
+                        enemies.remove(i);
+                        i--;
+                        explosions.add(new Explosion((int) enemy.getX(), (int) enemy.getY()));
+                        if (enemy.getDropType() != null) {
+                            items.add(new Item(enemy.getDropType(), enemy.getX(), enemy.getY(), tileMap));
+                        }
                     }
                 }
             }
@@ -153,16 +155,15 @@ public abstract class LevelState extends GameState{
             player.draw(g);
         }
 
+        MessageFactory.getInstance().draw(g);
 
-        if (frames < loadFrames){
-            g.setColor(Color.BLACK);
-            g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
-            MessageFactory.getInstance().createMessage("Loading...", Message.MessageType.LOADING);
+
+        if (frames < loadFrames) {
+            helpBg.draw(g);
         }
 
 
 
-        MessageFactory.getInstance().draw(g);
 
         frames++;
 
@@ -199,7 +200,6 @@ public abstract class LevelState extends GameState{
                 break;
             case KeyEvent.VK_S:
                 if (!player.isDead()) {
-                    MessageFactory.getInstance().createMessage("Saving...", Message.MessageType.FILEIO);
                     new Saver(player, GameStateManager.key);
                 }
                 break;
