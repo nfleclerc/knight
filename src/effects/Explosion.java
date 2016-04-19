@@ -1,4 +1,4 @@
-package entity;
+package effects;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

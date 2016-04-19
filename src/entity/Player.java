@@ -2,7 +2,9 @@ package entity;
 
 
 import audio.AudioPlayer;
+import effects.Animation;
 import entity.enemies.Enemy;
+import gameStates.GameState;
 import gameStates.GameStateManager;
 import gear.*;
 import gear.boots.SimpleGreaves;
@@ -11,6 +13,7 @@ import gear.gloves.SimpleGauntlets;
 import gear.helmets.SimpleHelm;
 import gear.weapons.SimpleSword;
 import entity.items.Item;
+import main.GamePanel;
 import messages.Message;
 import messages.MessageFactory;
 import save.Saver;
@@ -397,9 +400,9 @@ public class Player extends MapObject {
     }
 
     private void autoSave() {
-        if (frames % 5400 == 0 && frames != 0) {
+        if (frames % 3600 == 0 && !dead) {
             new Saver(this, GameStateManager.key);
-            if (frames == 5400 && XP == 0){
+            if (frames == 3600 && XP == 0){
                 MessageFactory.getInstance().createMessage(
                         "This Game Uses AutoSave. Do Not Quit While Saving.",
                         Message.MessageType.TIP);
@@ -542,7 +545,7 @@ public class Player extends MapObject {
     }
 
     private void takeDamage(int damage){
-        health -= Math.ceil((double)damage /(double) getDefenseRating());
+        health -= Math.ceil((double)damage / getDefenseRating());
     }
 
     public void checkGather(List<Item> items){

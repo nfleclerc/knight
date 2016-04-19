@@ -4,6 +4,8 @@
 
 package messages;
 
+import main.GamePanel;
+
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -31,6 +33,13 @@ public class MessageFactory {
 
         if (!messagesToDisplay.isEmpty()) {
             messagesToDisplay.peek().draw(g);
+            if (messagesToDisplay.peek().getType() == Message.MessageType.DEATH){
+                g.setFont(new Font("Arial", Font.BOLD, 14));
+                String text = "Press R to Revert to Last Save or Q to Quit";
+                g.drawString(text,
+                        GamePanel.WIDTH / 2 - g.getFontMetrics().stringWidth(text) / 2,
+                        140);
+            }
         }
 
     }

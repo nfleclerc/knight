@@ -18,6 +18,7 @@ public class Message implements Comparable<Message>{
     private int height;
     private Color color;
     private Font font;
+    private MessageType type;
 
     public enum MessageType {
 
@@ -27,7 +28,8 @@ public class Message implements Comparable<Message>{
         TIP(new Font("Arial", Font.ITALIC, 12), Color.YELLOW, 5, "", 70),
         WARNING(new Font("Arial", Font.PLAIN, 12), Color.MAGENTA, 3, "", 70),
         LOADING(new Font("Arial", Font.PLAIN, 12), Color.WHITE, 0, "", GamePanel.HEIGHT - 20),
-        FILEIO(new Font("Arial", Font.PLAIN, 12), Color.RED, 6, "", GamePanel.HEIGHT - 20);
+        FILEIO(new Font("Arial", Font.PLAIN, 12), Color.RED, 6, "", GamePanel.HEIGHT - 20),
+        DEATH(new Font("Arial", Font.BOLD, 60), new Color(110, 0, 7, 255), 0, "", GamePanel.HEIGHT / 2);
 
         private Color color;
         private Font font;
@@ -67,6 +69,7 @@ public class Message implements Comparable<Message>{
     protected Message(String message, MessageType type) {
 
         this.message = type.getPrefix() + message;
+        this.type = type;
         priority = type.getPriority();
         color = type.getColor();
         font = type.getFont();
@@ -89,8 +92,12 @@ public class Message implements Comparable<Message>{
         g.drawString(message, GamePanel.WIDTH / 2 - width / 2, height);
     }
 
-    public int getPriority() {
+    private int getPriority() {
         return priority;
+    }
+
+    public MessageType getType() {
+        return type;
     }
 
     @Override

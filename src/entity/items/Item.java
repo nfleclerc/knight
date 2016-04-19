@@ -4,9 +4,8 @@
 
 package entity.items;
 
-import entity.Animation;
+import effects.Animation;
 import entity.MapObject;
-import entity.Player;
 import tileMap.TileMap;
 
 import javax.imageio.ImageIO;

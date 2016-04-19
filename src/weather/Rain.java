@@ -4,7 +4,7 @@
 
 package weather;
 
-import entity.Animation;
+import effects.Animation;
 import main.GamePanel;
 
 import javax.imageio.ImageIO;

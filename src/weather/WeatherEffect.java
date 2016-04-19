@@ -4,7 +4,7 @@
 
 package weather;
 
-import entity.Animation;
+import effects.Animation;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

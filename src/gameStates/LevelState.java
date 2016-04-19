@@ -5,14 +5,13 @@
 package gameStates;
 
 import audio.AudioPlayer;
-import entity.Explosion;
+import effects.Explosion;
 import hud.HUD;
 import entity.Player;
 import entity.enemies.Enemy;
 import entity.items.Item;
 import evaluator.AttackProcessor;
-import gameStates.GameState;
-import hud.Health;
+import main.Game;
 import main.GamePanel;
 import messages.Message;
 import messages.MessageFactory;
@@ -51,63 +50,72 @@ public abstract class LevelState extends GameState{
     @Override
     public void update() {
 
-        if (frames > loadFrames && !musicStarted){
-            bgMusic.loop();
-            musicStarted = true;
-        }
+        if (!player.isDead()) {
 
-        if (player.getX() <= 52242) {
-            snow.update();
-        }else {
-            rain.update();
-        }
+            if (frames > loadFrames && !musicStarted) {
+                bgMusic.loop();
+                musicStarted = true;
+            }
 
-        tileMap.setPosition(
-                GamePanel.WIDTH / 2 - player.getX(),
-                GamePanel.HEIGHT / 2 - player.getY()
-        );
+            if (player.getX() <= 52242) {
+                snow.update();
+            } else {
+                rain.update();
+            }
 
-        bg.setPosition(tileMap.getX(), tileMap.getY());
+            tileMap.setPosition(
+                    GamePanel.WIDTH / 2 - player.getX(),
+                    GamePanel.HEIGHT / 2 - player.getY()
+            );
 
-        if (frames > loadFrames) {
-            player.checkAttack(enemies);
-            player.checkGather(items);
-        }
+            bg.setPosition(tileMap.getX(), tileMap.getY());
 
-        for (int i = 0; i < enemies.size(); i++) {
-            Enemy enemy = enemies.get(i);
-            enemy.update();
-            if (enemy.isDead()){
-                enemies.remove(i);
-                i--;
-                explosions.add(new Explosion((int)enemy.getX(), (int)enemy.getY()));
-                if (enemy.getDropType() != null) {
-                    items.add(new Item(enemy.getDropType(), enemy.getX(), enemy.getY(), tileMap));
+            if (frames > loadFrames) {
+                player.checkAttack(enemies);
+                player.checkGather(items);
+            }
+
+            for (int i = 0; i < enemies.size(); i++) {
+                Enemy enemy = enemies.get(i);
+                enemy.update();
+                if (enemy.isDead()) {
+                    enemies.remove(i);
+                    i--;
+                    explosions.add(new Explosion((int) enemy.getX(), (int) enemy.getY()));
+                    if (enemy.getDropType() != null) {
+                        items.add(new Item(enemy.getDropType(), enemy.getX(), enemy.getY(), tileMap));
+                    }
                 }
             }
-        }
 
-        for (int i = 0; i < explosions.size(); i++) {
-            Explosion explosion = explosions.get(i);
-            explosion.update();
-            if (explosion.shouldRemove()){
-                explosions.remove(i);
-                i--;
+            for (int i = 0; i < explosions.size(); i++) {
+                Explosion explosion = explosions.get(i);
+                explosion.update();
+                if (explosion.shouldRemove()) {
+                    explosions.remove(i);
+                    i--;
+                }
             }
-        }
 
-        for (int i = 0; i < items.size(); i++) {
-            Item item = items.get(i);
-            item.update();
-            if (item.wasGathered()){
-                items.remove(i);
-                i--;
+            for (int i = 0; i < items.size(); i++) {
+                Item item = items.get(i);
+                item.update();
+                if (item.wasGathered()) {
+                    items.remove(i);
+                    i--;
+                }
             }
+            player.update();
+
+            MessageFactory.getInstance().update();
+
+            if (player.isDead()){
+                bgMusic.stop();
+                MessageFactory.getInstance().createMessage("DEAD", Message.MessageType.DEATH);
+            }
+
         }
-        player.update();
 
-
-        MessageFactory.getInstance().update();
     }
 
     @Override
@@ -117,7 +125,7 @@ public abstract class LevelState extends GameState{
 
         if (player.getX() <= 52242) {
             snow.draw(g);
-        }else if (player.getX() >= 52800){
+        }else if (player.getX() >= 63264){
             rain.draw(g);
         }
 
@@ -139,10 +147,11 @@ public abstract class LevelState extends GameState{
         }
 
 
-
         hud.draw(g);
 
-        player.draw(g);
+        if (!player.isDead()) {
+            player.draw(g);
+        }
 
 
         if (frames < loadFrames){
@@ -176,33 +185,42 @@ public abstract class LevelState extends GameState{
                 player.setDown(true);
                 break;
             case KeyEvent.VK_SPACE:
-                new AttackProcessor(this);
+                if (!player.isDead()) {
+                    new AttackProcessor(this);
+                }
                 break;
             case KeyEvent.VK_K:
-                new SkillDisplay(this.getPlayer(), this);
+                if (!player.isDead()) {
+                    new SkillDisplay(this.getPlayer(), this);
+                }
                 break;
             case KeyEvent.VK_P:
                 System.out.println((player.getX() + ", " + player.getY()));
                 break;
             case KeyEvent.VK_S:
-                MessageFactory.getInstance().createMessage("Saving...", Message.MessageType.FILEIO);
-                new Saver(player, GameStateManager.key);
+                if (!player.isDead()) {
+                    MessageFactory.getInstance().createMessage("Saving...", Message.MessageType.FILEIO);
+                    new Saver(player, GameStateManager.key);
+                }
                 break;
             case KeyEvent.VK_R:
-                frames = 0;
-                musicStarted = false;
-                bgMusic.stop();
-                MessageFactory.getInstance().flush();
+                resumeGame();
                 new Loader(gameStateManager, GameStateManager.key, bgMusic);
                 break;
             case KeyEvent.VK_Q:
-                frames = 0;
+                resumeGame();
                 new Saver(player, GameStateManager.key);
-                bgMusic.stop();
                 gameStateManager.setState(GameStateManager.MENUSTATE);
                 MessageFactory.getInstance().flush();
                 break;
         }
+    }
+
+    public synchronized void resumeGame(){
+        frames = 0;
+        musicStarted = false;
+        bgMusic.stop();
+        MessageFactory.getInstance().flush();
     }
 
     @Override

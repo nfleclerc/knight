@@ -47,12 +47,6 @@ public class AudioPlayer {
 
     }
 
-    public void play() {
-        if (clip == null) return;
-        stop();
-        clip.start();
-    }
-
     public void playOnce(){
         if (clip == null) return;
         stop();
@@ -63,12 +57,6 @@ public class AudioPlayer {
     public void stop() {
         if (clip.isRunning()) clip.stop();
     }
-
-    public void close(){
-        stop();
-        clip.close();
-    }
-
 
     public void loop() {
         if (clip == null) return;

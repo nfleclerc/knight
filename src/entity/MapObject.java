@@ -1,11 +1,11 @@
 package entity;
 
+import effects.Animation;
 import main.GamePanel;
 import tileMap.Tile;
 import tileMap.TileMap;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by nathaniel on 2/19/16.

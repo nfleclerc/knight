@@ -4,7 +4,7 @@
 
 package entity.enemies;
 
-import entity.Animation;
+import effects.Animation;
 import entity.Player;
 import tileMap.TileMap;
 
