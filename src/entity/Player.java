@@ -349,6 +349,7 @@ public class Player extends MapObject {
             MessageFactory.getInstance().createMessage("You Must Be Level 5 or Higher to Enter This Area",
                     Message.MessageType.WARNING);
         }
+        if (y >= 1550) dead = true;
     }
 
     public void update() {
