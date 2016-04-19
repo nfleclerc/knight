@@ -39,6 +39,7 @@ public class BugBoss extends Enemy {
         height = 120;
         cWidth = 230;
         cHeight = 80;
+        damage = 5;
 
         health = maxHealth = 30;
         xpWorth = 500;

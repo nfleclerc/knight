@@ -33,6 +33,7 @@ public class Moose extends Enemy{
 
         health = maxHealth = 30;
         xpWorth = 80;
+        damage = 2;
 
         //loadSprites
         try{

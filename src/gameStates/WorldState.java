@@ -26,8 +26,8 @@ public class WorldState extends LevelState {
     public WorldState(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
         tileMap = new TileMap(30);
-        tileMap.loadTiles("/tilesets/worldset_withoutramps.gif");
-        tileMap.loadMap("/maps/worldwithoutramps.map");
+        tileMap.loadTiles("/tilesets/world_dark.gif");
+        tileMap.loadMap("/maps/darkworld.map");
         tileMap.setPosition(0, 0);
         helpBg = new Background("/backgrounds/helpbg.gif", 0);
         init();

@@ -33,6 +33,7 @@ public class Ghost extends Enemy{
 
         health = maxHealth = 5;
         xpWorth = 20;
+        damage = 2;
 
         //loadSprites
         try{

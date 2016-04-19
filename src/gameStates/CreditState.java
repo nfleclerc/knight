@@ -93,7 +93,8 @@ public class CreditState extends GameState {
                 "Skeleton Knight Sprites - sonild\n" +
                 "Demon Sprites - Redshrike and William.Thomsonj\n" +
                 "Heart Sprite - ForeignGuyMike\n" +
-                "Fipps Font - pheist\n" +
+                "Fipps Font - pheist" +
+                "Snow - Dave Sutton\n" +
                 "\n" +
                 "The above art has been adapted from its original\n" +
                 "form. The owner of each piece does not endorse\n" +

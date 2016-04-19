@@ -33,6 +33,7 @@ public class Knight extends Enemy {
 
         health = maxHealth = 20;
         xpWorth = 10;
+        damage = 2;
 
         //loadSprites
         try{

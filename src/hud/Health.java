@@ -54,25 +54,27 @@ public class Health {
             }
 
 
-            if (i <= 5){
+            if (i < 5){
                 y = 5;
-            } else if (i <= 10){
+            } else if (i < 10){
                 y = 20;
-            } else if (i <= 15){
+            } else if (i < 15){
                 y = 35;
-            } else if (i <= 20){
+            } else if (i < 20){
                 y = 50;
             } else {
                 y = 65;
             }
 
-            g.drawImage(hearts.get(i), x, y, null);
 
             x += 15;
 
-            if (i % 5 == 0 && i != 0){
+            if (i % 5 == 0){
                 x = 0;
             }
+
+            g.drawImage(hearts.get(i), x, y, null);
+
 
             i++;
 

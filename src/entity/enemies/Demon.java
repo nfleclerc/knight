@@ -30,6 +30,7 @@ public class Demon extends Enemy{
         height = 60;
         cWidth = 40;
         cHeight = 40;
+        damage = 3;
 
         health = maxHealth = 15;
         xpWorth = 50;
