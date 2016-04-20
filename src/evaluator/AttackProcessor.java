@@ -27,6 +27,8 @@ public class AttackProcessor {
     CodeWindow codeWindow;
     Class<?> compiledClass;
     private String className;
+    private boolean successfulRun = true;
+    private boolean successfulCompilation;
 
     public AttackProcessor(LevelState levelState){
         this.levelState = levelState;
@@ -52,7 +54,7 @@ public class AttackProcessor {
     }
 
     private boolean codeWasSuccessFull() {
-        return false;
+        return successfulCompilation && successfulRun;
     }
 
     public LevelState getLevelState() {
@@ -74,14 +76,14 @@ public class AttackProcessor {
 
     private String getClassName(String text) {
         String[] lines = text.split("\n");
-        String classDeclerationLine = "";
+        String classDeclarationLine = "";
         for (String line : lines){
             if (line.contains("class")) {
-                classDeclerationLine = line;
+                classDeclarationLine = line;
             }
         }
-        System.out.println(classDeclerationLine);
-        String[] words = classDeclerationLine.split("\\s");
+        System.out.println(classDeclarationLine);
+        String[] words = classDeclarationLine.split("\\s");
         int i = 0;
         while (i < words.length){
             if (!isKeyword(words[i])){
@@ -106,13 +108,13 @@ public class AttackProcessor {
                 word.trim().equals("strictfp"));
     }
 
-    private static Class compile(String filepath) {
+    private void compile(String filepath) {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         if (compiler == null){
             MessageFactory.getInstance().createMessage(
                     "Compiler Not Found. Please Download The Latest JDK.",
                     Message.MessageType.COMPILE_ERROR);
-            return null;
+            return;
         }
         DiagnosticCollector<JavaFileObject> diagnosticsCollector = new DiagnosticCollector<JavaFileObject>();
         StandardJavaFileManager fileManager = compiler.getStandardFileManager(diagnosticsCollector, null, null);
@@ -120,16 +122,14 @@ public class AttackProcessor {
         String classPath = "AKnightOfCode/Classes/";
         new File(classPath).mkdirs();
         final Iterable<String> options = Arrays.asList("-d", classPath);
-        boolean successfulCompilation = compiler.getTask(null, fileManager,
+        successfulCompilation = compiler.getTask(null, fileManager,
                 diagnosticsCollector, options, null, sourceFiles).call();
         for (JavaFileObject file : sourceFiles){
             System.out.println(file.getName());
         }
         Class compiledClass = null;
         try {
-            if (successfulCompilation) {
-                compiledClass = Class.forName(filepath.replace("/", ".").replace("Programs", "Classes"));
-            } else {
+            if (!successfulCompilation) {
                 List<Diagnostic<? extends JavaFileObject>> diagnostics = diagnosticsCollector.getDiagnostics();
                 for (Diagnostic<? extends JavaFileObject> diagnostic : diagnostics) {
                     MessageFactory.getInstance().createMessage(diagnostic.getMessage(null),
@@ -140,8 +140,6 @@ public class AttackProcessor {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return compiledClass;
     }
 
 

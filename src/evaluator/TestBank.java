@@ -43,7 +43,16 @@ public class TestBank {
     }
 
     public String getTest(Player player){
-        return player.getXP() == 0 ? intro : getRandomTest();
+        return player.getXP() == 0 ? intro : getRandomTest() + getCode();
+    }
+
+    private String getCode() {
+        return "\n\npublic class /* Write Class Name Here/* { \n" +
+                "\n" +
+                "\t public static void main(String[] args) {\n" +
+                "\t\t/* Your Code Here */\n" +
+                "\t}\n" +
+                "}";
     }
 
     private String getRandomTest() {

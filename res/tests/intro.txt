@@ -8,7 +8,7 @@ The code below is similar to what you'll have to write in the future. All classe
 
 public class RescueThePrince {
 
-	public static void main(String... args){
+	public static void main(String[] args){
 		/* This is a comment.
 		Comments are not checked by the compiler
 		and will not affect the program.
