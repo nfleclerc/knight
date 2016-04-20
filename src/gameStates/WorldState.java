@@ -53,7 +53,7 @@ public class WorldState extends LevelState {
         explosions = new ArrayList<>();
         items = new ArrayList<>();
 
-        bgMusic = new AudioPlayer("/music/Clock-Maker-the-Hero_Looping.mp3");
+        bgMusic = new AudioPlayer("/music/Trouble-in-the-Kingdom_Looping.mp3");
 
         musicStarted = false;
         rain = new Rain();
@@ -80,7 +80,7 @@ public class WorldState extends LevelState {
         explosions = new ArrayList<>();
         items = new ArrayList<>();
 
-        bgMusic = new AudioPlayer("/music/Clock-Maker-the-Hero_Looping.mp3");
+        bgMusic = new AudioPlayer("/music/Trouble-in-the-Kingdom_Looping.mp3");
 
         musicStarted = false;
 
