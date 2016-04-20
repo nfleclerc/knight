@@ -209,7 +209,6 @@ public abstract class LevelState extends GameState{
                 break;
             case KeyEvent.VK_Q:
                 resumeGame();
-                new Saver(player, GameStateManager.key);
                 gameStateManager.setState(GameStateManager.MENUSTATE);
                 MessageFactory.getInstance().flush();
                 break;

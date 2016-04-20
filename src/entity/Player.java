@@ -95,8 +95,8 @@ public class Player extends MapObject {
         jumpStart = -5.0;
         stopJumpSpeed = 0.3;
 
-        skillPoints = 0;
-        level = 1;
+        skillPoints = 5;
+        level = 10;
         XP = 0;
 
 
@@ -105,7 +105,7 @@ public class Player extends MapObject {
 
         facingRight = true;
 
-        health = maxHealth = 3;
+        health = maxHealth = 30;
 
 
         // load sprites
@@ -604,14 +604,16 @@ public class Player extends MapObject {
     public void increaseMovement(double movementBonus) {
         maxSpeed *= movementBonus;
         moveSpeed *= movementBonus;
+        jumpStart -= movementBonus / 3;
+
     }
 
     public void increaseAttack(double attackBonus) {
-        this.attackBonus = attackBonus;
+        this.attackBonus += attackBonus;
     }
 
     public void increaseDefense(double defenseBonus) {
-        this.defenseBonus = defenseBonus;
+        this.defenseBonus += defenseBonus;
     }
 
     public void buySkill(Skill skill){

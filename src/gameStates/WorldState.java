@@ -503,6 +503,14 @@ public class WorldState extends LevelState {
         boss.setPosition(42074, 1430);
         enemies.add(boss);
 
+        Javar javar = new Javar(tileMap, player);
+        javar.setPosition(89502, 1350);
+        enemies.add(javar);
+
+        Dragon dragon = new Dragon(tileMap, player);
+        dragon.setPosition(7047, 1260);
+        enemies.add(dragon);
+
     }
 
 

@@ -29,11 +29,11 @@ public class SkillTree {
                 "/skill_buttons/movement/movement_1_selected.gif",
                 "/skill_buttons/movement/movement_1_unselected.gif",
                 "/skill_buttons/movement/movement_1_locked.gif");
-        Attack a1 = new Attack(player, 1.15, null, 1,
+        Attack a1 = new Attack(player, 0.15, null, 1,
                 "/skill_buttons/attack/attack_1_selected.gif",
                 "/skill_buttons/attack/attack_1_unselected.gif",
                 "/skill_buttons/attack/attack_1_locked.gif");
-        Defense d1 = new Defense(player, 1.15, null, 2,
+        Defense d1 = new Defense(player, 0.15, null, 2,
                 "/skill_buttons/defense/defense_1_selected.gif",
                 "/skill_buttons/defense/defense_1_unselected.gif",
                 "/skill_buttons/defense/defense_1_locked.gif");
@@ -42,11 +42,11 @@ public class SkillTree {
                 "/skill_buttons/movement/movement_2_selected.gif",
                 "/skill_buttons/movement/movement_2_unselected.gif",
                 "/skill_buttons/movement/movement_2_locked.gif");
-        Attack a2 = new Attack(player, 1.6050, a1,4,
+        Attack a2 = new Attack(player, 0.6050, a1,4,
                 "/skill_buttons/attack/attack_2_selected.gif",
                 "/skill_buttons/attack/attack_2_unselected.gif",
                 "/skill_buttons/attack/attack_2_locked.gif");
-        Defense d2 = new Defense(player, 1.6050, d1, 5,
+        Defense d2 = new Defense(player, 0.6050, d1, 5,
                 "/skill_buttons/defense/defense_2_selected.gif",
                 "/skill_buttons/defense/defense_2_unselected.gif",
                 "/skill_buttons/defense/defense_2_locked.gif");
@@ -55,11 +55,11 @@ public class SkillTree {
                 "/skill_buttons/movement/movement_3_selected.gif",
                 "/skill_buttons/movement/movement_3_unselected.gif",
                 "/skill_buttons/movement/movement_3_locked.gif");
-        Attack a3 = new Attack(player, 1.605, a2, 7,
+        Attack a3 = new Attack(player, 0.605, a2, 7,
                 "/skill_buttons/attack/attack_3_selected.gif",
                 "/skill_buttons/attack/attack_3_unselected.gif",
                 "/skill_buttons/attack/attack_3_locked.gif");
-        Defense d3 = new Defense(player, 1.605, d2, 8,
+        Defense d3 = new Defense(player, 0.605, d2, 8,
                 "/skill_buttons/defense/defense_3_selected.gif",
                 "/skill_buttons/defense/defense_3_unselected.gif",
                 "/skill_buttons/defense/defense_3_locked.gif");
@@ -68,11 +68,11 @@ public class SkillTree {
                 "/skill_buttons/movement/movement_4_selected.gif",
                 "/skill_buttons/movement/movement_4_unselected.gif",
                 "/skill_buttons/movement/movement_4_locked.gif");
-        Attack a4 = new Attack(player, 1.60, a3, 10,
+        Attack a4 = new Attack(player, 0.60, a3, 10,
                 "/skill_buttons/attack/attack_4_selected.gif",
                 "/skill_buttons/attack/attack_4_unselected.gif",
                 "/skill_buttons/attack/attack_4_locked.gif");
-        Defense d4 = new Defense(player, 1.60, d3, 11,
+        Defense d4 = new Defense(player, 0.60, d3, 11,
                 "/skill_buttons/defense/defense_4_selected.gif",
                 "/skill_buttons/defense/defense_4_unselected.gif",
                 "/skill_buttons/defense/defense_4_locked.gif");
@@ -81,11 +81,11 @@ public class SkillTree {
                 "/skill_buttons/movement/movement_5_selected.gif",
                 "/skill_buttons/movement/movement_5_unselected.gif",
                 "/skill_buttons/movement/movement_5_locked.gif");
-        Attack a5 = new Attack(player, 1.75, a4, 13,
+        Attack a5 = new Attack(player, 0.75, a4, 13,
                 "/skill_buttons/attack/attack_5_selected.gif",
                 "/skill_buttons/attack/attack_5_unselected.gif",
                 "/skill_buttons/attack/attack_5_locked.gif");
-        Defense d5 = new Defense(player, 1.75, d4, 14,
+        Defense d5 = new Defense(player, 0.75, d4, 14,
                 "/skill_buttons/defense/defense_5_selected.gif",
                 "/skill_buttons/defense/defense_5_unselected.gif",
                 "/skill_buttons/defense/defense_5_locked.gif");
