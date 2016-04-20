@@ -42,17 +42,17 @@ public class AttackProcessor {
         String filePath = makeFileFrom(codeWindow.getText());
         compile(filePath);
         run();
+        levelState.getGamePanel().setInterrupted(false);
+        synchronized (Game.panel) {
+            Game.panel.notify();
+        }
         if (codeWasSuccessFull()) {
-            levelState.getGamePanel().setInterrupted(false);
-            synchronized (Game.panel) {
-                Game.panel.notify();
-            }
             levelState.getPlayer().setAttacking();
         }
     }
 
     private boolean codeWasSuccessFull() {
-        return true;
+        return false;
     }
 
     public LevelState getLevelState() {
@@ -73,28 +73,23 @@ public class AttackProcessor {
     }
 
     private String getClassName(String text) {
-        boolean inBlockComment = false;
         String[] lines = text.split("\n");
         String classDeclerationLine = "";
         for (String line : lines){
-            if (line.startsWith("//")){
-                //do nothing;
-            } else if (line.contains("/*")){
-                inBlockComment = true;
-            } else if (line.contains("*/")){
-                inBlockComment = false;
-            } else if (!inBlockComment){
+            if (line.contains("class")) {
                 classDeclerationLine = line;
             }
         }
-        String[] words = classDeclerationLine.split(" ");
-        String className = "";
-        for (String word : words){
-            if (!isKeyword(word)){
-                className = word.replace("{", "").replace("}", "");
+        System.out.println(classDeclerationLine);
+        String[] words = classDeclerationLine.split("\\s");
+        int i = 0;
+        while (i < words.length){
+            if (!isKeyword(words[i])){
+                break;
             }
+            i++;
         }
-        return className;
+        return words[i].replace("{", "").replace("}", "");
     }
 
     private static boolean isKeyword(String word) {
