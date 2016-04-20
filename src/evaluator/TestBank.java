@@ -8,6 +8,7 @@ import entity.Player;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -46,8 +47,12 @@ public class TestBank {
     }
 
     private String getRandomTest() {
-       return  ((List<String>) testAnswerMap.keySet())
-               .get(new Random().nextInt(testAnswerMap.size()));
+        List<String> keys = new ArrayList<>(testAnswerMap.keySet());
+       return  keys.get(new Random().nextInt(testAnswerMap.size()));
+    }
+
+    public String getAnswer(String prompt){
+        return testAnswerMap.get(prompt);
     }
 
 

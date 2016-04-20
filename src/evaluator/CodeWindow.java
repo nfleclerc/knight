@@ -4,7 +4,9 @@
 
 package evaluator;
 
+import entity.Player;
 import gameStates.GameStateManager;
+import gameStates.LevelState;
 import main.Game;
 import main.GamePanel;
 import main.SubWindowManager;
@@ -40,10 +42,12 @@ public class CodeWindow extends GamePanel implements ActionListener{
     private static final int SCALE = GamePanel.SCALE - 1;
     private AttackProcessor attackProcessor;
     private boolean unclicked;
+    private String prompt;
 
-    public CodeWindow(AttackProcessor attackProcessor){
+    public CodeWindow(Player player, AttackProcessor attackProcessor){
         this.attackProcessor = attackProcessor;
         this.unclicked = true;
+        prompt = LevelState.testBank.getTest(player);
 
         StyleContext styleContext = new StyleContext();
         Style style = styleContext.getStyle(StyleContext.DEFAULT_STYLE);
@@ -61,6 +65,7 @@ public class CodeWindow extends GamePanel implements ActionListener{
         };
         editor.setFont(new Font("Courier New", Font.PLAIN, 15));
         editor.setOpaque(false);
+        editor.setText(prompt);
 
         JScrollPane scrollingEditor = new JScrollPane(editor);
         scrollingEditor.setPreferredSize(new Dimension(WIDTH * SCALE - 20, HEIGHT * SCALE - 80));

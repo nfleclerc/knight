@@ -6,6 +6,7 @@ package gameStates;
 
 import audio.AudioPlayer;
 import effects.Explosion;
+import evaluator.TestBank;
 import hud.HUD;
 import entity.Player;
 import entity.enemies.Enemy;
@@ -46,6 +47,8 @@ public abstract class LevelState extends GameState{
     protected boolean musicStarted;
     protected Rain rain;
     protected Snow snow;
+
+    public static TestBank testBank = new TestBank();
 
     @Override
     public void update() {

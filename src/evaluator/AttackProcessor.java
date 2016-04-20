@@ -32,7 +32,7 @@ public class AttackProcessor {
         this.levelState = levelState;
         if (levelState.getPlayer().enemyInRange(levelState.getEnemies())){
             levelState.getGamePanel().setInterrupted(true);
-            codeWindow = new CodeWindow(this);
+            codeWindow = new CodeWindow(levelState.getPlayer(), this);
         } else {
             levelState.getPlayer().setAttacking();
         }
@@ -73,15 +73,28 @@ public class AttackProcessor {
     }
 
     private String getClassName(String text) {
-        String[] words = text.split("\\s");
-        int i = 0;
-        while (i < words.length){
-            if (!isKeyword(words[i])){
-                break;
+        boolean inBlockComment = false;
+        String[] lines = text.split("\n");
+        String classDeclerationLine = "";
+        for (String line : lines){
+            if (line.startsWith("//")){
+                //do nothing;
+            } else if (line.contains("/*")){
+                inBlockComment = true;
+            } else if (line.contains("*/")){
+                inBlockComment = false;
+            } else if (!inBlockComment){
+                classDeclerationLine = line;
             }
-            i++;
         }
-        return words[i];
+        String[] words = classDeclerationLine.split(" ");
+        String className = "";
+        for (String word : words){
+            if (!isKeyword(word)){
+                className = word.replace("{", "").replace("}", "");
+            }
+        }
+        return className;
     }
 
     private static boolean isKeyword(String word) {
