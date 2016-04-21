@@ -80,6 +80,8 @@ public class CreditState extends GameState {
                 "\n" +
                 "Art Design\n" +
                 "\n" +
+                "Non-commissioned Art\n" +
+                "\n" +
                 "Tileset - Jordan Trudgett\n" +
                 "Mountain Background - ansimuz\n" +
                 "Loading Background - ansimuz\n" +
@@ -94,19 +96,21 @@ public class CreditState extends GameState {
                 "Skeleton Knight Sprites - sonild\n" +
                 "Demon Sprites - Redshrike and William.Thomsonj\n" +
                 "Heart Sprite - ForeignGuyMike\n" +
-                "Fipps Font - pheist" +
+                "Fipps Font - pheist\n" +
                 "Snow - Dave Sutton\n" +
                 "\n" +
                 "The above art has been adapted from its original\n" +
                 "form. The owner of each piece does not endorse\n" +
                 "its use in this project.\n" +
                 "\n" +
+                "Commissioned Art\n" +
+                "\n" +
                 "Javar Sprites - Chase Corpus\n" +
                 "Dragon Sprites - Chase Corpus\n" +
                 "Python Sprites - Chase Corpus\n" +
                 "Yeti Sprites - Chase Corpus\n" +
                 "\n" +
-                "All other art by Nathaniel Leclerc and Brian Sherman\n" +
+                "All other art by Nathaniel Leclerc\n" +
                 "\n" +
                 "\n" +
                 "Sound Design\n" +
@@ -129,10 +133,11 @@ public class CreditState extends GameState {
                 "\n" +
                 "Special Thanks\n" +
                 "\n" +
+                "Ella Perry\n" +
                 "Fred Li\n" +
                 "Kristin Wilinkiewicz\n" +
                 "Gavin-Rae Barnaby\n" +
-                "Ella Perry\n" +
+                "Lance Graul\n" +
                 "\n" +
                 "\n" +
                 "\n" +
