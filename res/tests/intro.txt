@@ -2,17 +2,18 @@
 
 Since you're fighting your first enemy, I've decided to help you out and provide you the code to hack it. Just hit the Attack Button when you're ready, and the code will stream straight from your sword into the enemy! As you make progress on your journey, your enemies will get more difficult and you'll need more complex code to hack them. If you ever get too stuck, you can press 'H' and I'll give you all the tips I know. You're our best knight Ruby; I expect that your knowledge will soon outgrow even mine. Good Luck; you'll need it. The Prince is counting on you to rescue him. The whole kingdom is counting on you.
 
-The code below is similar to what you'll have to write in the future. All classes in Java must be declared as they are below. In your adventure, all classes will be public and all of your code will go in the main method.
+The code below is similar to what you'll have to write in the future. All classes in Java must be declared as they are below. In your adventure, all classes will be public and all of your code will go in the attack method.
 
 - Queen Sharp */
 
 public class RescueThePrince {
 
-	public static void main(String[] args){
-		/* This is a comment.
-		Comments are not checked by the compiler
-		and will not affect the program.
-		In future fights your code
-		will all go here */
+	public String attack(String[] args){
+	    /* In the future you will write
+	    all of your own code! It will have a
+	    similar structure to the following
+	    and always return a String. A String
+	    is denoted by double quotes in Java. */
+        return "Rescue The Prince, Ruby!";
 	}
 }

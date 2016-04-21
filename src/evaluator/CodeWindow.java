@@ -42,12 +42,10 @@ public class CodeWindow extends GamePanel implements ActionListener{
     private static final int SCALE = GamePanel.SCALE - 1;
     private AttackProcessor attackProcessor;
     private boolean unclicked;
-    private String prompt;
 
-    public CodeWindow(Player player, AttackProcessor attackProcessor){
+    public CodeWindow(String prompt, AttackProcessor attackProcessor){
         this.attackProcessor = attackProcessor;
         this.unclicked = true;
-        prompt = LevelState.testBank.getTest(player);
 
         StyleContext styleContext = new StyleContext();
         Style style = styleContext.getStyle(StyleContext.DEFAULT_STYLE);
@@ -56,16 +54,15 @@ public class CodeWindow extends GamePanel implements ActionListener{
         StyleConstants.setForeground(constantWidthStyle, new Color(176, 0, 72));
         StyleConstants.setBold(constantWidthStyle, true);
 
-        editor = new JTextPane(new Highlighter(style, constantWidthStyle)) {
-            @Override
-            protected void paintComponent(Graphics g) {
-                textbg.draw((Graphics2D) g);
-                super.paintComponent(g);
-            }
-        };
+        editor = new JTextPane(new Highlighter(style, constantWidthStyle));
         editor.setFont(new Font("Courier New", Font.PLAIN, 15));
         editor.setOpaque(false);
-        editor.setText(prompt);
+
+        if (attackProcessor.getLevelState().getPlayer().getXP() > 0) {
+            editor.setText(prompt + LevelState.testBank.getCode());
+        } else {
+            editor.setText(prompt);
+        }
 
         JScrollPane scrollingEditor = new JScrollPane(editor);
         scrollingEditor.setPreferredSize(new Dimension(WIDTH * SCALE - 20, HEIGHT * SCALE - 80));
@@ -136,7 +133,7 @@ public class CodeWindow extends GamePanel implements ActionListener{
     public void init() {
         image = new BufferedImage(GamePanel.WIDTH, GamePanel.HEIGHT, BufferedImage.TYPE_INT_RGB);
         g = (Graphics2D) image.getGraphics();
-        setBackgroundByLevel();
+        bg = new Background("/backgrounds/mountainbg_attackwindow.gif", 0);
         running = true;
     }
 
@@ -148,18 +145,6 @@ public class CodeWindow extends GamePanel implements ActionListener{
     @Override
     public int getYInset(){
         return 50;
-    }
-
-    private void setBackgroundByLevel(){
-        switch (attackProcessor.getLevelState()
-                .getGameStateManager().getCurrentState()){
-            case GameStateManager.WORLDSTATE:
-                bg = new Background("/backgrounds/mountainbg_attackwindow.gif", 1);
-                textbg = new Background("/backgrounds/mountain_textwindow.gif", 1);
-                break;
-            default:
-
-        }
     }
 
     @Override

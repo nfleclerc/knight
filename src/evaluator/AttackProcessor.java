@@ -5,6 +5,7 @@
 package evaluator;
 
 import gameStates.LevelState;
+import gameStates.WorldState;
 import main.Game;
 import messages.Message;
 import messages.MessageFactory;
@@ -13,6 +14,11 @@ import javax.tools.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,14 +33,16 @@ public class AttackProcessor {
     CodeWindow codeWindow;
     Class<?> compiledClass;
     private String className;
-    private boolean successfulRun = true;
+    private boolean successfulRun;
     private boolean successfulCompilation;
+    private String prompt;
 
     public AttackProcessor(LevelState levelState){
         this.levelState = levelState;
+        prompt = LevelState.testBank.getTest(levelState.getPlayer());
         if (levelState.getPlayer().enemyInRange(levelState.getEnemies())){
             levelState.getGamePanel().setInterrupted(true);
-            codeWindow = new CodeWindow(levelState.getPlayer(), this);
+            codeWindow = new CodeWindow(prompt, this);
         } else {
             levelState.getPlayer().setAttacking();
         }
@@ -43,7 +51,9 @@ public class AttackProcessor {
     public synchronized void processClick() {
         String filePath = makeFileFrom(codeWindow.getText());
         compile(filePath);
-        run();
+        if (successfulCompilation) {
+            run();
+        }
         levelState.getGamePanel().setInterrupted(false);
         synchronized (Game.panel) {
             Game.panel.notify();
@@ -82,7 +92,6 @@ public class AttackProcessor {
                 classDeclarationLine = line;
             }
         }
-        System.out.println(classDeclarationLine);
         String[] words = classDeclarationLine.split("\\s");
         int i = 0;
         while (i < words.length){
@@ -124,10 +133,6 @@ public class AttackProcessor {
         final Iterable<String> options = Arrays.asList("-d", classPath);
         successfulCompilation = compiler.getTask(null, fileManager,
                 diagnosticsCollector, options, null, sourceFiles).call();
-        for (JavaFileObject file : sourceFiles){
-            System.out.println(file.getName());
-        }
-        Class compiledClass = null;
         try {
             if (!successfulCompilation) {
                 List<Diagnostic<? extends JavaFileObject>> diagnostics = diagnosticsCollector.getDiagnostics();
@@ -135,6 +140,11 @@ public class AttackProcessor {
                     MessageFactory.getInstance().createMessage(diagnostic.getMessage(null),
                             Message.MessageType.COMPILE_ERROR);
                 }
+            } else {
+                ClassLoader cl = new URLClassLoader(
+                        new URL[]{new File(classPath).toURI().toURL()});
+                compiledClass = cl.loadClass((className));
+                System.out.println(compiledClass);
             }
             fileManager.close();
         } catch (Exception e) {
@@ -145,8 +155,30 @@ public class AttackProcessor {
 
     public void run(){
         try {
-            Process process = new ProcessBuilder(("AKnightOfCode/Classes/" + className).replace("/", ".")).start();
-        } catch (Exception e){
+            Method m = compiledClass.getMethod("attack", String[].class);
+            String result =
+                    String.valueOf(m.invoke(compiledClass.newInstance(), (Object) new String[]{}));
+            String answer = LevelState.testBank.getAnswer(prompt);
+            if (levelState.getPlayer().getXP() > 0) {
+                if (answer.trim().toLowerCase()
+                        .equals(result.trim().toLowerCase())) {
+                    successfulRun = true;
+                } else {
+                    successfulRun = false;
+                    MessageFactory.getInstance().createMessage("Correct Answer: " + answer,
+                            Message.MessageType.RUNTIME_ERROR
+                    );
+                }
+            } else {
+                successfulRun = true;
+            }
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
     }
