@@ -190,6 +190,7 @@ public abstract class LevelState extends GameState{
                 break;
             case KeyEvent.VK_SPACE:
                 if (!player.isDead()) {
+                    MessageFactory.getInstance().flushOutput();
                     new AttackProcessor(this);
                 }
                 break;

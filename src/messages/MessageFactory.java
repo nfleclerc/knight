@@ -65,4 +65,9 @@ public class MessageFactory {
         messagesToDisplay.clear();
     }
 
+    public void flushOutput(){
+        messagesToDisplay.removeIf(message -> message.getType() == Message.MessageType.COMPILE_ERROR
+                || message.getType() == Message.MessageType.RUNTIME_ERROR);
+    }
+
 }

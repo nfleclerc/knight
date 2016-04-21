@@ -27,16 +27,9 @@ import java.awt.image.BufferedImage;
  */
 public class CodeWindow extends GamePanel implements ActionListener{
 
-    private BufferedImage image;
-    private Graphics2D g;
-    private boolean running;
-    private int FPS = 60;
-    private long targetTime = 1000 / FPS;
     private JTextPane editor;
     private JButton button;
     private JFrame window;
-    private Background bg;
-    private Background textbg;
     private Background unclickedbg;
     private Background clickedbg;
     private static final int SCALE = GamePanel.SCALE - 1;
@@ -118,23 +111,17 @@ public class CodeWindow extends GamePanel implements ActionListener{
         setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
         setFocusable(true);
         requestFocus();
+        setOpaque(false);
         window = new JFrame("Write Code to Attack!");
         window.setUndecorated(true);
-        window.setLocation(Game.window.getX() + getXInset(), Game.window.getY() + getYInset());
+        window.setLocation(Game.window.getX() + getXInset(), Game.window.getY() + getYInset() + 20);
         window.setContentPane(this);
+        window.setBackground(new Color(0, 0, 0, 0));
         window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         window.setResizable(false);
         window.pack();
         SubWindowManager.setAsSubWindow(window);
         window.setVisible(true);
-    }
-
-    @Override
-    public void init() {
-        image = new BufferedImage(GamePanel.WIDTH, GamePanel.HEIGHT, BufferedImage.TYPE_INT_RGB);
-        g = (Graphics2D) image.getGraphics();
-        bg = new Background("/backgrounds/mountainbg_attackwindow.gif", 0);
-        running = true;
     }
 
     @Override
@@ -162,13 +149,6 @@ public class CodeWindow extends GamePanel implements ActionListener{
         //more nada
     }
 
-    @Override
-    public void drawToScreen(){
-        Graphics g2 = getGraphics();
-        g2.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
-        g2.dispose();
-    }
-
     public String getText(){
         return editor.getText();
     }
@@ -180,12 +160,4 @@ public class CodeWindow extends GamePanel implements ActionListener{
         window.dispose();
     }
 
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (bg != null) {
-            bg.draw((Graphics2D) g);
-        }
-    }
 }
