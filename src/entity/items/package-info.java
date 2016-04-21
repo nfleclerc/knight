@@ -15,5 +15,4 @@
  *
  */
 
-@Deprecated
 package entity.items;

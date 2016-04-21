@@ -1,7 +1,4 @@
 package main;
-
-import com.sun.xml.internal.messaging.saaj.soap.JpegDataContentHandler;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;

@@ -9,14 +9,11 @@ import entity.Player;
 import gameStates.GameStateManager;
 import messages.Message;
 import messages.MessageFactory;
-import org.apache.commons.io.FileUtils;
-import sun.misc.IOUtils;
+import org.apache.commons.io.IOUtils;
 
 import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.io.*;
-import java.util.Arrays;
 
 /**
  * Created by nathaniel on 4/16/16.
@@ -46,7 +43,7 @@ public class Loader {
             Cipher desCipher = Cipher.getInstance("DES");
 
             desCipher.init(Cipher.DECRYPT_MODE, key);
-            byte[] textDecrypted = desCipher.doFinal(org.apache.commons.io.IOUtils.toByteArray(in));
+            byte[] textDecrypted = desCipher.doFinal(IOUtils.toByteArray(in));
 
             String[] attributes = new String(textDecrypted).split("\n");
 
