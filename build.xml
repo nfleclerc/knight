@@ -1,4 +1,4 @@
-<project name="knight" basedir="." default="clean-run">
+<project name="knight" basedir="." default="run">
 
     <property name="src.dir"     value="src"/>
     <property name="bin.dir"     value="bin"/>
@@ -21,8 +21,7 @@
 
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac includeantruntime="true" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="lib.jars">
-        </javac>
+        <javac includeantruntime="true" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="lib.jars"/>
     </target>
 
     <target name="jar" depends="compile">
@@ -39,7 +38,7 @@
 
     <path id="application" location="${jar.dir}/${ant.project.name}.jar"/>
 
-    <target name="clean-build" depends="clean,jar,doc"/>
+    <target name="clean-build" depends="clean,jar"/>
 
     <target name="clean-run" depends="clean-build, run"/>
 
