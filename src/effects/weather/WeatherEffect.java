@@ -2,7 +2,7 @@
  * Copyright (c) 2016.
  */
 
-package weather;
+package effects.weather;
 
 import effects.Animation;
 

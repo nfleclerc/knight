@@ -11,8 +11,8 @@ import entity.Player;
 import messages.MessageFactory;
 import tileMap.Background;
 import tileMap.TileMap;
-import weather.Rain;
-import weather.Snow;
+import effects.weather.Rain;
+import effects.weather.Snow;
 
 import java.awt.*;
 import java.util.ArrayList;

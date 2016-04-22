@@ -7,7 +7,7 @@ import messages.MessageFactory;
 import save.Loader;
 import tileMap.Background;
 import tileMap.TileMap;
-import weather.Rain;
+import effects.weather.Rain;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

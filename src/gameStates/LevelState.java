@@ -12,7 +12,6 @@ import entity.Player;
 import entity.enemies.Enemy;
 import entity.items.Item;
 import evaluator.AttackProcessor;
-import main.Game;
 import main.GamePanel;
 import messages.Message;
 import messages.MessageFactory;
@@ -21,8 +20,8 @@ import save.Saver;
 import skilltree.SkillDisplay;
 import tileMap.Background;
 import tileMap.TileMap;
-import weather.Rain;
-import weather.Snow;
+import effects.weather.Rain;
+import effects.weather.Snow;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

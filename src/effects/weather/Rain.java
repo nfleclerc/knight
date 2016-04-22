@@ -2,7 +2,7 @@
  * Copyright (c) 2016.
  */
 
-package weather;
+package effects.weather;
 
 import effects.Animation;
 import main.GamePanel;
@@ -23,7 +23,7 @@ public class Rain extends WeatherEffect {
         try {
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
-                            "/weather/rain.gif"
+                            "/effects/weather/rain.gif"
                     )
             );
 
