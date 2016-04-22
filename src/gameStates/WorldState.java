@@ -55,7 +55,8 @@ public class WorldState extends LevelState {
         player = new Player(tileMap);
 
         //correct starting loc 52800 1280
-        player.setPosition(7000, 1200);
+        //player.setPosition(52800, 1280);
+        player.setPosition(36365, 1410);
 
         hud = new HUD(player);
 
@@ -524,6 +525,10 @@ public class WorldState extends LevelState {
         Yeti yeti = new Yeti(tileMap, player);
         yeti.setPosition(18716, 1350);
         enemies.add(yeti);
+
+        Python python = new Python(tileMap, player);
+        python.setPosition(35795, 1380);
+        enemies.add(python);
 
 
         Dragon dragon = new Dragon(tileMap, player);

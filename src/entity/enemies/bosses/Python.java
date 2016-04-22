@@ -22,15 +22,15 @@ public class Python extends Enemy {
 
         this.dropType = null;
 
-        moveSpeed = 0.0;
-        maxSpeed = 0.0;
+        moveSpeed = 0.2;
+        maxSpeed = 3.0;
         fallSpeed = 0.8;
         maxFallSpeed = 1.8;
 
         width = 240;
         height = 120;
         cWidth = 240;
-        cHeight = 115;
+        cHeight = 120;
 
         health = maxHealth = 50;
         xpWorth = 100;
@@ -60,7 +60,7 @@ public class Python extends Enemy {
 
         animation = new Animation();
         animation.setFrames(sprites);
-        animation.setDelay(400);
+        animation.setDelay(200);
 
         right = true;
         facingRight = true;
