@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 /**
- * Created by nathaniel on 4/17/16.
+ * Creates a new snow effect
  */
 public class Snow  extends WeatherEffect{
 
@@ -20,6 +20,7 @@ public class Snow  extends WeatherEffect{
             int width = GamePanel.WIDTH;
             int height = GamePanel.HEIGHT;
 
+            //reads in the snow frames
             try {
                 BufferedImage spriteSheet = ImageIO.read(
                         getClass().getResourceAsStream(
@@ -41,6 +42,8 @@ public class Snow  extends WeatherEffect{
                 e.printStackTrace();
             }
 
+            //reduces the transparency of each of the frames to look better
+            //in a nighttime setting
             for (int i = 0; i < frames.length; i++) {
                 frames[i] = makeTransparent(frames[i], 0.6F);
             }

@@ -29,6 +29,7 @@ public abstract class Enemy extends MapObject {
     public Enemy(TileMap tm, Player player){
         super(tm);
         this.player = player;
+        damage = 1;
     }
 
     public boolean isDead() {

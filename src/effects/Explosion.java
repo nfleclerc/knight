@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * Created by nathaniel on 2/22/16.
+ * Creates a new explosion to play when an enemy is downed
  */
 public class Explosion {
 
@@ -22,6 +22,11 @@ public class Explosion {
 
     private boolean remove;
 
+    /**
+     * Create an explosion at the given coordinates
+     * @param x the x-coordinate
+     * @param y the y-coordinate
+     */
     public Explosion(int x, int y){
         this.x = x;
         this.y = y;
@@ -29,6 +34,7 @@ public class Explosion {
         width = 30;
         height = 30;
 
+        //read in the sprites
         try {
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
@@ -55,6 +61,9 @@ public class Explosion {
         animation.setDelay(70);
     }
 
+    /**
+     * Updates the animation. If it has played once, it should be removed
+     */
     public void update(){
         animation.update();
         if(animation.hasPlayedOnce()){
@@ -62,15 +71,28 @@ public class Explosion {
         }
     }
 
+    /**
+     * Returns whether or not this explosion should be removed or not
+     * @return whether or not this explosion should be removed or not
+     */
     public boolean shouldRemove() {
         return remove;
     }
 
+    /**
+     * Sets the map location of this explosion
+     * @param x the x-coordinate
+     * @param y the y-coordinate
+     */
     public void setMapPostion(int x, int y){
         xmap = x;
         ymap = y;
     }
 
+    /**
+     * Draws this explosion
+     * @param g the graphics of the screen
+     */
     public void draw(Graphics2D g){
         g.drawImage(animation.getImage(),
                 x + xmap - width / 2,

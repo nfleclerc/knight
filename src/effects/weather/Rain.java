@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 /**
- * Created by nathaniel on 4/17/16.
+ * Creates a new rain background effect
  */
 public class Rain extends WeatherEffect {
 
@@ -20,6 +20,7 @@ public class Rain extends WeatherEffect {
         int width = GamePanel.WIDTH;
         int height = GamePanel.HEIGHT;
 
+        //read in the rain frames
         try {
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
@@ -41,6 +42,8 @@ public class Rain extends WeatherEffect {
             e.printStackTrace();
         }
 
+        //decrease the transparency of each of the frames, making them
+        //appear better over the dark nighttime background
         for (int i = 0; i < frames.length; i++) {
             frames[i] = makeTransparent(frames[i], 0.2F);
         }
