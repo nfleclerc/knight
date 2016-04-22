@@ -1,10 +1,6 @@
 package main;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +35,7 @@ public class Game{
                         GamePanel.HEIGHT * GamePanel.SCALE / 2);
             }
         };
-        window.addComponentListener(new SubWindowManager());
+        window.addComponentListener(new WindowManager());
         window.setUndecorated(true);
         panel = new GamePanel();
         window.setContentPane(panel);
@@ -47,7 +43,7 @@ public class Game{
         window.setResizable(false);
         window.pack();
         List<Image> icons = new ArrayList<>();
-        icons.add(new ImageIcon("res/sprites/player/ruby.gif").getImage());
+        icons.add(new ImageIcon("res/spritesheets/player/ruby.gif").getImage());
         window.setIconImages(icons);
         window.setLocation((int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2 -
                         GamePanel.WIDTH  * GamePanel.SCALE / 2,

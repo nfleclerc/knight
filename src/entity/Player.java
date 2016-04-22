@@ -4,7 +4,6 @@ package entity;
 import audio.AudioPlayer;
 import effects.Animation;
 import entity.enemies.Enemy;
-import gameStates.GameState;
 import gameStates.GameStateManager;
 import gear.*;
 import gear.boots.SimpleGreaves;
@@ -13,7 +12,6 @@ import gear.gloves.SimpleGauntlets;
 import gear.helmets.SimpleHelm;
 import gear.weapons.SimpleSword;
 import entity.items.Item;
-import main.GamePanel;
 import messages.Message;
 import messages.MessageFactory;
 import save.Saver;
@@ -108,12 +106,12 @@ public class Player extends MapObject {
         health = maxHealth = 12;
 
 
-        // load sprites
+        // load spritesheets
         try {
 
             BufferedImage spritesheet = ImageIO.read(
                     getClass().getResourceAsStream(
-                            "/sprites/player/knightsprites.gif"
+                            "/spritesheets/player/knightsprites.gif"
                     )
             );
 
@@ -212,12 +210,12 @@ public class Player extends MapObject {
         }
 
 
-        // load sprites
+        // load spritesheets
         try {
 
             BufferedImage spritesheet = ImageIO.read(
                     getClass().getResourceAsStream(
-                            "/sprites/player/knightsprites.gif"
+                            "/spritesheets/player/knightsprites.gif"
                     )
             );
 

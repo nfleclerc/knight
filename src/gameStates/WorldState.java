@@ -5,7 +5,18 @@
 package gameStates;
 
 import audio.AudioPlayer;
+import entity.enemies.bosses.Dragon;
+import entity.enemies.bosses.Javar;
+import entity.enemies.bugs.BugBoss;
+import entity.enemies.bugs.RoboSpider;
+import entity.enemies.bugs.Wasp;
+import entity.enemies.castle.Ghost;
+import entity.enemies.castle.Knight;
+import entity.enemies.cave.Demon;
+import entity.enemies.cave.Rat;
 import entity.enemies.*;
+import entity.enemies.snow.Bat;
+import entity.enemies.snow.Moose;
 import hud.HUD;
 import entity.Player;
 import messages.MessageFactory;
@@ -26,10 +37,10 @@ public class WorldState extends LevelState {
     public WorldState(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
         tileMap = new TileMap(30);
-        tileMap.loadTiles("/tilesets/world_dark.gif");
-        tileMap.loadMap("/maps/darkworld.map");
+        tileMap.loadTiles("/tileset/world_dark.gif");
+        tileMap.loadMap("/map/darkworld.map");
         tileMap.setPosition(0, 0);
-        helpBg = new Background("/backgrounds/helpbg.gif", 0);
+        helpBg = new Background("/background/helpbg.gif", 0);
         init();
     }
 
@@ -37,7 +48,7 @@ public class WorldState extends LevelState {
     public void init() {
 
 
-        bg = new Background("/backgrounds/mountainbg.gif", 0.1);
+        bg = new Background("/background/mountainbg.gif", 0.1);
 
         player = new Player(tileMap);
 
@@ -67,7 +78,7 @@ public class WorldState extends LevelState {
     @Override
     public void load(Player player) {
 
-        bg = new Background("/backgrounds/mountainbg.gif", 0.1);
+        bg = new Background("/background/mountainbg.gif", 0.1);
 
         this.player = player;
 

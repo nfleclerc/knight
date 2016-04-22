@@ -4,12 +4,10 @@
 
 package evaluator;
 
-import entity.Player;
-import gameStates.GameStateManager;
 import gameStates.LevelState;
 import main.Game;
 import main.GamePanel;
-import main.SubWindowManager;
+import main.WindowManager;
 import tileMap.Background;
 
 import javax.swing.*;
@@ -18,7 +16,6 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by nathaniel on 3/9/16.
@@ -62,8 +59,8 @@ public class CodeWindow extends GamePanel implements ActionListener{
         scrollingEditor.setOpaque(false);
         add(scrollingEditor, BorderLayout.CENTER);
 
-        clickedbg = new Background("/backgrounds/button_clicked.gif", 1);
-        unclickedbg = new Background("/backgrounds/button_unclicked.gif", 1);
+        clickedbg = new Background("/background/button_clicked.gif", 1);
+        unclickedbg = new Background("/background/button_unclicked.gif", 1);
         button = new JButton("Attack!") {
             @Override
             protected void paintComponent(Graphics g) {
@@ -120,7 +117,7 @@ public class CodeWindow extends GamePanel implements ActionListener{
         window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         window.setResizable(false);
         window.pack();
-        SubWindowManager.setAsSubWindow(window);
+        WindowManager.setAsSubWindow(window);
         window.setVisible(true);
     }
 
@@ -156,7 +153,7 @@ public class CodeWindow extends GamePanel implements ActionListener{
     @Override
     public synchronized void actionPerformed(ActionEvent e) {
         attackProcessor.processClick();
-        SubWindowManager.removeSubWindow();
+        WindowManager.removeSubWindow();
         window.dispose();
     }
 

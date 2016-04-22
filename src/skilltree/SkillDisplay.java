@@ -9,7 +9,7 @@ import entity.Player;
 import gameStates.LevelState;
 import main.Game;
 import main.GamePanel;
-import main.SubWindowManager;
+import main.WindowManager;
 import tileMap.Background;
 
 import javax.swing.*;
@@ -40,7 +40,7 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         GamePanel.interrupted = true;
         this.levelState = levelState;
         skillMusic = new AudioPlayer("/music/Realm-of-Fantasy_Looping.mp3");
-        bg = new Background("/backgrounds/skillbg.gif", 1);
+        bg = new Background("/background/skillbg.gif", 1);
 
         this.player = player;
         this.skillTree = player.getSkillTree();
@@ -151,7 +151,7 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         backgroundPanel.add(this, BorderLayout.CENTER);
         backgroundPanel.add(exitPanel, BorderLayout.SOUTH);
         window.setContentPane(backgroundPanel);
-        SubWindowManager.setAsSubWindow(window);
+        WindowManager.setAsSubWindow(window);
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         window.setResizable(false);
         window.pack();
@@ -191,7 +191,7 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         }
         levelState.getBgMusic().loop();
         window.dispose();
-        SubWindowManager.removeSubWindow();
+        WindowManager.removeSubWindow();
     }
 
     @Override
