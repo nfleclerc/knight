@@ -2,9 +2,7 @@ package hud;
 
 import entity.Player;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by nathaniel on 2/21/16.

@@ -5,7 +5,6 @@
 package hud;
 
 import entity.Player;
-import main.Game;
 import main.GamePanel;
 
 import java.awt.*;
