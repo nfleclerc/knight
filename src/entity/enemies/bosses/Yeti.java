@@ -15,32 +15,32 @@ import java.awt.image.BufferedImage;
 /**
  * Created by nathaniel on 4/22/16.
  */
-public class Python extends Enemy {
+public class Yeti extends Enemy{
 
-    public Python(TileMap tm, Player player) {
+    public Yeti(TileMap tm, Player player) {
         super(tm, player);
 
         this.dropType = null;
 
-        moveSpeed = 0.0;
-        maxSpeed = 0.0;
+        moveSpeed = 0.3;
+        maxSpeed = 0.3;
         fallSpeed = 0.8;
         maxFallSpeed = 1.8;
 
         width = 240;
-        height = 120;
+        height = 240;
         cWidth = 240;
-        cHeight = 115;
+        cHeight = 240;
 
-        health = maxHealth = 50;
-        xpWorth = 100;
-        damage = 5;
+        health = maxHealth = 200;
+        xpWorth = 200;
+        damage = 10;
 
         //loadSprites
         try{
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
-                            "/spritesheets/enemies/python.png"
+                            "/spritesheets/enemies/yeti.png"
                     )
             );
 
@@ -60,7 +60,7 @@ public class Python extends Enemy {
 
         animation = new Animation();
         animation.setFrames(sprites);
-        animation.setDelay(400);
+        animation.setDelay(200);
 
         right = true;
         facingRight = true;

@@ -28,7 +28,7 @@ public class Health {
         try {
             for (int i = 0; i < 50; i++) {
                 hearts.add(ImageIO.read(
-                        getClass().getResourceAsStream("/headusupdisplay/heart.gif")));
+                        getClass().getResourceAsStream("/headsupdisplay/heart.gif")));
             }
 
         } catch (Exception e) {

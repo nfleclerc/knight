@@ -7,6 +7,8 @@ package gameStates;
 import audio.AudioPlayer;
 import entity.enemies.bosses.Dragon;
 import entity.enemies.bosses.Javar;
+import entity.enemies.bosses.Python;
+import entity.enemies.bosses.Yeti;
 import entity.enemies.bugs.BugBoss;
 import entity.enemies.bugs.RoboSpider;
 import entity.enemies.bugs.Wasp;
@@ -53,7 +55,7 @@ public class WorldState extends LevelState {
         player = new Player(tileMap);
 
         //correct starting loc 52800 1280
-        player.setPosition(52800, 1280);
+        player.setPosition(7000, 1200);
 
         hud = new HUD(player);
 
@@ -517,6 +519,12 @@ public class WorldState extends LevelState {
         Javar javar = new Javar(tileMap, player);
         javar.setPosition(89502, 1350);
         enemies.add(javar);
+
+
+        Yeti yeti = new Yeti(tileMap, player);
+        yeti.setPosition(18716, 1350);
+        enemies.add(yeti);
+
 
         Dragon dragon = new Dragon(tileMap, player);
         dragon.setPosition(7047, 1260);

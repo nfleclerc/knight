@@ -129,7 +129,7 @@ public abstract class MapObject {
         if (dy < 0) {
             if (topLeft || topRight) {
                 dy = 0;
-                ytemp = currRow * tileSize + cHeight / 2;
+                ytemp = currRow * tileSize + cHeight / 2.0;
             } else {
                 ytemp += dy;
             }
@@ -141,7 +141,7 @@ public abstract class MapObject {
             if (bottomLeft || bottomRight) {
                 dy = 0;
                 falling = false;
-                ytemp = (currRow + 1) * tileSize - cHeight / 2;
+                ytemp = (currRow + 1) * tileSize - cHeight / 2.0;
             } else {
                 ytemp += dy;
             }
