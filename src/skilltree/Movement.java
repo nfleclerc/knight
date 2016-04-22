@@ -2,10 +2,9 @@
  * Copyright (c) 2016.
  */
 
-package skilltree.maurader;
+package skilltree;
 
 import entity.Player;
-import skilltree.Skill;
 
 /**
  * Created by nathaniel on 3/29/16.

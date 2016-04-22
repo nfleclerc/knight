@@ -5,9 +5,6 @@
 package skilltree;
 
 import entity.Player;
-import skilltree.juggernaut.Defense;
-import skilltree.maurader.Movement;
-import skilltree.warrior.Attack;
 
 import java.util.ArrayList;
 import java.util.List;
