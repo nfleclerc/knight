@@ -3,8 +3,6 @@ package tileMap;
 import java.awt.image.BufferedImage;
 
 /**
- * Created by nathaniel on 2/19/16.
- *
  * Represents a single tile in a map.
  */
 public class Tile {

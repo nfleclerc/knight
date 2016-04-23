@@ -10,8 +10,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * Created by nathaniel on 2/19/16.
- *
  * Represents the Tile Map for a given level.
  */
 public class TileMap {
@@ -47,7 +45,7 @@ public class TileMap {
     private int numColToDraw;
 
     /**
-     *
+     * Creates a new tilemap
      * @param tileSize The size of each tile in pixels. Height and Width must be the same.
      */
     public TileMap(int tileSize) {
@@ -173,8 +171,8 @@ public class TileMap {
 
     /**
      * Sets the curent position of the map on the screen.
-     * @param x
-     * @param y
+     * @param x the x-coordinate of the map
+     * @param y the y-coordinate of the map
      */
     public void setPosition(double x, double y){
         this.x += (x - this.x) * tween;
@@ -198,7 +196,7 @@ public class TileMap {
 
     /**
      * Draws the map to the screen.
-     * @param g
+     * @param g the graphics of the screen
      */
     public void draw(Graphics2D g){
         for (int row = rowOffset; row < rowOffset + numRowsToDraw; row++) {
