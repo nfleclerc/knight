@@ -20,7 +20,7 @@ import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
- * Created by nathaniel on 4/4/16.
+ * Displays the skilltree to the screen
  */
 public class SkillDisplay extends GamePanel implements ActionListener {
 
@@ -28,7 +28,6 @@ public class SkillDisplay extends GamePanel implements ActionListener {
     private final Player player;
     private JFrame window;
 
-    private Graphics2D g;
     private JLabel skillpoints;
     private BufferedImage image;
     private Background bg;
@@ -36,26 +35,32 @@ public class SkillDisplay extends GamePanel implements ActionListener {
     private AudioPlayer skillMusic;
 
 
+    /**
+     * Creates a new skilltree for the given levelState and player
+     * @param player the player to which the skilltree belongs
+     * @param levelState the level in which the player exists
+     */
     public SkillDisplay(Player player, LevelState levelState){
+        //pause the rest of the game
         GamePanel.interrupted = true;
         this.levelState = levelState;
         skillMusic = new AudioPlayer("/music/Realm-of-Fantasy_Looping.mp3");
         bg = new Background("/background/skillbg.gif", 1);
-
         this.player = player;
         this.skillTree = player.getSkillTree();
 
+        //set up a gridlayout
         GridLayout grid = new GridLayout(6, 3, 103, 0);
         setLayout(grid);
 
-        JLabel maurader = new JLabel("Marauder");
-        maurader.setHorizontalAlignment(JLabel.CENTER);
-        maurader.setFont(new Font("Fipps", Font.PLAIN, 20));
-        maurader.setForeground(Color.BLACK);
-        maurader.setBackground(new Color(0, 0, 0, 0));
-        maurader.setToolTipText("Increases speed by 15% each rank.");
-
-
+        //set up labels to appear over the jbuttons
+        JLabel nomad = new JLabel("Nomad");
+        nomad.setHorizontalAlignment(JLabel.CENTER);
+        nomad.setFont(new Font("Fipps", Font.PLAIN, 20));
+        nomad.setForeground(Color.BLACK);
+        nomad.setBackground(new Color(0, 0, 0, 0));
+        nomad.setToolTipText("Increases speed by 15% each rank.");
+        
         JLabel warrior = new JLabel("Warrior");
         warrior.setHorizontalAlignment(JLabel.CENTER);
         warrior.setFont(new Font("Fipps", Font.PLAIN, 20));
@@ -69,19 +74,12 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         juggernaut.setForeground(Color.BLACK);
         juggernaut.setBackground(new Color(0, 0, 0, 0));
         juggernaut.setToolTipText("Increases defense by 15% each rank.");
+        
+        add(nomad);
+        add(warrior);
+        add(juggernaut);
 
-
-        Queue<JLabel> labels = new ArrayBlockingQueue<>(3);
-
-        labels.add(maurader);
-        labels.add(warrior);
-        labels.add(juggernaut);
-
-        while (!labels.isEmpty()){
-            add(labels.poll());
-        }
-
-
+        //sets up the panel to tell the user how to exit
         JPanel exitPanel = new JPanel();
         exitPanel.setLayout(new GridLayout(1, 1));
         JLabel exitJLabel = new JLabel("Press Any Button To Go Back");
@@ -91,7 +89,7 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         exitPanel.add(exitJLabel);
         exitPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
-
+        //sets up the panel that displays the number of skillpoints
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new GridLayout(1, 1));
         skillpoints = new JLabel();
@@ -102,12 +100,12 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         titlePanel.add(skillpoints);
         titlePanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
 
+        //adds all the skills in the skilltree to the display
         for (int i = 0; i < skillTree.getSkills().size(); i++) {
             Skill skill = skillTree.getSkillAt(i);
             skill.addActionListener(this);
             add(skill);
         }
-
 
         setFocusable(true);
         requestFocus();
@@ -116,6 +114,7 @@ public class SkillDisplay extends GamePanel implements ActionListener {
                 GamePanel.WIDTH * (SCALE),
                 GamePanel.HEIGHT * (SCALE) - titlePanel.getHeight() - exitPanel.getHeight() - 168
         ));
+        //paints the background
         JPanel backgroundPanel = new JPanel(){
             @Override
             protected void paintComponent(Graphics g) {
@@ -125,18 +124,22 @@ public class SkillDisplay extends GamePanel implements ActionListener {
                 }
             }
         };
+        //creates the window
+        //overwrites the contentpane to be this class.
         window = new JFrame("Skill Tree") {
             @Override
             public Container getContentPane() {
                 return SkillDisplay.this;
             }
         };
+        //makes sure the look is the same accross OSs
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException |
                 UnsupportedLookAndFeelException | IllegalAccessException e) {
             e.printStackTrace();
         }
+        //sets up the window for display
         window.setLocation(Game.window.getX(), Game.window.getY());
         window.setSize(GamePanel.WIDTH * SCALE, GamePanel.HEIGHT * SCALE);
         window.setUndecorated(true);
@@ -160,6 +163,7 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         window.setVisible(true);
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
         player.buySkill(skillTree.getSkillAt(Integer.parseInt(e.getActionCommand())));
@@ -169,11 +173,9 @@ public class SkillDisplay extends GamePanel implements ActionListener {
 
     }
 
-
     @Override
     public void init() {
         image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-        g = (Graphics2D) image.getGraphics();
     }
 
     @Override
@@ -182,6 +184,10 @@ public class SkillDisplay extends GamePanel implements ActionListener {
 
     }
 
+    /**
+     * If a key is pressed, exit the screen and notify the main thread
+     * @param e the key pressed
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         GamePanel.interrupted = false;
@@ -199,6 +205,9 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         //more nada
     }
 
+    /**
+     * Draws the image to the screen
+     */
     @Override
     public void drawToScreen(){
         Graphics g2 = getGraphics();

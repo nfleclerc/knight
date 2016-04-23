@@ -10,18 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by nathaniel on 3/29/16.
+ * Creates the skilltree for the player to use
  */
 public class SkillTree {
 
     private List<Skill> skills;
 
 
-
+    /**
+     * Creates a new skilltree
+     * @param player the player that owns this tree
+     */
     public SkillTree(Player player) {
 
         skills = new ArrayList<>();
 
+        //adds all the skills to the tree
         Movement m1 = new Movement(player, 1.05, null, 0,
                 "/skill_buttons/movement/movement_1_selected.gif",
                 "/skill_buttons/movement/movement_1_unselected.gif",
@@ -109,10 +113,19 @@ public class SkillTree {
 
     }
 
+    /**
+     * Gets the skill at the specified index
+     * @param index where the skill to be turn resides in the skilltree
+     * @return
+     */
     public Skill getSkillAt(int index){
         return skills.get(index);
     }
 
+    /**
+     * Gets the skilltree as a list of skills
+     * @return the list of skills
+     */
     public List<Skill> getSkills(){
         return this.skills;
     }
