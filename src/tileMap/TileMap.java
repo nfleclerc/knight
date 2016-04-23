@@ -88,6 +88,7 @@ public class TileMap {
             InputStream in = getClass().getResourceAsStream(s);
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(in));
+
             numCols = Integer.parseInt(br.readLine());
             numRows = Integer.parseInt(br.readLine());
             map = new int[numRows][numCols];

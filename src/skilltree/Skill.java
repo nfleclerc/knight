@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by nathaniel on 3/29/16.
+ * Creates a new skill for use in the skilltree
  */
 public abstract class Skill extends JButton {
 
@@ -23,8 +23,16 @@ public abstract class Skill extends JButton {
     private Background inactiveBg;
     private Background lockedBg;
 
-
-
+    /**
+     * Creates a new Skill for use in the skilltree
+     * @param player The player that owns this skill
+     * @param index the index of this skill in the skilltree
+     * @param activeBg the background to display while this skill is active
+     * @param inactiveBg the background to display while this skill is
+     *                   available for purchase
+     * @param lockedBg the background to display while this skill is locked to
+     *                 the player
+     */
     public Skill(Player player, int index, String activeBg, String inactiveBg, String lockedBg){
         setContentAreaFilled(false);
         setBorderPainted(false);
@@ -42,16 +50,33 @@ public abstract class Skill extends JButton {
 
     }
 
+    /**
+     * Gets the index of this skill in the skilltree
+     * @return
+     */
     public int getIndex(){
         return this.index;
     }
 
+    /**
+     * If this skill is not active and the previous is active, or
+     * if it is the first in the list, when clicked this skill becomes activated
+     * and applies its bonus to the player
+     */
     public abstract void activate();
 
+    /**
+     * Returns whether or not this skill is active
+     * @return whether or not this skill is active
+     */
     public boolean isActive() {
         return active;
     }
 
+    /**
+     * Returns the previous skill in this tree
+     * @return the previous skill in this tree, or null if it is the first one
+     */
     public Skill getPrevious() {
         return previous;
     }
