@@ -52,6 +52,7 @@ public class CodeWindow extends GamePanel implements ActionListener{
             editor.setText(prompt + LevelState.testBank.getCode());
         } else {
             editor.setText(prompt);
+            editor.setCaretPosition(0);
         }
 
         JScrollPane scrollingEditor = new JScrollPane(editor);
