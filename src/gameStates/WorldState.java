@@ -46,6 +46,9 @@ public class WorldState extends LevelState {
         init();
     }
 
+    /**
+     * Initializes a new world state
+     */
     @Override
     public void init() {
 
@@ -55,13 +58,13 @@ public class WorldState extends LevelState {
         player = new Player(tileMap);
 
         //correct starting loc 52800 1280
-        //player.setPosition(52800, 1280);
-        player.setPosition(36365, 1410);
+        player.setPosition(52800, 1280);
 
         hud = new HUD(player);
 
         loadFrames = 459;
 
+        //places all the enemies on that map
         populateEnemies();
 
         explosions = new ArrayList<>();
@@ -78,6 +81,10 @@ public class WorldState extends LevelState {
 
     }
 
+    /**
+     * loads a new state based on a given player
+     * @param player
+     */
     @Override
     public void load(Player player) {
 

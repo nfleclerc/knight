@@ -5,7 +5,9 @@
 package gear;
 
 /**
- * Created by nathaniel on 3/28/16.
+ *
+ * Creates a new weapon. Houses logic for attack speed and attack damage
+ *
  */
 public abstract class Weapon extends Gear{
 

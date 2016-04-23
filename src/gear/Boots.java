@@ -5,7 +5,7 @@
 package gear;
 
 /**
- * Created by nathaniel on 3/28/16.
+ * Creates a new pair of greaves
  */
 public abstract class Boots extends Gear{
 

@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by nathaniel on 2/18/16.
- *
  * Class to start the game and play it.
  */
 public class Game{
@@ -16,12 +14,13 @@ public class Game{
 
     /**
      * Main method for the game.
-     * @param args
+     * @param args Nothing is passed into this
      */
     public static void main(String... args){
 
 
         window = new JFrame("A Knight of Code") {
+            //creats the splash screen that is displayed while the main menu is loading
             @Override
             public void paint(Graphics g) {
                 g.setColor(Color.BLACK);

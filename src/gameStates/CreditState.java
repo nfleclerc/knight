@@ -145,6 +145,10 @@ public class CreditState extends GameState {
                 "Until Next Time";
     }
 
+    /**
+     * Breaks up a string to be drawn over multiple lines
+     * @param g the graphics of the screen
+     */
     private void drawString(Graphics g) {
         int i= 0;
         for (String line : getCreditReel().split("\n")) {

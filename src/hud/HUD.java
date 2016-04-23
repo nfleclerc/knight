@@ -5,7 +5,7 @@ import entity.Player;
 import java.awt.*;
 
 /**
- * Created by nathaniel on 2/21/16.
+ * Houses all components of the HUD
  */
 public class HUD {
 
@@ -19,6 +19,10 @@ public class HUD {
         this.bar = new XPBar(player);
     }
 
+    /**
+     * Draws all members of the HUD to the screen
+     * @param g the graphics of the screen
+     */
     public void draw(Graphics2D g) {
         health.draw(g);
         levelCounter.draw(g);

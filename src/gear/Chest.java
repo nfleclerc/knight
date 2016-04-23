@@ -5,8 +5,8 @@
 package gear;
 
 /**
- * Created by nathaniel on 3/28/16.
- */
+ * Creates a new breastplate
+ * */
 public class Chest extends Gear{
 
     public Chest(){

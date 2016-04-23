@@ -28,8 +28,9 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 /**
- * Created by nathaniel on 3/10/16.
- */
+ * Houses all the logic for updating or drawing a state. Right now only WorldState extends this class,
+ * but in the future, any levelstate would extend this.
+ * */
 public abstract class LevelState extends GameState{
 
     protected TileMap tileMap;
@@ -49,6 +50,10 @@ public abstract class LevelState extends GameState{
 
     public static TestBank testBank = new TestBank();
 
+    /**
+     * Updates this game state. Only updates it while the player is living.
+     * Also sets the loading screen until the state is ready
+     */
     @Override
     public void update() {
 
@@ -122,6 +127,10 @@ public abstract class LevelState extends GameState{
 
     }
 
+    /**
+     * Draws all the components of this state to the screen
+     * @param g
+     */
     @Override
     public void draw(Graphics2D g) {
 

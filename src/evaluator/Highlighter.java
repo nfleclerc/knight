@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by nathaniel on 3/10/16.
- */
+ * Allows syntax highlighting for all the code editor
+ * */
 public class Highlighter extends DefaultStyledDocument {
 
     private Style style;
@@ -33,6 +33,11 @@ public class Highlighter extends DefaultStyledDocument {
         refresh();
     }
 
+    /**
+     * Refreshes the screen everytime a new character is entered, and tells
+     * the editor what to coloize
+     * @throws BadLocationException
+     */
     private synchronized void refresh() throws BadLocationException {
         String text = getText(0, getLength());
         List<Word> keywords = processWords(text);
@@ -43,6 +48,11 @@ public class Highlighter extends DefaultStyledDocument {
         }
     }
 
+    /**
+     * Process each word in the text
+     * @param text The text to parse and look for highlighting
+     * @return The list of words that need to be highlighted
+     */
     private static  List<Word> processWords(String text) {
         text = text + " ";
         List<Word> keywords = new ArrayList<>();
@@ -72,6 +82,9 @@ public class Highlighter extends DefaultStyledDocument {
         return keywords;
     }
 
+    /**
+     * Represents a word in the text to be parsed
+     */
     private static class Word {
 
         private int position;
@@ -82,6 +95,10 @@ public class Highlighter extends DefaultStyledDocument {
             this.position = position;
         }
 
+        /**
+         * Gets the words position in the text
+         * @return the position of the word
+         */
         public int getPosition() {
             return position;
         }
@@ -90,6 +107,10 @@ public class Highlighter extends DefaultStyledDocument {
             return word;
         }
 
+        /**
+         * Returns weather or not this word is a keyword
+         * @return whether or not this word is a keyword
+         */
         public boolean isKeyword(){
             return(word.trim().equals("private") ||
                     word.trim().equals("public") ||

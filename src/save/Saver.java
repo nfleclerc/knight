@@ -15,16 +15,16 @@ import javax.crypto.SecretKey;
 import java.io.*;
 
 /**
- * Created by nathaniel on 4/16/16.
+ * Saves the game
  */
 public class Saver {
 
     public Saver(Player player, SecretKey key){
 
         String dirPath = "AKnightOfCode/Saves/";
-
         new File(dirPath).mkdirs();
 
+        //concatenates all of the player's attributes to be saved
         String text = (player.getX() + "\n" +
         player.getY() + "\n"+
         player.getSkillPoints() + "\n"+
@@ -41,27 +41,17 @@ public class Saver {
                 .replace(",", "")
                 .replace("\"", ""));
 
-
-
         try (FileOutputStream out = new FileOutputStream(dirPath + "knight.save")){
-
+            //encryptes the file using DES, and writes the file out
             Cipher desCipher = Cipher.getInstance("DES");
-
             byte[] byteText = text.getBytes("UTF8");
-
             desCipher.init(Cipher.ENCRYPT_MODE, key);
-
             out.write(desCipher.doFinal(byteText));
-
             MessageFactory.getInstance().createMessage("Saving...", Message.MessageType.FILEIO);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
     }
-
-
 
 }

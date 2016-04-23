@@ -9,8 +9,8 @@ import main.GamePanel;
 import java.awt.*;
 
 /**
- * Created by nathaniel on 4/12/16.
- */
+ * A message that is displayed to the screen
+ * */
 public class Message implements Comparable<Message>{
 
     private final String message;
@@ -20,6 +20,7 @@ public class Message implements Comparable<Message>{
     private Font font;
     private MessageType type;
 
+    //the different kinds of messaages that can appear on the screen
     public enum MessageType {
 
         RUNTIME_ERROR(new Font("Arial", Font.PLAIN, 12), Color.PINK, 2, "Runtime Error: ", 70),
@@ -65,6 +66,12 @@ public class Message implements Comparable<Message>{
         }
     }
 
+    /**
+     * Creates a new message. Only for use in the MessageFactory class
+     * @param message The actual message to be displayed on the screen. Must be able
+     *                to fit on the screen in one line.
+     * @param type  The type of message
+     */
     protected Message(String message, MessageType type) {
 
         this.message = type.getPrefix() + message;
@@ -75,15 +82,10 @@ public class Message implements Comparable<Message>{
         height = type.getHeight();
     }
 
-    protected Message(String message, MessageType type, int height) {
-
-        this.message = type.getPrefix() + message;
-        priority = type.getPriority();
-        color = type.getColor();
-        font = type.getFont();
-        this.height = height;
-    }
-
+    /**
+     * Draws this message to the screen
+     * @param g the graphics of the screen
+     */
     protected void draw(Graphics2D g){
         g.setFont(font);
         g.setColor(color);
@@ -91,17 +93,17 @@ public class Message implements Comparable<Message>{
         g.drawString(message, GamePanel.WIDTH / 2 - width / 2, height);
     }
 
-    private int getPriority() {
-        return priority;
-    }
-
     public MessageType getType() {
         return type;
     }
 
+    /**
+     * Compares two messages. Message priority is based on its type
+     * @param message the message to compare this message to
+     */
     @Override
     public int compareTo(Message message) {
-        return Integer.compare(this.getPriority(), message.getPriority());
+        return Integer.compare(this.priority, message.priority);
     }
 
     @Override

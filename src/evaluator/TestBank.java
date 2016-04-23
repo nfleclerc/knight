@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by nathaniel on 4/16/16.
- */
+ * Holds all of the prompts used in the game
+ * */
 public class TestBank {
 
     private final HashMap<String, String> testAnswerMap;
@@ -24,6 +24,7 @@ public class TestBank {
     public TestBank(){
         this.testAnswerMap = new HashMap<>();
 
+        //parse the CSV file and put the results into a  a hashmap
         try (BufferedReader br = new BufferedReader(new FileReader("res/tests/tests.csv"))){
             String line;
             while ((line = br.readLine()) != null){
@@ -42,10 +43,20 @@ public class TestBank {
 
     }
 
+    /**
+     * If the player has yet to defeat an enemy, display the intro text.
+     * Otherwise display a prompt at random
+     * @param player The player attacking
+     * @return the prompt to display in the codewindow
+     */
     public String getTest(Player player){
         return player.getXP() == 0 ? intro : getRandomTest();
     }
 
+    /**
+     * The code that is displayed in the codewindow
+     * @return A String representing the code that is displayed in the main window
+     */
     public String getCode() {
         return "\n\npublic class /* Write Class Name Here/* { \n" +
                 "\n" +
@@ -55,11 +66,20 @@ public class TestBank {
                 "}";
     }
 
+    /**
+     * Gets a prompt at random from the map
+     * @return a prompt
+     */
     private String getRandomTest() {
         List<String> keys = new ArrayList<>(testAnswerMap.keySet());
        return  keys.get(new Random().nextInt(testAnswerMap.size()));
     }
 
+    /**
+     * Returns the answer for any given prompt
+     * @param prompt the prompt for which you need an answer
+     * @return the answer
+     */
     public String getAnswer(String prompt){
         System.out.println((testAnswerMap.get(prompt)));
         return testAnswerMap.get(prompt);

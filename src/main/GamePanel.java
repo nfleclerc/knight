@@ -14,8 +14,6 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by nathaniel on 2/18/16.
- *
  * Represents the panel displaying the game.
  */
 public class GamePanel extends JPanel implements Runnable, KeyListener{
@@ -147,10 +145,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 
     }
 
+    /**
+     * The amount this panel should be inset in the x direction
+     */
     public int getXInset(){
         return 0;
     }
 
+    /**
+     * The amount this panel should be inset in the x direction
+     */
     public int getYInset(){
         return 0;
     }
@@ -169,6 +173,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         gameStateManager.keyReleased(e.getKeyCode());
     }
 
+    /**
+     * Tells the main thread to wait
+     * @param interrupted if true the thread should wait until it is notified.
+     */
     public synchronized void setInterrupted(boolean interrupted) {
         this.interrupted = interrupted;
     }

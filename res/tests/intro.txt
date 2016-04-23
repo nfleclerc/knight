@@ -13,7 +13,7 @@ public class RescueThePrince {
 	    all of your own code! It will have a
 	    similar structure to the following
 	    and always return a String. A String
-	    is denoted by double quotes in Java. */
-        return "Rescue The Prince, Ruby!";
+	    is denoted by quotes in Java. */
+            return "Rescue The Prince, Ruby!";
 	}
 }

@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
- * Created by nathaniel on 4/13/16.
+ * The health system
  */
 public class Health {
 
@@ -37,6 +37,11 @@ public class Health {
 
     }
 
+    /**
+     * For each point of health draws a heart. Draws five hearts on a line, before
+     * jumping to the next line. If there is only one point of health left, it will flash and blink rapidly
+     * @param g The graphics of the screen
+     */
     public void draw(Graphics2D g){
 
         int i = 0;

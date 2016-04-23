@@ -10,8 +10,8 @@ import main.GamePanel;
 import java.awt.*;
 
 /**
- * Created by nathaniel on 4/13/16.
- */
+ * Displays the player's current level
+ * */
 public class LevelCounter {
 
     private final Player player;
@@ -24,6 +24,10 @@ public class LevelCounter {
     }
 
 
+    /**
+     * Draws the player's current level to the top of the screen.
+     * @param g the graphics of the screen
+     */
     public void draw(Graphics2D g){
         g.setColor(Color.WHITE);
         g.setFont(font);

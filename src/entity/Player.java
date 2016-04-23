@@ -93,17 +93,17 @@ public class Player extends MapObject {
         jumpStart = -5.0;
         stopJumpSpeed = 0.3;
 
-        skillPoints = 5;
-        level = 10;
+        skillPoints = 0;
+        level = 1;
         XP = 0;
 
 
-        attackBonus = 8;
-        defenseBonus = 8;
+        attackBonus = 1;
+        defenseBonus = 1;
 
         facingRight = true;
 
-        health = maxHealth = 20;
+        health = maxHealth = 3;
 
 
         // load spritesheets
@@ -661,11 +661,11 @@ public class Player extends MapObject {
     }
 
     private double getAttackRange(){
-        return weapon.getAttackRange() * attackBonus;
+        return weapon.getAttackRange();
     }
 
     public double getAttackSpeed() {
-        return weapon.getAttackSpeed() * attackBonus;
+        return weapon.getAttackSpeed();
     }
 
     public void gainXP(int XP){
@@ -693,7 +693,7 @@ public class Player extends MapObject {
 
     /**
      * Increases the player's defense power
-     * @param attackBonus The defense bonus to apply to the player's current defense power
+     * @param defenseBonus The defense bonus to apply to the player's current defense power
      */
     public void increaseDefense(double defenseBonus) {
         this.defenseBonus += defenseBonus;

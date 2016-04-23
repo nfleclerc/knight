@@ -16,7 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- * Created by nathaniel on 2/18/16.
  *
  * Represents the opening menu in the game.
  */
@@ -69,6 +68,9 @@ public class MenuState extends GameState {
         musicStarted = false;
     }
 
+    /**
+     * Updates this state
+     */
     @Override
     public void update() {
 
@@ -86,6 +88,10 @@ public class MenuState extends GameState {
         frames++;
     }
 
+    /**
+     * Draw this state to the screen
+     * @param g The graphics of the screen
+     */
     @Override
     public void draw(Graphics2D g) {
 
@@ -119,6 +125,10 @@ public class MenuState extends GameState {
         MessageFactory.getInstance().draw(g);
     }
 
+    /**
+     * Perform an action depending on the key pressed.
+     * @param k The key code of the key being pressed.
+     */
     @Override
     public void keyPressed(int k) {
         switch (k){
@@ -143,6 +153,9 @@ public class MenuState extends GameState {
         }
     }
 
+    /**
+     * Selects the current menu choice and performs a new action, generally setting a new state
+     */
     private void select() {
         switch (currentChoice) {
             case 0:
@@ -164,8 +177,6 @@ public class MenuState extends GameState {
             case 3:
                 System.exit(0);
                 break;
-            case 4:
-                System.exit(0);
         }
     }
 

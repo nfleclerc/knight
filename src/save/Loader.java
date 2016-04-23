@@ -16,7 +16,7 @@ import javax.crypto.SecretKey;
 import java.io.*;
 
 /**
- * Created by nathaniel on 4/16/16.
+ * Loads the game from a save file
  */
 public class Loader {
 
@@ -34,19 +34,21 @@ public class Loader {
 
     public Loader(GameStateManager gameStateManager, SecretKey key, AudioPlayer bgMusic){
 
+        //whether or not the background music should be stopped
         boolean shouldClose = true;
 
         File file = new File("AKnightOfCode/Saves/knight.save");
 
         try (FileInputStream in = new FileInputStream(file)) {
 
+            //uses DES decryption
             Cipher desCipher = Cipher.getInstance("DES");
-
             desCipher.init(Cipher.DECRYPT_MODE, key);
             byte[] textDecrypted = desCipher.doFinal(IOUtils.toByteArray(in));
 
             String[] attributes = new String(textDecrypted).split("\n");
 
+            //retrieves all information located in the save file
             int i = 0;
             x = Double.parseDouble(attributes[i++]);
             y = Double.parseDouble(attributes[i++]);
@@ -64,9 +66,6 @@ public class Loader {
                 skillsActive[j] = Boolean.parseBoolean(activeFlags[j]);
             }
 
-
-
-
         } catch (IOException e){
             MessageFactory.getInstance().createMessage("Couldn't Find Save File in AKnightOfCode/Saves",
                     Message.MessageType.FILEIO);
@@ -79,6 +78,7 @@ public class Loader {
 
         if (shouldClose) bgMusic.stop();
 
+        //loads the world state with a player loaded from the attributes in the save file
         gameStateManager.loadWorldState(new Player(
                 gameStateManager.getTileMap(),
                 x,
@@ -94,5 +94,4 @@ public class Loader {
                 skillsActive
         ));
     }
-
 }
