@@ -2,7 +2,5 @@
 /.idea
 .DS_Store
 knight.iml
-/bin
-/jar
 /res/.DS_Store
 /AKnightOfCode
