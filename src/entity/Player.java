@@ -47,11 +47,8 @@ public class Player extends MapObject {
     private Helmet helmet;
     private Weapon weapon;
 
-
     // attack
     private boolean attacking;
-
-
 
     // animations
     private ArrayList<BufferedImage[]> sprites;
@@ -72,7 +69,10 @@ public class Player extends MapObject {
     private HashMap<String, AudioPlayer> sfx;
     private int frames;
 
-
+    /**
+     * Creates a new player
+     * @param tm The tile map the player is on
+     */
     public Player(TileMap tm) {
 
         super(tm);
@@ -166,6 +166,21 @@ public class Player extends MapObject {
 
     }
 
+    /**
+     * Creates a new player
+     * @param tm The tile map the player is on
+     * @param x The x position of the player
+     * @param y The y position of the player
+     * @param skillPoints The current skill points of the player
+     * @param level The current level of the player
+     * @param attackBonus The current bonus to attack of the player
+     * @param defenseBonus The current bonus to defense of the player
+     * @param health The current health of the player
+     * @param maxHealth The maximum health of the player
+     * @param facingRight True if the player is facing right
+     * @param XP The current amount of experience of the player
+     * @param skillIsActive Stores whether or not skills are active
+     */
     public Player(TileMap tm, double x, double y, int skillPoints,
                   int level, double attackBonus, double defenseBonus, int health,
                   int maxHealth, boolean facingRight, int XP,
@@ -282,6 +297,9 @@ public class Player extends MapObject {
         attacking = true;
     }
 
+    /**
+     * Gets the next position of the player
+     */
     private void getNextPosition() {
 
 
@@ -334,6 +352,9 @@ public class Player extends MapObject {
 
     }
 
+    /**
+     * Checks if the player has reached the minimum level to enter certain areas
+     */
     private void checkLevelBounds() {
         if (level < 10 && x <= 52514){
             x = 52514;
@@ -349,6 +370,9 @@ public class Player extends MapObject {
         if (y >= 1550) dead = true;
     }
 
+    /**
+     * Updates the player information (gets the next position, checks for collisions, and updates animation)
+     */
     public void update() {
 
         autoSave();
@@ -397,6 +421,9 @@ public class Player extends MapObject {
 
     }
 
+    /**
+     * Autosaves the game
+     */
     private void autoSave() {
         if (frames % 3600 == 0 && !dead) {
             new Saver(this, GameStateManager.key);
@@ -414,6 +441,9 @@ public class Player extends MapObject {
         }
     }
 
+    /**
+     * Checks if the player's health is ready to regenerate (after 10 seconds)
+     */
     private void checkHealthRegen() {
         if (health < 2 && !healthMessagePlayedOnce){
             MessageFactory.getInstance().createMessage("Your Health Is Low! Go Somewhere Safe To Recover!",
@@ -430,6 +460,9 @@ public class Player extends MapObject {
         }
     }
 
+    /**
+     * Checks if the player has moved and displays a message if they haven't (containing instructions on how to move)
+     */
     private void checkIfMoved() {
         if (x == 52800 && XP == 0 && frames > 420){
             MessageFactory.getInstance().createMessage("Use The Arrow Keys to Move",
@@ -437,6 +470,12 @@ public class Player extends MapObject {
         }
     }
 
+    /**
+     * Sets the animation of the character
+     * @param currentAction The current action of the player
+     * @param delay The delay between frames
+     * @param width The width of the animation
+     */
     private void setAnimation(int currentAction, int delay, int width){
         if(this.currentAction != currentAction){
             this.currentAction = currentAction;
@@ -467,6 +506,10 @@ public class Player extends MapObject {
         return XP;
     }
 
+    /**
+     * Checks to see if the player is attacking
+     * @param enemies The list of enemies on the map
+     */
     public void checkAttack(ArrayList<Enemy> enemies) {
 
         try {
@@ -484,6 +527,9 @@ public class Player extends MapObject {
 
     }
 
+    /**
+     * Checks if the player's current attack has stopped
+     */
     public void checkAttackHasStopped(){
         //check attack has stopped
         if (currentAction == ATTACKING){
@@ -493,6 +539,10 @@ public class Player extends MapObject {
         }
     }
 
+    /**
+     * Called when the player is hit
+     * @param damage The damage dealt to the player
+     */
     private void hit(int damage) {
         if (flinching) return;
         takeDamage(damage);
@@ -504,6 +554,10 @@ public class Player extends MapObject {
         flinchTimer = System.nanoTime();
     }
 
+    /**
+     * Gets a rectangle boxing the player in
+     * @return A rectangle boxing the player in
+     */
     @Override
     public Rectangle getRectangle(){
         if (attacking){
@@ -516,6 +570,10 @@ public class Player extends MapObject {
         }
     }
 
+    /**
+     * Gets a rectangle boxing the player and their attack range in (so the player and their attack range are a hitbox)
+     * @return A rectangle boxing the player and their attack range in
+     */
     private Rectangle getRangedRectangle(){
         if (facingRight) {
             return new Rectangle(
@@ -532,6 +590,11 @@ public class Player extends MapObject {
         }
     }
 
+    /**
+     * Checks to see if there is an enemy in range of the player's attack
+     * @param enemies The list of enemies on the map
+     * @return True if there is an enemy in range
+     */
     public boolean enemyInRange(ArrayList<Enemy> enemies){
         Rectangle rangedRec = getRangedRectangle();
         for (Enemy enemy : enemies){
@@ -542,10 +605,18 @@ public class Player extends MapObject {
         return false;
     }
 
+    /**
+     * Causes the player to take damage
+     * @param damage The raw damage dealt by the enemy
+     */
     private void takeDamage(int damage){
         health -= Math.ceil((double)damage / getDefenseRating());
     }
 
+    /**
+     * Checks to see if an item can be picked up
+     * @param items The list of items on the map
+     */
     public void checkGather(List<Item> items){
         items.stream().filter(this::intersects).forEach(item -> {
             item.setGathered(true);
@@ -562,6 +633,9 @@ public class Player extends MapObject {
                 chest.getRating() + helmet.getRating()) / 4 * defenseBonus;
     }
 
+    /**
+     * Increments the player's level, incrementing skill points, health, etc. as well
+     */
     private void updateLevel(){
         if (this.XP >= getXPRequiredForLevelUp()){
             level++;
@@ -598,6 +672,10 @@ public class Player extends MapObject {
         this.XP += XP;
     }
 
+    /**
+     * Increases the player's movement speed
+     * @param movementBonus The movement bonus to apply to the player's current speed
+     */
     public void increaseMovement(double movementBonus) {
         maxSpeed *= movementBonus;
         moveSpeed *= movementBonus;
@@ -605,14 +683,26 @@ public class Player extends MapObject {
 
     }
 
+    /**
+     * Increases the player's attack power
+     * @param attackBonus The attack bonus to apply to the player's current attack power
+     */
     public void increaseAttack(double attackBonus) {
         this.attackBonus += attackBonus;
     }
 
+    /**
+     * Increases the player's defense power
+     * @param attackBonus The defense bonus to apply to the player's current defense power
+     */
     public void increaseDefense(double defenseBonus) {
         this.defenseBonus += defenseBonus;
     }
 
+    /**
+     * Purchases a skill
+     * @param skill The skill that the player is purchasing
+     */
     public void buySkill(Skill skill){
         if (skill.getPrevious() == null || skill.getPrevious().isActive()) {
             if (!skill.isActive()) {

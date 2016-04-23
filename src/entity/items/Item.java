@@ -22,6 +22,13 @@ public class Item extends MapObject{
     private boolean gathered;
 
 
+    /**
+     * Creates a new Item
+     * @param type The type of the item
+     * @param x The x coordinate
+     * @param y The y coordinate
+     * @param tm The tile map this is placed on
+     */
     public Item(ItemType type, double x, double y, TileMap tm) {
         super(tm);
         this.type = type;
@@ -51,6 +58,10 @@ public class Item extends MapObject{
 
     }
 
+    /**
+     * Loads the sprites from resource s
+     * @param s The location of the sprites
+     */
     private void loadSprites(String s){
         try {
             BufferedImage spriteSheet = ImageIO.read(
@@ -70,6 +81,9 @@ public class Item extends MapObject{
         super.draw(g);
     }
 
+    /**
+     * Updates the item (gets the next position, checks for collisions, and updates animation)
+     */
     @Override
     public void update(){
         getNextPosition();
@@ -78,6 +92,9 @@ public class Item extends MapObject{
         animation.update();
     }
 
+    /**
+     * Updates the position of the item (if falling)
+     */
     private void getNextPosition() {
         if (falling) {
             dy += fallSpeed;

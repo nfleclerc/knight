@@ -14,27 +14,34 @@ import java.awt.image.BufferedImage;
  */
 public class RoboSpider extends Enemy {
 
-
+    /**
+     * Creates a RoboSpider enemy
+     * @param tm The tile map this enemy is placed on.
+     * @param player The Player. Used when applying XP increases.
+     */
     public RoboSpider(TileMap tm, Player player){
         super(tm, player);
 
+        //item dropped by enemy (unused)
         this.dropType = ItemType.BUG_LEGS;
 
-
+        /* Movement Attributes */
         moveSpeed = 0.3;
         maxSpeed = 0.3;
         fallSpeed = 0.2;
         maxFallSpeed = 10.0;
 
+        /* Size Attributes */
         width = 30;
         height = 30;
         cWidth = 20;
         cHeight = 20;
 
+        /* Gameplay Attributes */
         health = maxHealth = 2;
         xpWorth = 10;
 
-        //loadSprites
+        /* Load Sprites */
         try{
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
@@ -56,6 +63,7 @@ public class RoboSpider extends Enemy {
             e.printStackTrace();
         }
 
+        /* Set Animation */
         animation = new Animation();
         animation.setFrames(sprites);
         animation.setDelay(300);

@@ -17,26 +17,34 @@ import java.awt.image.BufferedImage;
  */
 public class Ghost extends Enemy {
 
+    /**
+     * Creates a ghost enemy
+     * @param tm The tile map this enemy is placed on.
+     * @param player The Player. Used when applying XP increases.
+     */
     public Ghost(TileMap tm, Player player) {
         super(tm, player);
 
         this.dropType = null;
 
+        /* Movement Attributes */
         moveSpeed = 0.5;
         maxSpeed = 0.5;
         fallSpeed = 0.0;
         maxFallSpeed = 0.0;
 
+        /* Size Attributes */
         width = 30;
         height = 30;
         cWidth = 20;
         cHeight = 20;
 
+        /* Gameplay Attributes */
         health = maxHealth = 5;
         xpWorth = 20;
         damage = 2;
 
-        //loadSprites
+        /* Load Sprites */
         try{
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
@@ -58,6 +66,7 @@ public class Ghost extends Enemy {
             e.printStackTrace();
         }
 
+        /* Set Animation */
         animation = new Animation();
         animation.setFrames(sprites);
         animation.setDelay(300);

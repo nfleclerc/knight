@@ -17,26 +17,34 @@ import java.awt.image.BufferedImage;
  */
 public class Knight extends Enemy {
 
+    /**
+     * Creates a knight enemy
+     * @param tm The tile map this enemy is placed on.
+     * @param player The Player. Used when applying XP increases.
+     */
     public Knight(TileMap tm, Player player) {
         super(tm, player);
 
         this.dropType = null;
 
+        /* Movement Attributes */
         moveSpeed = 0.3;
         maxSpeed = 0.3;
         fallSpeed = 0.8;
         maxFallSpeed = 1.8;
 
+        /* Size Attributes */
         width = 30;
         height = 30;
         cWidth = 20;
         cHeight = 20;
 
+        /* Gameplay Attributes */
         health = maxHealth = 20;
         xpWorth = 10;
         damage = 2;
 
-        //loadSprites
+        /* Load Sprites */
         try{
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
@@ -58,6 +66,7 @@ public class Knight extends Enemy {
             e.printStackTrace();
         }
 
+        /* Set Animation */
         animation = new Animation();
         animation.setFrames(sprites);
         animation.setDelay(200);

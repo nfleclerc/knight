@@ -17,26 +17,34 @@ import java.awt.image.BufferedImage;
  */
 public class Python extends Enemy {
 
+    /**
+     * Creates the boss, Python
+     * @param tm The tile map this enemy is placed on.
+     * @param player The Player. Used when applying XP increases.
+     */
     public Python(TileMap tm, Player player) {
         super(tm, player);
 
         this.dropType = null;
 
+        /* Movement Attributes */
         moveSpeed = 0.2;
         maxSpeed = 3.0;
         fallSpeed = 0.8;
         maxFallSpeed = 1.8;
 
+        /* Size Attributes */
         width = 240;
         height = 120;
         cWidth = 240;
         cHeight = 120;
 
+        /* Gameplay Attributes */
         health = maxHealth = 50;
         xpWorth = 100;
         damage = 5;
 
-        //loadSprites
+        /* Load Sprites */
         try{
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
@@ -58,6 +66,7 @@ public class Python extends Enemy {
             e.printStackTrace();
         }
 
+        /* Set Animation */
         animation = new Animation();
         animation.setFrames(sprites);
         animation.setDelay(200);

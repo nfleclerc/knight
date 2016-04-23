@@ -17,26 +17,34 @@ import java.awt.image.BufferedImage;
  */
 public class Javar extends Enemy {
 
+    /**
+     * Creates the boss Javar
+     * @param tm The tile map this enemy is placed on.
+     * @param player The Player. Used when applying XP increases.
+     */
     public Javar(TileMap tm, Player player) {
         super(tm, player);
 
         this.dropType = null;
 
+        /* Movement Attributes */
         moveSpeed = 0.3;
         maxSpeed = 0.3;
         fallSpeed = 0.8;
         maxFallSpeed = 1.8;
 
+        /* Size Attributes */
         width = 240;
         height = 240;
         cWidth = 240;
         cHeight = 240;
 
+        /* Gameplay Attributes */
         health = maxHealth = 50;
         xpWorth = 100;
         damage = 5;
 
-        //loadSprites
+        /* Load Sprites */
         try{
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
@@ -58,6 +66,7 @@ public class Javar extends Enemy {
             e.printStackTrace();
         }
 
+        /* Set Animation */
         animation = new Animation();
         animation.setFrames(sprites);
         animation.setDelay(200);

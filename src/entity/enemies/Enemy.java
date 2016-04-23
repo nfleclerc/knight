@@ -13,19 +13,27 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Enemy extends MapObject {
 
+    //The player. Used when awarding XP
     private final Player player;
 
+    //The sprites used
     protected BufferedImage[] sprites;
 
-    protected int health;
-    protected int maxHealth;
-    protected boolean dead;
-    protected int damage;
+    //Gameplay attributes
+    protected int health;           //Health of the enemy
+    protected int maxHealth;        //Maximum health of the enemy
+    protected boolean dead;         //True if the enemy is dead, false if they are alive
+    protected int damage;           //Damage the enemy deals through attacking
     protected boolean flinching;
     protected long flinchTimer;
     protected int xpWorth;
-    protected ItemType dropType;
+    protected ItemType dropType;    //Item dropped by the enemy (unused)
 
+    /**
+     * Creates an enemy
+     * @param tm The tile map this enemy is placed on.
+     * @param player The Player. Used when applying XP increases.
+     */
     public Enemy(TileMap tm, Player player){
         super(tm);
         this.player = player;
@@ -36,10 +44,18 @@ public abstract class Enemy extends MapObject {
         return dead;
     }
 
+    /**
+     * Gets the damage dealt by the enemy
+     * @return The damage dealt BY the enemy
+     */
     public int getDamage() {
         return damage;
     }
 
+    /**
+     * Called when the enemy is hit by an attack
+     * @param damage The damage dealt TO the enemy
+     */
     public void hit(int damage){
         if (dead || flinching) return;
         health -= damage;
@@ -52,6 +68,9 @@ public abstract class Enemy extends MapObject {
         flinchTimer = System.nanoTime();
     }
 
+    /**
+     * Updates the position of the enemy
+     */
     protected void getNextPosition(){
 
         if(left) {
@@ -73,6 +92,9 @@ public abstract class Enemy extends MapObject {
 
     }
 
+    /**
+     * Updates the enemy (gets the next position, checks for collisions, and updates animation)
+     */
     public void update(){
 
         getNextPosition();
@@ -85,6 +107,9 @@ public abstract class Enemy extends MapObject {
 
     }
 
+    /**
+     * Checks if the enemy's direction needs to change
+     */
     protected void checkForDirectionChange(){
         if (!bottomRight || (right && dx == 0)){
             dx = 0;

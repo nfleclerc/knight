@@ -17,26 +17,34 @@ import java.awt.image.BufferedImage;
  */
 public class Demon extends Enemy {
 
+    /**
+     * Creates a Demon enemy
+     * @param tm The tile map this enemy is placed on.
+     * @param player The Player. Used when applying XP increases.
+     */
     public Demon(TileMap tm, Player player) {
         super(tm, player);
 
         this.dropType = null;
 
+        /* Movement Attributes */
         moveSpeed = 0.3;
         maxSpeed = 0.3;
         fallSpeed = 0.8;
         maxFallSpeed = 1.8;
 
+        /* Size Atributes */
         width = 60;
         height = 60;
         cWidth = 40;
         cHeight = 40;
         damage = 3;
 
+        /* Gameplay Attributes */
         health = maxHealth = 15;
         xpWorth = 50;
 
-        //loadSprites
+        /* Load Sprites */
         try{
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
@@ -58,6 +66,7 @@ public class Demon extends Enemy {
             e.printStackTrace();
         }
 
+        /* Set animation */
         animation = new Animation();
         animation.setFrames(sprites);
         animation.setDelay(200);

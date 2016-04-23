@@ -17,25 +17,33 @@ import java.awt.image.BufferedImage;
  */
 public class Bat extends Enemy {
 
+    /**
+     * Creates a bat enemy
+     * @param tm The tile map this enemy is placed on.
+     * @param player The Player. Used when applying XP increases.
+     */
     public Bat(TileMap tm, Player player) {
         super(tm, player);
 
         this.dropType = null;
 
+        /* Movement Attributes */
         moveSpeed = 0.8;
         maxSpeed = 0.8;
         fallSpeed = 0.0;
         maxFallSpeed = 0.0;
 
+        /* Size Attributes */
         width = 30;
         height = 30;
         cWidth = 20;
         cHeight = 20;
 
+        /* Gameplay Attributes */
         health = maxHealth = 1;
         xpWorth = 5;
 
-        //loadSprites
+        /* Load Sprites */
         try{
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
@@ -57,6 +65,7 @@ public class Bat extends Enemy {
             e.printStackTrace();
         }
 
+        /* Set Animation */
         animation = new Animation();
         animation.setFrames(sprites);
         animation.setDelay(60);

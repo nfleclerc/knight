@@ -17,26 +17,34 @@ import java.awt.image.BufferedImage;
  */
 public class Yeti extends Enemy{
 
+    /**
+     * Creates the Yeti boss
+     * @param tm The tile map this enemy is placed on.
+     * @param player The Player. Used when applying XP increases.
+     */
     public Yeti(TileMap tm, Player player) {
         super(tm, player);
 
         this.dropType = null;
 
+        /* Movement Attributes */
         moveSpeed = 0.3;
         maxSpeed = 0.3;
         fallSpeed = 0.8;
         maxFallSpeed = 1.8;
 
+        /* Size Attributes */
         width = 240;
         height = 240;
         cWidth = 240;
         cHeight = 240;
 
+        /* Gameplay Attributes */
         health = maxHealth = 200;
         xpWorth = 200;
         damage = 10;
 
-        //loadSprites
+        /* Load Sprites */
         try{
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
@@ -58,6 +66,7 @@ public class Yeti extends Enemy{
             e.printStackTrace();
         }
 
+        /* Set Animations */
         animation = new Animation();
         animation.setFrames(sprites);
         animation.setDelay(200);

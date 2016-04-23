@@ -83,6 +83,10 @@ public abstract class MapObject {
         return getRectangle().intersects(other.getRectangle());
     }
 
+    /**
+     * Gets a rectangle boxing the object in
+     * @return A rectangle around the object
+     */
     public Rectangle getRectangle() {
         return new Rectangle(
                 (int) x - cWidth,
@@ -92,6 +96,9 @@ public abstract class MapObject {
         );
     }
 
+    /**
+     * Checks if the object is colliding with other objects
+     */
     public void checkTileMapCollision() {
         currCol = (int) x / tileSize;
         currRow = (int) y / tileSize;
@@ -113,18 +120,27 @@ public abstract class MapObject {
         }
     }
 
+    /**
+     * Checks if there is a collision in the y direction
+     */
     private void calculateCollisionInYDirection() {
         calculateCorners(x, ydest);
         checkTopTiles();
         checkBottomTiles();
     }
 
+    /**
+     * Checks if there is a collision in the x direction
+     */
     private void calculateCollisionInXDirection() {
         calculateCorners(xdest, y);
         checkLeftTiles();
         checkRightTiles();
     }
 
+    /**
+     * Checks if there is a collision with the top tiles
+     */
     private void checkTopTiles(){
         if (dy < 0) {
             if (topLeft || topRight) {
@@ -136,6 +152,9 @@ public abstract class MapObject {
         }
     }
 
+    /**
+     * Checks if there is a collision with the bottom tiles
+     */
     private void checkBottomTiles(){
         if (dy > 0) {
             if (bottomLeft || bottomRight) {
@@ -148,6 +167,9 @@ public abstract class MapObject {
         }
     }
 
+    /**
+     * Checks if there is a collision with the left tiles
+     */
     private void checkLeftTiles(){
         if (dx < 0) {
             if (topLeft || bottomLeft) {
@@ -159,6 +181,9 @@ public abstract class MapObject {
         }
     }
 
+    /**
+     * Checks if there is a collision with the right tiles
+     */
     private void checkRightTiles(){
         if (dx > 0) {
             if (topRight || bottomRight) {
@@ -170,6 +195,11 @@ public abstract class MapObject {
         }
     }
 
+    /**
+     * Checks if corner tiles are blocked
+     * @param x The x position of the object
+     * @param y The y position of the object
+     */
     public void calculateCorners(double x, double y) {
         int leftTile = (int)(x - cWidth / 2) / tileSize;
         int rightTile = (int)(x + cWidth / 2 - 1) / tileSize;
@@ -249,8 +279,11 @@ public abstract class MapObject {
         this.jumping = jumping;
     }
 
+    /**
+     * Checks if the object (i.e. enemy) is done flinching
+     * @param flinchTime The time that the enemy flinches
+     */
     public void checkDoneFlinching(int flinchTime){
-        //check done flinching
         if (flinching){
             long elapsed = (System.nanoTime() - flinchTimer) / 1_000_000;
             if (elapsed > flinchTime){
@@ -259,6 +292,10 @@ public abstract class MapObject {
         }
     }
 
+    /**
+     * Checks if the object is on the screen
+     * @return True if the enemy is on screen
+     */
     public boolean isOnScreen(){
         return (x + xmap + width < 0 ||
                 x + xmap - width > GamePanel.WIDTH ||

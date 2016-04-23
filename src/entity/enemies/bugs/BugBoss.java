@@ -14,38 +14,50 @@ import java.util.ArrayList;
  */
 public class BugBoss extends Enemy {
 
+    /* The enemy can be walking or rolling; these variables distinguish between the two states */
     private static final int WALKING = 0;
     private static final int ROLLING = 1;
 
+    /* The time that the enemy has been rolling */
     private int rollTimer;
 
+    /* An arraylist to store sprite sets locally (one for rolling, one for walking) */
     private ArrayList<BufferedImage[]> sprites;
 
+    /* Frame timing for animations */
     private final int[] numFrames = {
             2, 4
     };
     private boolean walking;
 
+    /**
+     * Creates a boss-type bug enemy
+     * @param tm The tile map this enemy is placed on.
+     * @param player The Player. Used when applying XP increases.
+     */
     public BugBoss(TileMap tm, Player player){
         super(tm, player);
 
         this.dropType = null;
 
+        /* Movement Attributes */
         moveSpeed = 0.2;
         maxSpeed = 0.3;
         fallSpeed = 0.10;
         maxFallSpeed = 4.0;
 
+        /* Size Attributes */
         width = 240;
         height = 120;
         cWidth = 230;
         cHeight = 80;
         damage = 5;
 
+        /* Gameplay Attributes */
         health = maxHealth = 30;
         xpWorth = 500;
 
-        //loadSprites
+        /* Load Sprites */
         try{
             BufferedImage spriteSheet = ImageIO.read(
                     getClass().getResourceAsStream(
@@ -54,6 +66,7 @@ public class BugBoss extends Enemy {
             );
 
             sprites = new ArrayList<>();
+            // Incorporating animation
             for (int i = 0; i < numFrames.length; i++) {
 
                 BufferedImage[] bi = new BufferedImage[numFrames[i]];
@@ -92,6 +105,9 @@ public class BugBoss extends Enemy {
         facingRight = true;
     }
 
+    /**
+     * Updates the position, switches between rolling and walking, and checks for flinching
+     */
     @Override
     public void update() {
 
@@ -128,6 +144,12 @@ public class BugBoss extends Enemy {
         animation.update();
     }
 
+    /**
+     * Sets the animation of the enemy
+     * @param currentAction ROLLING or WALKING
+     * @param delay The delay between each frame
+     * @param width The width of the sprite
+     */
     private void setAnimation(int currentAction, int delay, int width){
         if(this.currentAction != currentAction){
             this.currentAction = currentAction;
