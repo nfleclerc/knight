@@ -58,7 +58,7 @@ public class TestBank {
      * @return A String representing the code that is displayed in the main window
      */
     public String getCode() {
-        return "\n\npublic class /* Write Class Name Here/* { \n" +
+        return "\n\npublic class /* Write Class Name Here */ { \n" +
                 "\n" +
                 "\t public String attack(String[] args) {\n" +
                 "\t\t/* Your Code Here */\n" +
