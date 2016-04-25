@@ -35,7 +35,7 @@ public class Game{
             }
         };
         window.addComponentListener(new WindowManager());
-        window.setUndecorated(true);
+        //window.setUndecorated(true);
         panel = new GamePanel();
         window.setContentPane(panel);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

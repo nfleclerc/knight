@@ -742,4 +742,16 @@ public class Player extends MapObject {
     public boolean getFacingRight() {
         return facingRight;
     }
+
+    public void autoLevel(){
+        level = 10;
+        skillPoints = 5;
+        attackBonus = 80;
+        defenseBonus = 80;
+        maxHealth = 20;
+        health = 20;
+        XP = XP + 10;
+    }
+
+
 }

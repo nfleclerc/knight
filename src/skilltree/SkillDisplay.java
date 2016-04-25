@@ -112,7 +112,7 @@ public class SkillDisplay extends GamePanel implements ActionListener {
         setBorder(BorderFactory.createEmptyBorder(0, 60, 0, 60));
         setPreferredSize(new Dimension(
                 GamePanel.WIDTH * (SCALE),
-                GamePanel.HEIGHT * (SCALE) - titlePanel.getHeight() - exitPanel.getHeight() - 168
+                GamePanel.HEIGHT * (SCALE) - titlePanel.getHeight() - exitPanel.getHeight()
         ));
         //paints the background
         JPanel backgroundPanel = new JPanel(){

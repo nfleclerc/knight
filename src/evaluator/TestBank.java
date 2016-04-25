@@ -20,6 +20,7 @@ public class TestBank {
 
     private final HashMap<String, String> testAnswerMap;
     private String intro;
+    private Random random = new Random(12345);
 
     public TestBank(){
         this.testAnswerMap = new HashMap<>();
@@ -72,7 +73,7 @@ public class TestBank {
      */
     private String getRandomTest() {
         List<String> keys = new ArrayList<>(testAnswerMap.keySet());
-       return  keys.get(new Random().nextInt(testAnswerMap.size()));
+       return  keys.get(random.nextInt(testAnswerMap.size()));
     }
 
     /**

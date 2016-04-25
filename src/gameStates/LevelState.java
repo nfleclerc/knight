@@ -224,6 +224,8 @@ public abstract class LevelState extends GameState{
                 gameStateManager.setState(GameStateManager.MENUSTATE);
                 MessageFactory.getInstance().flush();
                 break;
+            case KeyEvent.VK_Y:
+                player.autoLevel();
         }
     }
 
